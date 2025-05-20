@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基于配置类方式的SpringIOC容器完全注解开发理解 配置类 包扫描注解配置 @ComponentScan() 引用外部的配置文件@PropertySource() 声明第三方依赖的三个功能注解  12345678910111213141516171819202122@Configuration &#x2F;&#x2F;代表配置类@ComponentScan(&amp;#123;&quot;com.Jmin.ioc_01&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8_基于配置类方式的SpringIOC容器">
+<meta property="og:url" content="http://elaskon.asia/2023/09/08/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/8_%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E7%B1%BB%E6%96%B9%E5%BC%8F%E7%9A%84SpringIOC%E5%AE%B9%E5%99%A8/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="基于配置类方式的SpringIOC容器完全注解开发理解 配置类 包扫描注解配置 @ComponentScan() 引用外部的配置文件@PropertySource() 声明第三方依赖的三个功能注解  12345678910111213141516171819202122@Configuration &#x2F;&#x2F;代表配置类@ComponentScan(&amp;#123;&quot;com.Jmin.ioc_01&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908120030887.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908164529015.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908190336284.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908191217095.png">
+<meta property="article:published_time" content="2023-09-08T04:12:00.000Z">
+<meta property="article:modified_time" content="2023-09-15T01:45:56.568Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20230908120030887.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>8_基于配置类方式的SpringIOC容器 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="8_基于配置类方式的SpringIOC容器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-08 12:12" pubdate>
+          2023年9月8日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">8_基于配置类方式的SpringIOC容器</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月15日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="基于配置类方式的SpringIOC容器"><a href="#基于配置类方式的SpringIOC容器" class="headerlink" title="基于配置类方式的SpringIOC容器"></a>基于配置类方式的SpringIOC容器</h1><h2 id="完全注解开发理解"><a href="#完全注解开发理解" class="headerlink" title="完全注解开发理解"></a>完全注解开发理解</h2><p><img src="/assets/image-20230908120030887.png" srcset="/img/loading.gif" lazyload alt="image-20230908120030887"></p>
+<h2 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h2><ol>
+<li>包扫描注解配置 @ComponentScan()</li>
+<li>引用外部的配置文件@PropertySource()</li>
+<li>声明第三方依赖的三个功能注解</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span> <span class="hljs-comment">//代表配置类</span><br><span class="hljs-meta">@ComponentScan(&#123;&quot;com.Jmin.ioc_01&quot;,&quot;com.Jmin.ioc_02&quot;&#125;)</span> <span class="hljs-comment">//扫描包</span><br><span class="hljs-meta">@PropertySource(&quot;classpath:jdbc.properties&quot;)</span> <span class="hljs-comment">//properties扫描</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Config</span> &#123;<br>	<span class="hljs-meta">@Value(&quot;$&#123;Jmin.url&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String url;<br>    <span class="hljs-meta">@Value(&quot;$&#123;Jmin.driver&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String driver;<br>    <span class="hljs-meta">@Value(&quot;$&#123;Jmin.username&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String username;<br>    <span class="hljs-meta">@Value(&quot;$&#123;Jmin.password&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String password;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>        druidDataSource.setUrl(url);<br>        druidDataSource.setUsername(username);<br>        druidDataSource.setPassword(password);<br>        druidDataSource.setDriverClassName(driver);<br>        <span class="hljs-keyword">return</span> druidDataSource;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">test</span> &#123;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testioc1</span><span class="hljs-params">()</span>&#123;<br><span class="hljs-comment">//        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);</span><br>        <span class="hljs-type">AnnotationConfigApplicationContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AnnotationConfigApplicationContext</span>();<br>        context.register(Config.class);<br>        context.refresh();<br>        <span class="hljs-type">StudentController</span> <span class="hljs-variable">bean</span> <span class="hljs-operator">=</span> context.getBean(StudentController.class);<br>        System.out.println(bean);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230908164529015.png" srcset="/img/loading.gif" lazyload alt="image-20230908164529015"></p>
+<h2 id="Bean细节"><a href="#Bean细节" class="headerlink" title="@Bean细节"></a>@Bean细节</h2><h3 id="Bean生成BeanName问题"><a href="#Bean生成BeanName问题" class="headerlink" title="Bean生成BeanName问题"></a>Bean生成BeanName问题</h3><p>@Bean注解源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(&#123;ElementType.METHOD, ElementType.ANNOTATION_TYPE&#125;)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Documented</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Bean &#123;<br>    <span class="hljs-meta">@AliasFor(&quot;name&quot;)</span><br>    String[] value() <span class="hljs-keyword">default</span> &#123;&#125;;<br><br>    <span class="hljs-meta">@AliasFor(&quot;value&quot;)</span><br>    String[] name() <span class="hljs-keyword">default</span> &#123;&#125;;<br><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">autowireCandidate</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-literal">true</span>;<br><br>    String <span class="hljs-title function_">initMethod</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;<br><br>    String <span class="hljs-title function_">destroyMethod</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;(inferred)&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(name = &quot;druid&quot;)</span><br><span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>    druidDataSource.setUrl(url);<br>    druidDataSource.setUsername(username);<br>    druidDataSource.setPassword(password);<br>    druidDataSource.setDriverClassName(driver);<br>    <span class="hljs-keyword">return</span> druidDataSource;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Bean周期方法如何指定"><a href="#Bean周期方法如何指定" class="headerlink" title="Bean周期方法如何指定"></a>Bean周期方法如何指定</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)</span><br><span class="hljs-meta">@Bean(name = &quot;druid&quot;,initMethod = &quot;&quot;,destroyMethod = &quot;&quot;)</span><br><span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>    druidDataSource.setUrl(url);<br>    druidDataSource.setUsername(username);<br>    druidDataSource.setPassword(password);<br>    druidDataSource.setDriverClassName(driver);<br>    <span class="hljs-keyword">return</span> druidDataSource;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Bean如何引用其他ioc组件"><a href="#Bean如何引用其他ioc组件" class="headerlink" title="Bean如何引用其他ioc组件"></a>Bean如何引用其他ioc组件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(name = &quot;druid&quot;)</span><br><span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>    druidDataSource.setUrl(url);<br>    druidDataSource.setUsername(username);<br>    druidDataSource.setPassword(password);<br>    druidDataSource.setDriverClassName(driver);<br>    <span class="hljs-keyword">return</span> druidDataSource;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>();<br><span class="hljs-comment">//        jdbcTemplate需要DataSource，如何在ioc中获取？</span><br>        <span class="hljs-keyword">return</span> jdbcTemplate;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate1</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>();<br><span class="hljs-comment">//        方案1：如果其他组件也是bean方法，那么可以直接调用该组件，等价于从ioc容器中获取组件</span><br>        jdbcTemplate.setDataSource(dataSource());<br><span class="hljs-comment">//        jdbcTemplate需要DataSource，如何在ioc中获取？</span><br>        <span class="hljs-keyword">return</span> jdbcTemplate;<br>    &#125;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate2</span><span class="hljs-params">(DruidDataSource dataSource)</span>&#123;<br>        <span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>();<br><span class="hljs-comment">//        方案2：在形参列表声明想要的组件类型，可以是一个也可以是多个,ioc也会注入</span><br>        jdbcTemplate.setDataSource(dataSource);<br><span class="hljs-comment">//        jdbcTemplate需要DataSource，如何在ioc中获取？</span><br>        <span class="hljs-keyword">return</span> jdbcTemplate;<br>    &#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="特别注意！！"><a href="#特别注意！！" class="headerlink" title="特别注意！！"></a>特别注意！！</h4><ol>
+<li><p>如果调用的外部没有与形参同类型组件注解，那么该参数就不属于组件，如果在组件中采用形参变量注入该外部变量，该形参会报异常！！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource1</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>    druidDataSource.setUrl(url);<br>    druidDataSource.setUsername(username);<br>    druidDataSource.setPassword(password);<br>    druidDataSource.setDriverClassName(driver);<br>    <span class="hljs-keyword">return</span> druidDataSource;<br>&#125;<br><span class="hljs-meta">@Bean</span><br><span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate</span><span class="hljs-params">(DruidDataSource druid)</span>&#123; <span class="hljs-comment">//编译器报异常</span><br>    <span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>();<br>    jdbcTemplate.setDataSource(druid1);<br>    <span class="hljs-keyword">return</span> jdbcTemplate;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>如果调用的外部与形参同一类型的组件存在两个及以上的，那么需要将这多个组件用别名区分开，参数必须用别名定义。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(name = &quot;druid1&quot;)</span><br>   <span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource1</span><span class="hljs-params">()</span>&#123;<br>       <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>       druidDataSource.setUrl(url);<br>       druidDataSource.setUsername(username);<br>       druidDataSource.setPassword(password);<br>       druidDataSource.setDriverClassName(driver);<br>       <span class="hljs-keyword">return</span> druidDataSource;<br>   &#125;<br>   <span class="hljs-meta">@Bean(name = &quot;druid2&quot;)</span><br>   <span class="hljs-keyword">public</span> DruidDataSource <span class="hljs-title function_">dataSource2</span><span class="hljs-params">()</span>&#123;<br>       <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">druidDataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>       druidDataSource.setUrl(url);<br>       druidDataSource.setUsername(username);<br>       druidDataSource.setPassword(password);<br>       druidDataSource.setDriverClassName(driver);<br>       <span class="hljs-keyword">return</span> druidDataSource;<br>   &#125;<br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate</span><span class="hljs-params">(DruidDataSource druid1)</span>&#123;<br>       <span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>();<br>       jdbcTemplate.setDataSource(druid1);<br>       <span class="hljs-keyword">return</span> jdbcTemplate;<br>   &#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Import扩展"><a href="#Import扩展" class="headerlink" title="@Import扩展"></a>@Import扩展</h2><p>   @Import注解允许从另一个配置类加载@Bean定义，如下：</p>
+<p><img src="/assets/image-20230908190336284.png" srcset="/img/loading.gif" lazyload alt="image-20230908190336284"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/assets/image-20230908191217095.png" srcset="/img/loading.gif" lazyload alt="image-20230908191217095"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SSM/" class="category-chain-item">SSM</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/SSM/Spring/" class="category-chain-item">Spring</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/SSM/Spring/IOC/" class="category-chain-item">IOC</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>8_基于配置类方式的SpringIOC容器</div>
+      <div>http://elaskon.asia/2023/09/08/尚硅谷-SSM/Spring/8_基于配置类方式的SpringIOC容器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/08/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/9_%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E7%B1%BB%E7%9A%84%E7%AE%A1%E7%90%86IOC%E7%BB%83%E4%B9%A0/" title="9_基于注解+配置类方式的SpringIOC容器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">9_基于注解+配置类方式的SpringIOC容器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/08/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/7_%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3+XML%E7%AE%A1%E7%90%86IOC%E7%BB%83%E4%B9%A0/" title="7_基于注解+XML整合三层框架组件">
+                        <span class="hidden-mobile">7_基于注解+XML整合三层框架组件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

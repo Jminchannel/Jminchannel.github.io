@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="工程化开发&amp;脚手架CLI开发Vue的两种方式 核心包传统开发模式：基于html &#x2F; css &#x2F; js 文件，直接引入核心包，开发 Vue。 工程化开发模式：基于构建工具（例如：webpack）的环境中开发Vue。   工程化开发模式优点：    提高编码效率，比如使用JS新语法、Less&#x2F;Sass、Typescript等通过webpack都可以编译成浏览器识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6_工程化开发&amp;脚手架CLI">
+<meta property="og:url" content="http://elaskon.asia/2023/09/29/%E9%BB%91%E9%A9%AC-Vue2/6_%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91&%E8%84%9A%E6%89%8B%E6%9E%B6CLI/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="工程化开发&amp;脚手架CLI开发Vue的两种方式 核心包传统开发模式：基于html &#x2F; css &#x2F; js 文件，直接引入核心包，开发 Vue。 工程化开发模式：基于构建工具（例如：webpack）的环境中开发Vue。   工程化开发模式优点：    提高编码效率，比如使用JS新语法、Less&#x2F;Sass、Typescript等通过webpack都可以编译成浏览器识别">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929104029360.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929105556370.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929110604931.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929111031989.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929111344999.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929112117177.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929112326221.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929113059553.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929125017551.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929125956718.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230929131036287.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930003043734.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930003239532.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930003424847.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930080048201.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930080300695.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930080705761.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930080914980.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930081303483.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930082855943.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930094459579.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930094719114.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930094956400.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930095516176.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230930103650043.png">
+<meta property="article:published_time" content="2023-09-29T01:55:43.000Z">
+<meta property="article:modified_time" content="2023-10-03T06:32:21.197Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20230929104029360.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>6_工程化开发&amp;脚手架CLI - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="6_工程化开发&amp;脚手架CLI"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-29 09:55" pubdate>
+          2023年9月29日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">6_工程化开发&amp;脚手架CLI</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月3日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="工程化开发-脚手架CLI"><a href="#工程化开发-脚手架CLI" class="headerlink" title="工程化开发&amp;脚手架CLI"></a>工程化开发&amp;脚手架CLI</h1><h2 id="开发Vue的两种方式"><a href="#开发Vue的两种方式" class="headerlink" title="开发Vue的两种方式"></a>开发Vue的两种方式</h2><ul>
+<li>核心包传统开发模式：基于html &#x2F; css &#x2F; js 文件，直接引入核心包，开发 Vue。</li>
+<li>工程化开发模式：基于构建工具（例如：webpack）的环境中开发Vue。</li>
+</ul>
+<p><img src="/assets/image-20230929104029360.png" srcset="/img/loading.gif" lazyload alt="image-20230929104029360"></p>
+<p>工程化开发模式优点：</p>
+<p>   提高编码效率，比如使用JS新语法、Less&#x2F;Sass、Typescript等通过webpack都可以编译成浏览器识别的ES3&#x2F;ES5&#x2F;CSS等</p>
+<p>工程化开发模式问题：</p>
+<ul>
+<li>webpack配置<strong>不简单</strong></li>
+<li><strong>雷同</strong>的基础配置</li>
+<li>缺乏<strong>统一的标准</strong></li>
+</ul>
+<p>为了解决以上问题，所以我们需要一个工具，生成标准化的配置</p>
+<h2 id="VUE-CLI脚手架"><a href="#VUE-CLI脚手架" class="headerlink" title="VUE_CLI脚手架"></a>VUE_CLI脚手架</h2><h3 id="基本介绍："><a href="#基本介绍：" class="headerlink" title="基本介绍："></a>基本介绍：</h3><p>   Vue CLI 是Vue官方提供的一个<strong>全局命令工具</strong></p>
+<p>   可以帮助我们<strong>快速创建</strong>一个开发Vue项目的<strong>标准化基础架子</strong>。【集成了webpack配置】</p>
+<h4 id="好处："><a href="#好处：" class="headerlink" title="好处："></a>好处：</h4><ol>
+<li>开箱即用，零配置</li>
+<li>内置babel等工具</li>
+<li>标准化的webpack配置</li>
+</ol>
+<h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><ol>
+<li><p>全局安装（只需安装一次即可） </p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">yarn <span class="hljs-keyword">global</span> <span class="hljs-keyword">add</span> <span class="hljs-title">@vue</span>/cli <br>或者 npm i <span class="hljs-title">@vue</span>/cli -g<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看vue&#x2F;cli版本 </p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">vue <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建项目架子</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">vue</span> <span class="hljs-variable">create</span> <span class="hljs-variable">project</span>-<span class="hljs-function"><span class="hljs-title">name</span>(项目名不能使用中文)</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230929105556370.png" srcset="/img/loading.gif" lazyload alt="image-20230929105556370"><img src="/assets/image-20230929110604931.png" srcset="/img/loading.gif" lazyload alt="image-20230929110604931"><img src="/assets/image-20230929111031989.png" srcset="/img/loading.gif" lazyload alt="image-20230929111031989"></p>
+</li>
+<li><p>启动项目</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">yarn</span> <span class="hljs-variable">serve</span> <br>或者 <span class="hljs-variable">npm</span> <span class="hljs-variable">run</span> <span class="hljs-function"><span class="hljs-title">serve</span>(命令不固定，找<span class="hljs-variable">package.json</span>)</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230929111344999.png" srcset="/img/loading.gif" lazyload alt="image-20230929111344999"></p>
+<p><img src="/assets/image-20230929112117177.png" srcset="/img/loading.gif" lazyload alt="image-20230929112117177"></p>
+</li>
+</ol>
+<h2 id="项目目录介绍和运行流程"><a href="#项目目录介绍和运行流程" class="headerlink" title="项目目录介绍和运行流程"></a>项目目录介绍和运行流程</h2><h3 id="项目目录介绍"><a href="#项目目录介绍" class="headerlink" title="项目目录介绍"></a>项目目录介绍</h3><p><img src="/assets/image-20230929112326221.png" srcset="/img/loading.gif" lazyload alt="image-20230929112326221"></p>
+<p><img src="/assets/image-20230929113059553.png" srcset="/img/loading.gif" lazyload alt="image-20230929113059553"></p>
+<p><img src="/assets/image-20230929125017551.png" srcset="/img/loading.gif" lazyload alt="image-20230929125017551"></p>
+<p>虽然脚手架中的文件有很多，目前咱们只需人事三个文件即可</p>
+<ol>
+<li><p>main.js  入口文件</p>
+<p><img src="/assets/image-20230929125956718.png" srcset="/img/loading.gif" lazyload alt="image-20230929125956718"></p>
+<ul>
+<li><code>Vue.config.productionTip = false</code>提示当前处于（生产环境&#x2F;开发环境）</li>
+<li>Vue实例化，提供了render方法，基于App.vue创建结构渲染index.html</li>
+<li><code>.$mount(&#39;#app&#39;)</code>等价于<code>el:&#39;#app&#39;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vue">new Vue(&#123;<br>  el:&#x27;#app&#x27;,<br>  render: h =&gt; h(App),<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>render: h =&gt; h(App)</code>等价于</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">render:(createElement) =&gt; &#123;<br>  return createElement(App)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230929131036287.png" srcset="/img/loading.gif" lazyload alt="image-20230929131036287"></p>
+</li>
+<li><p>App.vue  App根组件 </p>
+</li>
+<li><p>index.html 模板文件</p>
+</li>
+</ol>
+<h2 id="组件化开发"><a href="#组件化开发" class="headerlink" title="组件化开发"></a>组件化开发</h2><ul>
+<li>组件化：一个页面可以拆分成一个个组件，每个组件有着自己独立的结构、样式、行为。</li>
+<li>好处：便于维护，利于复用 → 提升开发效率。</li>
+<li>组件分类：普通组件、根组件。</li>
+</ul>
+<p>下面这个页面，可以把所有的代码都写在一个页面中，但是这样显得代码比较混乱，难易维护。咱们可以按模块进行组件划分</p>
+<p><img src="/assets/image-20230930003043734.png" srcset="/img/loading.gif" lazyload alt="image-20230930003043734"></p>
+<p>总结：</p>
+<p>组件化的好处是什么？</p>
+<p>组件的分类？</p>
+<h2 id="根组件-App-vue"><a href="#根组件-App-vue" class="headerlink" title="根组件 App.vue"></a>根组件 App.vue</h2><h3 id="根组件介绍"><a href="#根组件介绍" class="headerlink" title="根组件介绍"></a>根组件介绍</h3><p>整个应用最上层的组件，包裹所有普通小组件</p>
+<p><img src="/assets/image-20230930003239532.png" srcset="/img/loading.gif" lazyload alt="image-20230930003239532"></p>
+<h3 id="组件是由三部分构成"><a href="#组件是由三部分构成" class="headerlink" title="组件是由三部分构成"></a>组件是由三部分构成</h3><ul>
+<li><p>语法高亮插件</p>
+<p><img src="/assets/image-20230930003424847.png" srcset="/img/loading.gif" lazyload alt="image-20230930003424847"></p>
+</li>
+<li><p>三部分构成</p>
+<ul>
+<li>template：结构 （有且只能一个根元素）</li>
+<li>script:   js逻辑 </li>
+<li>style： 样式 (可支持less，需要装包)</li>
+</ul>
+</li>
+<li><p>让组件支持less</p>
+<p>（1） style标签，lang&#x3D;”less” 开启less功能 </p>
+<p>（2） 装包: yarn add less less-loader -D 或者npm i less less-loader -D</p>
+<p><img src="/assets/image-20230930080048201.png" srcset="/img/loading.gif" lazyload alt="image-20230930080048201"></p>
+<p><img src="/assets/image-20230930080300695.png" srcset="/img/loading.gif" lazyload alt="image-20230930080300695"></p>
+<p><img src="/assets/image-20230930080705761.png" srcset="/img/loading.gif" lazyload alt="image-20230930080705761"></p>
+<p><img src="/assets/image-20230930080914980.png" srcset="/img/loading.gif" lazyload alt="image-20230930080914980"></p>
+</li>
+</ul>
+<h2 id="普通组件的注册使用-局部注册"><a href="#普通组件的注册使用-局部注册" class="headerlink" title="普通组件的注册使用-局部注册"></a>普通组件的注册使用-局部注册</h2><h3 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h3><p>只能在注册的组件内使用</p>
+<p><img src="/assets/image-20230930081303483.png" srcset="/img/loading.gif" lazyload alt="image-20230930081303483"></p>
+<h3 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h3><ol>
+<li>创建.vue文件（三个组成部分）</li>
+<li>在使用的组件内先导入再注册，最后使用</li>
+</ol>
+<h3 id="3-使用方式"><a href="#3-使用方式" class="headerlink" title="3.使用方式"></a>3.使用方式</h3><p>当成html标签使用即可  &lt;组件名&gt;&lt;&#x2F;组件名&gt;</p>
+<h3 id="4-注意"><a href="#4-注意" class="headerlink" title="4.注意"></a>4.注意</h3><p>组件名规范 —&gt; 大驼峰命名法， 如 HmHeader</p>
+<p><img src="/assets/image-20230930082855943.png" srcset="/img/loading.gif" lazyload alt="image-20230930082855943"><img src="/assets/image-20230930094459579.png" srcset="/img/loading.gif" lazyload alt="image-20230930094459579"></p>
+<h2 id="普通组件的注册使用-全局注册"><a href="#普通组件的注册使用-全局注册" class="headerlink" title="普通组件的注册使用-全局注册"></a>普通组件的注册使用-全局注册</h2><h3 id="1-特点-1"><a href="#1-特点-1" class="headerlink" title="1.特点"></a>1.特点</h3><p>全局注册的组件，在项目的<strong>任何组件</strong>中都能使用</p>
+<h3 id="2-步骤-1"><a href="#2-步骤-1" class="headerlink" title="2.步骤"></a>2.步骤</h3><ol>
+<li>创建.vue组件（三个组成部分）</li>
+<li><strong>main.js</strong>中进行全局注册</li>
+</ol>
+<h3 id="3-使用方式-1"><a href="#3-使用方式-1" class="headerlink" title="3.使用方式"></a>3.使用方式</h3><p>当成HTML标签直接使用</p>
+<blockquote>
+<p>&lt;组件名&gt;&lt;&#x2F;组件名&gt;</p>
+</blockquote>
+<h3 id="4-注意-1"><a href="#4-注意-1" class="headerlink" title="4.注意"></a>4.注意</h3><p>组件名规范 —&gt; 大驼峰命名法， 如 HmHeader</p>
+<h3 id="5-语法"><a href="#5-语法" class="headerlink" title="5.语法"></a>5.语法</h3><p>Vue.component(‘组件名’, 组件对象)</p>
+<p><img src="/assets/image-20230930094719114.png" srcset="/img/loading.gif" lazyload alt="image-20230930094719114"></p>
+<p><img src="/assets/image-20230930094956400.png" srcset="/img/loading.gif" lazyload alt="image-20230930094956400"></p>
+<p><img src="/assets/image-20230930095516176.png" srcset="/img/loading.gif" lazyload alt="image-20230930095516176"></p>
+<h2 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h2><p><img src="/assets/image-20230930103650043.png" srcset="/img/loading.gif" lazyload alt="image-20230930103650043"></p>
+<h3 id="开发思路"><a href="#开发思路" class="headerlink" title="开发思路"></a>开发思路</h3><ol>
+<li><p>分析页面，按模块拆分组件，搭架子  (局部或全局注册)</p>
+</li>
+<li><p>根据设计图，编写组件 html 结构 css 样式 (已准备好)</p>
+</li>
+<li><p>拆分封装通用小组件  (局部或全局注册)</p>
+<p>将来 → 通过 js 动态渲染，实现功能</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Vue2/" class="category-chain-item">Vue2</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>6_工程化开发&amp;脚手架CLI</div>
+      <div>http://elaskon.asia/2023/09/29/黑马-Vue2/6_工程化开发&amp;脚手架CLI/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/30/%E9%BB%91%E9%A9%AC-Vue2/7_%E7%BB%84%E4%BB%B6/" title="7_组件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">7_组件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/29/%E9%BB%91%E9%A9%AC-Vue2/5_%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="5_生命周期">
+                        <span class="hidden-mobile">5_生命周期</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

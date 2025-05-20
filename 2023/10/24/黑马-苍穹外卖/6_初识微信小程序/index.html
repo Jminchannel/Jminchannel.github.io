@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="初识微信小程序HttpClientHttpClient 是Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。 HttpClient作用 发送HTTP请求 接收响应数据  应用场景扫描支付、查看地图、获取验证码、查看天气 应用程序本身并未实现这些功能，都是在应用程序里访问提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6_初识微信小程序">
+<meta property="og:url" content="http://elaskon.asia/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="初识微信小程序HttpClientHttpClient 是Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。 HttpClient作用 发送HTTP请求 接收响应数据  应用场景扫描支付、查看地图、获取验证码、查看天气 应用程序本身并未实现这些功能，都是在应用程序里访问提">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231024145454378.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231024212147563.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225355015.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225502698.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225557820.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231024235930396.png">
+<meta property="article:published_time" content="2023-10-24T06:55:43.000Z">
+<meta property="article:modified_time" content="2023-10-24T16:26:53.325Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20231024145454378.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>6_初识微信小程序 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="6_初识微信小程序"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-24 14:55" pubdate>
+          2023年10月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">6_初识微信小程序</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月25日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="初识微信小程序"><a href="#初识微信小程序" class="headerlink" title="初识微信小程序"></a>初识微信小程序</h1><h2 id="HttpClient"><a href="#HttpClient" class="headerlink" title="HttpClient"></a>HttpClient</h2><p>HttpClient 是Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。</p>
+<h3 id="HttpClient作用"><a href="#HttpClient作用" class="headerlink" title="HttpClient作用"></a>HttpClient作用</h3><ul>
+<li>发送HTTP请求</li>
+<li>接收响应数据</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>扫描支付、查看地图、获取验证码、查看天气</p>
+<p>应用程序本身并未实现这些功能，都是在应用程序里访问提供这些功能的服务，访问这些服务需要发送HTTP请求，并且接收响应数据，可通过HttpClient来实现。</p>
+<p><img src="/assets/image-20231024145454378.png" srcset="/img/loading.gif" lazyload alt="image-20231024145454378"></p>
+<h3 id="maven依赖"><a href="#maven依赖" class="headerlink" title="maven依赖"></a>maven依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>httpclient<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.5.13<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="HttpClient的核心API"><a href="#HttpClient的核心API" class="headerlink" title="HttpClient的核心API"></a>HttpClient的核心API</h3><ul>
+<li>HttpClient：Http客户端对象类型，使用该类型对象可发起Http请求。</li>
+<li>HttpClients：可认为是构建器，可创建HttpClient对象。</li>
+<li>CloseableHttpClient：实现类，实现了HttpClient接口。</li>
+<li>HttpGet：Get方式请求类型。</li>
+<li>HttpPost：Post方式请求类型。</li>
+</ul>
+<h3 id="发送请求步骤"><a href="#发送请求步骤" class="headerlink" title="发送请求步骤"></a>发送请求步骤</h3><ul>
+<li>创建HttpClient对象 </li>
+<li>创建Http请求对象</li>
+<li>调用HttpClient的execute方法发送请求</li>
+</ul>
+<p>练手</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.sky.HttpClientTest;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;<br><span class="hljs-keyword">import</span> org.apache.http.HttpEntity;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.CloseableHttpResponse;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.HttpGet;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.HttpPost;<br><span class="hljs-keyword">import</span> org.apache.http.entity.StringEntity;<br><span class="hljs-keyword">import</span> org.apache.http.impl.client.CloseableHttpClient;<br><span class="hljs-keyword">import</span> org.apache.http.impl.client.HttpClients;<br><span class="hljs-keyword">import</span> org.apache.http.util.EntityUtils;<br><span class="hljs-keyword">import</span> org.junit.jupiter.api.Test;<br><span class="hljs-keyword">import</span> org.springframework.boot.test.context.SpringBootTest;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ClassName: HttpClientTest</span><br><span class="hljs-comment"> * Package: com.sky.HttpClientTest</span><br><span class="hljs-comment"> * Description:</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> Jmin</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Create</span> 2023/10/24 14:59</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Version</span> 1.0</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HttpClientTest</span> &#123;<br>    <span class="hljs-comment">//        通过httpclient发送get请求</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGet</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br><span class="hljs-comment">//        创建httpclient对象</span><br>        <span class="hljs-type">CloseableHttpClient</span> <span class="hljs-variable">httpClient</span> <span class="hljs-operator">=</span> HttpClients.createDefault();<br><span class="hljs-comment">//        创建请求对象</span><br>        <span class="hljs-type">HttpGet</span> <span class="hljs-variable">httpGet</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpGet</span>(<span class="hljs-string">&quot;http://localhost:8080/user/shop/status&quot;</span>);<br><span class="hljs-comment">//        发送请求,返回响应</span><br>        <span class="hljs-type">CloseableHttpResponse</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> httpClient.execute(httpGet);<br><span class="hljs-comment">//        获取服务端返回的状态码</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">statusCode</span> <span class="hljs-operator">=</span> response.getStatusLine().getStatusCode();<br>        System.out.println(<span class="hljs-string">&quot;服务端返回的状态码：&quot;</span> + statusCode);<br>        System.out.println(<span class="hljs-string">&quot;////////////////////////////////////&quot;</span>);<br>        <span class="hljs-type">HttpEntity</span> <span class="hljs-variable">entity</span> <span class="hljs-operator">=</span> response.getEntity();<br>        System.out.println(EntityUtils.toString(entity));<br>        response.close();<br>        httpClient.close();<br>    &#125;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testPost</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException, CloneNotSupportedException &#123;<br><span class="hljs-comment">//        创建httpClient对象</span><br>        <span class="hljs-type">CloseableHttpClient</span> <span class="hljs-variable">httpClient</span> <span class="hljs-operator">=</span> HttpClients.createDefault();<br><span class="hljs-comment">//        创建请求对象</span><br>        <span class="hljs-type">HttpPost</span> <span class="hljs-variable">httpPost</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpPost</span>(<span class="hljs-string">&quot;http://localhost:8080/admin/employee/login&quot;</span>);<br>        <span class="hljs-type">JSONObject</span> <span class="hljs-variable">jsonObject</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();<br>        jsonObject.put(<span class="hljs-string">&quot;username&quot;</span>,<span class="hljs-string">&quot;admin&quot;</span>);<br>        jsonObject.put(<span class="hljs-string">&quot;password&quot;</span>,<span class="hljs-string">&quot;123456&quot;</span>);<br>        <span class="hljs-type">StringEntity</span> <span class="hljs-variable">stringEntity</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringEntity</span>(jsonObject.toString());<br><span class="hljs-comment">//        指定请求编码方式</span><br>        stringEntity.setContentEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);<br>        stringEntity.setContentType(<span class="hljs-string">&quot;application/json&quot;</span>);<br>        httpPost.setEntity(stringEntity);<br><span class="hljs-comment">//        发送请求</span><br>        <span class="hljs-type">CloseableHttpResponse</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> httpClient.execute(httpPost);<br>        <span class="hljs-type">HttpEntity</span> <span class="hljs-variable">entity</span> <span class="hljs-operator">=</span> response.getEntity();<br>        System.out.println(<span class="hljs-string">&quot;响应码：&quot;</span> + response.getStatusLine());<br><span class="hljs-comment">//        解析返回结果</span><br>        System.out.println(EntityUtils.toString(entity));<br>        response.close();<br>        httpClient.close();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>我的小程序appid wx187375baddb04dba</p>
+<h3 id="设置不校验合法域名"><a href="#设置不校验合法域名" class="headerlink" title="设置不校验合法域名"></a>设置不校验合法域名</h3><p><strong>注：</strong>开发阶段，小程序发出请求到后端的Tomcat服务器，若不勾选，请求发送失败。</p>
+<p><img src="/assets/image-20231024212147563.png" srcset="/img/loading.gif" lazyload alt="image-20231024212147563"></p>
+<h3 id="小程序目录结构"><a href="#小程序目录结构" class="headerlink" title="小程序目录结构"></a>小程序目录结构</h3><h4 id="小程序主体"><a href="#小程序主体" class="headerlink" title="小程序主体"></a>小程序主体</h4><p>小程序包含一个描述整体程序的 app 和多个描述各自页面的 page。一个小程序主体部分由三个文件组成，必须放在项目的根目录。</p>
+<p><strong>app.js：</strong>必须存在，主要存放小程序的逻辑代码</p>
+<p><strong>app.json：</strong>必须存在，小程序配置文件，主要存放小程序的公共配置</p>
+<p><strong>app.wxss:</strong>  非必须存在，主要存放小程序公共样式表，类似于前端的CSS样式</p>
+<p>小程序又有多个页面，比如说商品浏览页面、购物车的页面、订单支付的页面、商品的详情页面等等，会存放在pages目录。</p>
+<h4 id="小程序页面"><a href="#小程序页面" class="headerlink" title="小程序页面"></a>小程序页面</h4><p><strong>js文件：</strong>必须存在，存放页面业务逻辑代码，编写的js代码。</p>
+<p><strong>wxml文件：</strong>必须存在，存放页面结构，主要是做页面布局，页面效果展示的，类似于HTML页面。</p>
+<p><strong>json文件：</strong>非必须，存放页面相关的配置。</p>
+<p><strong>wxss文件：</strong>非必须，存放页面样式表，相当于CSS文件。</p>
+<h4 id="发布小程序"><a href="#发布小程序" class="headerlink" title="发布小程序"></a>发布小程序</h4><p>小程序的代码都已经开发完毕，要将小程序发布上线，让所有的用户都能使用到这个小程序。</p>
+<p>点击上传按钮：</p>
+<img src="/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225355015.png" srcset="/img/loading.gif" lazyload alt="image-20221204225355015" style="zoom:50%;"> 
+
+<p>指定版本号：</p>
+<img src="/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225502698.png" srcset="/img/loading.gif" lazyload alt="image-20221204225502698" style="zoom:50%;"> 
+
+<p>上传成功：</p>
+<img src="/2023/10/24/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/6_%E5%88%9D%E8%AF%86%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20221204225557820.png" srcset="/img/loading.gif" lazyload alt="image-20221204225557820" style="zoom:50%;"> 
+
+<p>把代码上传到微信服务器就表示小程序已经发布了吗？<br><strong>其实并不是。</strong>当前小程序版本只是一个开发版本。</p>
+<p>进到微信公众平台，打开版本管理页面。</p>
+<p><img src="/assets/image-20231024235930396.png" srcset="/img/loading.gif" lazyload alt="image-20231024235930396"> </p>
+<p>需提交审核，变成审核版本，审核通过后，进行发布，变成线上版本。</p>
+<p>一旦成为线上版本，这就说明小程序就已经发布上线了，微信用户就可以在微信里面去搜索和使用这个小程序了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/" class="category-chain-item">项目练习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" class="category-chain-item">苍穹外卖</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>6_初识微信小程序</div>
+      <div>http://elaskon.asia/2023/10/24/黑马-苍穹外卖/6_初识微信小程序/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/25/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/7_%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" title="7_微信小程序后端开发">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">7_微信小程序后端开发</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/22/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/5_java%E6%93%8D%E4%BD%9Credis/" title="5_springboot项目Redis使用">
+                        <span class="hidden-mobile">5_springboot项目Redis使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

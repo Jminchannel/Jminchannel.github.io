@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基于注解的SpringIOC容器实践和应用和 XML 配置文件一样，注解本身并不能执行，注解本身仅仅只是做一个标记，具体的功能是框架检测到注解标记的位置，然后针对这个位置按照注解标记的功能来执行具体操作。 本质上：所有一切的操作都是 Java 代码来完成的，XML 和注解只是告诉框架中的 Java 代码如何执行。 Spring 为了知道程序员在哪些地方标记了什么注解，就需要通过扫描的方式，来进行检">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6_基于注解的SpringIOC容器实践和应用">
+<meta property="og:url" content="http://elaskon.asia/2023/09/07/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/6_%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84SpringIOC%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5%E5%92%8C%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="基于注解的SpringIOC容器实践和应用和 XML 配置文件一样，注解本身并不能执行，注解本身仅仅只是做一个标记，具体的功能是框架检测到注解标记的位置，然后针对这个位置按照注解标记的功能来执行具体操作。 本质上：所有一切的操作都是 Java 代码来完成的，XML 和注解只是告诉框架中的 Java 代码如何执行。 Spring 为了知道程序员在哪些地方标记了什么注解，就需要通过扫描的方式，来进行检">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907095711542.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907095732120.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907095751274.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907095845880.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907101212911.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907101346153.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907213238028.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907214250509.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907233145357.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230907233321152.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908004241418.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908084805370.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908085458658.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908085634555.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908090555468.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908091244805.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908092015202.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908092638736.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908092813289.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908092901840.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908093618662.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908093646919.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908100920775.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230908101601394.png">
+<meta property="article:published_time" content="2023-09-07T01:17:00.000Z">
+<meta property="article:modified_time" content="2023-09-15T01:45:50.600Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20230907095711542.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>6_基于注解的SpringIOC容器实践和应用 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="6_基于注解的SpringIOC容器实践和应用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-07 09:17" pubdate>
+          2023年9月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          65 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">6_基于注解的SpringIOC容器实践和应用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月15日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="基于注解的SpringIOC容器实践和应用"><a href="#基于注解的SpringIOC容器实践和应用" class="headerlink" title="基于注解的SpringIOC容器实践和应用"></a>基于注解的SpringIOC容器实践和应用</h1><p>和 XML 配置文件一样，注解本身并不能执行，注解本身仅仅只是做一个标记，具体的功能是框架检测到注解标记的位置，然后针对这个位置按照注解标记的功能来执行具体操作。</p>
+<p><strong>本质上：所有一切的操作都是 Java 代码来完成的，XML 和注解只是告诉框架中的 Java 代码如何执行。</strong></p>
+<p>Spring 为了知道程序员在哪些地方标记了什么注解，就需要通过扫描的方式，来进行检测。然后根据注解进行后续操作。</p>
+<h2 id="组件添加标记注解"><a href="#组件添加标记注解" class="headerlink" title="组件添加标记注解"></a>组件添加标记注解</h2><ol>
+<li>组件标记注解和区别</li>
+</ol>
+<p>Spring 提供了以下多个注解，这些注解可以直接标注在 Java 类上，将它们定义成 Spring Bean。</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Component</td>
+<td>该注解用于描述 Spring 中的 Bean，它是一个泛化的概念，仅仅表示容器中的一个组件（Bean），并且可以作用在应用的任何层次，例如 Service 层、Dao 层等。 使用时只需将该注解标注在相应类上即可。</td>
+</tr>
+<tr>
+<td>@Repository</td>
+<td>该注解用于将数据访问层（Dao 层）的类标识为 Spring 中的 Bean，其功能与 @Component 相同。</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>该注解通常作用在业务层（Service 层），用于将业务层的类标识为 Spring 中的 Bean，其功能与 @Component 相同。</td>
+</tr>
+<tr>
+<td>@Controller</td>
+<td>该注解通常作用在控制层（如SpringMVC 的 Controller），用于将控制层的类标识为 Spring 中的 Bean，其功能与 @Component 相同。</td>
+</tr>
+</tbody></table>
+<p>通过查看源码我们得知，@Controller、@Service、@Repository这三个注解只是在@Component注解的基础上起了三个新的名字。</p>
+<p><img src="/assets/image-20230907095711542.png" srcset="/img/loading.gif" lazyload alt="image-20230907095711542"><img src="/assets/image-20230907095732120.png" srcset="/img/loading.gif" lazyload alt="image-20230907095732120"><img src="/assets/image-20230907095751274.png" srcset="/img/loading.gif" lazyload alt="image-20230907095751274"><img src="/assets/image-20230907095845880.png" srcset="/img/loading.gif" lazyload alt="image-20230907095845880"></p>
+<p>对于Spring使用IOC容器管理这些组件来说没有区别，也就是语法层面没有区别。所以@Controller、@Service、@Repository这三个注解只是给开发人员看的，让我们能够便于分辨组件的作用。</p>
+<p><strong>注意：虽然它们本质上一样，但是为了代码的可读性、程序结构严谨！我们肯定不能随便胡乱标记。</strong></p>
+<h2 id="配置文件确定扫描范围"><a href="#配置文件确定扫描范围" class="headerlink" title="配置文件确定扫描范围"></a>配置文件确定扫描范围</h2><h3 id="基本扫描配置"><a href="#基本扫描配置" class="headerlink" title="基本扫描配置"></a>基本扫描配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span><br><span class="hljs-comment">&lt;!--    普通配置包扫描</span><br><span class="hljs-comment">        base-package 指定ioc容器去哪些包查找注解类 可以包含多个包 </span><br><span class="hljs-comment">		com.xx,com.yy--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.Jmin.ioc_01&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testioc1</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">ClassPathXmlApplicationContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ClassPathXmlApplicationContext</span>(<span class="hljs-string">&quot;spring-01.xml&quot;</span>);<br>        <span class="hljs-type">XxxDao</span> <span class="hljs-variable">bean</span> <span class="hljs-operator">=</span> context.getBean(XxxDao.class);<br>        System.out.println(bean);<br><span class="hljs-comment">//        ioc注解，默认的组件名为 类的全名并且其首字母小写</span><br>        <span class="hljs-type">Object</span> <span class="hljs-variable">bean1</span> <span class="hljs-operator">=</span> context.getBean(<span class="hljs-string">&quot;xxxService&quot;</span>);<br>        System.out.println(bean1);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230907101212911.png" srcset="/img/loading.gif" lazyload alt="image-20230907101212911"></p>
+<h3 id="指定排除组件"><a href="#指定排除组件" class="headerlink" title="指定排除组件"></a>指定排除组件</h3><p><img src="/assets/image-20230907101346153.png" srcset="/img/loading.gif" lazyload alt="image-20230907101346153"></p>
+<p>三层架构中，基础整合中web会存在两种容器，WebIOC和RootIOC，在同个包的范围内，WebIOC只能装配Controller类，而RootIOC可以装配包内所有资源，需要将@Controller排除</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--    指定包，排除注解--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.Jmin.ioc_01&quot;</span> &gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">context:exclude-filter</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;annotation&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;org.springframework.stereotype.Service&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">context:component-scan</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230907213238028.png" srcset="/img/loading.gif" lazyload alt="image-20230907213238028"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--    修改指定包内所有注解先不生效--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.Jmin.ioc_01&quot;</span> <span class="hljs-attr">use-default-filters</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br><span class="hljs-comment">&lt;!--        开启某个注解生效--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">context:include-filter</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;annotation&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;org.springframework.stereotype.Service&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">context:component-scan</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230907214250509.png" srcset="/img/loading.gif" lazyload alt="image-20230907214250509"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>注解方式IoC只是标记哪些类要被Spring管理</li>
+<li>最终，我们还需要XML方式或者后面讲解Java配置类方式指定注解生效的包</li>
+<li>现阶段配置方式为 注解（标记）+ XML（扫描）</li>
+</ol>
+<h2 id="组件作用域和周期方法注解"><a href="#组件作用域和周期方法注解" class="headerlink" title="组件作用域和周期方法注解"></a>组件作用域和周期方法注解</h2><h3 id="组件周期方法配置"><a href="#组件周期方法配置" class="headerlink" title="组件周期方法配置"></a>组件周期方法配置</h3><ol>
+<li><p>周期方法概念</p>
+<p>我们可以在组件类中定义方法，然后当IoC容器实例化和销毁组件对象的时候进行调用！这两个方法我们成为生命周期方法！</p>
+</li>
+<li><p>周期方法声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JavaBean</span> &#123;<br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span>&#123;<br><br>    &#125;<br>    <span class="hljs-meta">@PreDestroy</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span>&#123;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="组件作用域配置"><a href="#组件作用域配置" class="headerlink" title="组件作用域配置"></a>组件作用域配置</h3><ol>
+<li><p>Bean作用域回顾</p>
+<p>&lt;bean 标签声明Bean，只是将Bean的信息配置给SpringIOC容器中，在IOC容器中，这些通过bean标签声明的信息将转化为Spring内部的BeanDefinition对象，在BeanDefinition对象内，包含了定义的信息。</p>
+<p>意味着BeanDefinition与类的概念一样，SpringIOC容器可以根据BeanDefinition对象反射创建多个Bean对象实例。</p>
+<p>而具体要创建多少个bean的实例对象，由Bean的作用域Scope所决定。</p>
+</li>
+<li><p>作用域可选值</p>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>含义</th>
+<th>创建对象的时机</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>singleton</td>
+<td>在 IOC 容器中，这个 bean 的对象始终为单实例</td>
+<td>IOC 容器初始化时</td>
+<td>是</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>这个 bean 在 IOC 容器中有多个实例</td>
+<td>获取 bean 时</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p>而在WebApplicationContext中</p>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>含义</th>
+<th>创建对象的时机</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request</td>
+<td>请求范围内有效的实例</td>
+<td>每次请求</td>
+<td>否</td>
+</tr>
+<tr>
+<td>session</td>
+<td>会话范围内有效的实例</td>
+<td>每次会话</td>
+<td>否</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>作用域配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><span class="hljs-comment">//多例设置</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JavaBean</span> &#123;<br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;init()......&quot;</span>);<br>    &#125;<br>    <span class="hljs-meta">@PreDestroy</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;destroy()......&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230907233145357.png" srcset="/img/loading.gif" lazyload alt="image-20230907233145357"></p>
+<p>多例状态时关闭资源不会调用销毁方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-comment">//单例设置</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JavaBean</span> &#123;<br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;init()......&quot;</span>);<br>    &#125;<br>    <span class="hljs-meta">@PreDestroy</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;destroy()......&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230907233321152.png" srcset="/img/loading.gif" lazyload alt="image-20230907233321152"></p>
+</li>
+</ol>
+<h2 id="Bean属性赋值，引用类型自动装配DI"><a href="#Bean属性赋值，引用类型自动装配DI" class="headerlink" title="Bean属性赋值，引用类型自动装配DI"></a>Bean属性赋值，引用类型自动装配DI</h2><h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><ol>
+<li><p>前提</p>
+<p>参与自动装配的组件不管是否需要注入的都要存放进IoC容器中，不区分装配方式，XML和注解本质是一样的。</p>
+</li>
+<li><p>@Autowrited注解</p>
+</li>
+</ol>
+<h4 id="IoC容器中仅有一个UserService接口对应的实现类对象。"><a href="#IoC容器中仅有一个UserService接口对应的实现类对象。" class="headerlink" title="IoC容器中仅有一个UserService接口对应的实现类对象。"></a>IoC容器中仅有一个<strong>UserService</strong>接口对应的实现类对象。</h4>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;userServiceShow&quot;</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>   成员变量上直接标记，不需要配置set方法。</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br><span class="hljs-comment">//     &lt;property ref=&quot;service&quot; name=&quot;userService&quot;/&gt;</span><br><span class="hljs-comment">//    自动装配注解DI，在IOC容器中查找符合类型的组件对象。设置给当前属性DI</span><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> userService.show();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908004241418.png" srcset="/img/loading.gif" lazyload alt="image-20230908004241418"></p>
+<h4 id="IoC容器没有默认的类型，把service类中的-Controller去掉，即去掉bean"><a href="#IoC容器没有默认的类型，把service类中的-Controller去掉，即去掉bean" class="headerlink" title="IoC容器没有默认的类型，把service类中的**@Controller去掉，即去掉bean**"></a><strong>IoC</strong>容器没有默认的类型，把<strong>service</strong>类中的**@Controller<strong>去掉，即去掉</strong>bean**</h4>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-comment">//@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;userServiceShow&quot;</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908084805370.png" srcset="/img/loading.gif" lazyload alt="image-20230908084805370"></p>
+<p>   @Autowired 装配【默认】至少要求有一个bean，否则报错</p>
+<p>   原因：</p>
+<p>   <img src="/assets/image-20230908085458658.png" srcset="/img/loading.gif" lazyload alt="image-20230908085458658"></p>
+<p>   @Autowired的默认要求，我们可以设置不要求bean存在，即佛系装配(不推荐)。但值为空。</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired(required = false)</span><br><span class="hljs-keyword">private</span> UserService userService;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908085634555.png" srcset="/img/loading.gif" lazyload alt="image-20230908085634555"></p>
+<h4 id="一个类型同时存在多个对应的组件"><a href="#一个类型同时存在多个对应的组件" class="headerlink" title="一个类型同时存在多个对应的组件"></a><em>一个类型同时存在多个对应的组件</em></h4>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;userServiceShow&quot;</span>;<br>    &#125;<br>&#125;<br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NewUserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;new show()&quot;</span>;<br>    &#125;<br>&#125;<br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br><span class="hljs-comment">//     &lt;property ref=&quot;service&quot; name=&quot;userService&quot;/&gt;</span><br><span class="hljs-comment">//    自动装配注解DI，在IOC容器中查找符合类型的组件对象。设置给当前属性DI</span><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> userService.show();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908090555468.png" srcset="/img/loading.gif" lazyload alt="image-20230908090555468"></p>
+<p>   解决方法1：</p>
+<p>   成员属性名指定@Autowired多个组件时，默认会根据成员属性名newUserServiceImpl查找对应的bean</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br><span class="hljs-comment">//     &lt;property ref=&quot;service&quot; name=&quot;userService&quot;/&gt;</span><br><span class="hljs-comment">//    自动装配注解DI，在IOC容器中查找符合类型的组件对象。设置给当前属性DI</span><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService newUserServiceImpl;<br><br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> newUserServiceImpl.show();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908091244805.png" srcset="/img/loading.gif" lazyload alt="image-20230908091244805"></p>
+<p>   解决方法2：</p>
+<p>   在@Autowired之后使用@Qualifier(value &#x3D; “beanName”)来指定bean的id，必须搭配使用！</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-meta">@Qualifier(value = &quot;userServiceImpl&quot;)</span><br><span class="hljs-keyword">private</span> UserService userService;<br></code></pre></td></tr></table></figure>
+
+<p>   <img src="/assets/image-20230908092015202.png" srcset="/img/loading.gif" lazyload alt="image-20230908092015202"></p>
+<p>   优化：@Autowired+@Qualifier&#x3D;@Resource</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Resource(name = &quot;userServiceImpl&quot;)</span><br><span class="hljs-keyword">private</span> UserService userService;<br></code></pre></td></tr></table></figure>
+
+<p>   JDK17的错误示例（导包错误）：</p>
+<p>   <img src="/assets/image-20230908092638736.png" srcset="/img/loading.gif" lazyload alt="image-20230908092638736"></p>
+<p>   <img src="/assets/image-20230908092813289.png" srcset="/img/loading.gif" lazyload alt="image-20230908092813289"></p>
+<p>   去掉该注解时</p>
+<p>   <img src="/assets/image-20230908092901840.png" srcset="/img/loading.gif" lazyload alt="image-20230908092901840"></p>
+<p>   错误一致，因此结出导包出错！</p>
+<p>   在高于JDK11或低于JDK8版本中，@Resource需要由JSR-250提供技术规范（规定了注解和注解的含义），第三方框架（Spring）和库才能实现和提供对应的功能。</p>
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>jakarta.annotation<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jakarta.annotation-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>   修正：</p>
+<p>   <img src="/assets/image-20230908093618662.png" srcset="/img/loading.gif" lazyload alt="image-20230908093618662"></p>
+<p>   <img src="/assets/image-20230908093646919.png" srcset="/img/loading.gif" lazyload alt="image-20230908093646919"></p>
+<h2 id="Bean属性赋值，基本类型自动装配DI"><a href="#Bean属性赋值，基本类型自动装配DI" class="headerlink" title="Bean属性赋值，基本类型自动装配DI"></a>Bean属性赋值，基本类型自动装配DI</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.Jmin.ioc_04&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:property-placeholder</span> <span class="hljs-attr">location</span>=<span class="hljs-string">&quot;jdbc.properties&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">Jmin.username</span> = <span class="hljs-string">root</span><br><span class="hljs-attr">Jmin.password</span> = <span class="hljs-string">123456</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.Jmin.ioc_04;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JavaBean04</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getUsername</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> username;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getPassword</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> password;<br>    &#125;<br><br>    <span class="hljs-comment">//    直接赋值</span><br><span class="hljs-comment">//    注解赋值 @Value注解 读取外部资源配置</span><br>    <span class="hljs-comment">//@Value(&quot;$&#123;key&#125;&quot;)</span><br>    <span class="hljs-comment">//@Value(&quot;$&#123;key:defaultValue&#125;&quot;)</span><br>    <span class="hljs-meta">@Value(&quot;$&#123;Jmin.username:admin&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String username;<br>    <span class="hljs-meta">@Value(&quot;$&#123;Jmin.password:admin&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String password;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230908100920775.png" srcset="/img/loading.gif" lazyload alt="image-20230908100920775"></p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p><img src="/assets/image-20230908101601394.png" srcset="/img/loading.gif" lazyload alt="image-20230908101601394"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SSM/" class="category-chain-item">SSM</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/SSM/Spring/" class="category-chain-item">Spring</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/SSM/Spring/IOC/" class="category-chain-item">IOC</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>6_基于注解的SpringIOC容器实践和应用</div>
+      <div>http://elaskon.asia/2023/09/07/尚硅谷-SSM/Spring/6_基于注解的SpringIOC容器实践和应用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/08/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/7_%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3+XML%E7%AE%A1%E7%90%86IOC%E7%BB%83%E4%B9%A0/" title="7_基于注解+XML整合三层框架组件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">7_基于注解+XML整合三层框架组件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/07/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/Spring/5_%E5%9F%BA%E4%BA%8EXML%E7%AE%A1%E7%90%86IOC%E7%BB%83%E4%B9%A0/" title="5_基于XML管理IOC练习">
+                        <span class="hidden-mobile">5_基于XML管理IOC练习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

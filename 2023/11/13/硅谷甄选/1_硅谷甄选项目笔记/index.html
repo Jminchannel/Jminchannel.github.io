@@ -1,0 +1,1075 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="硅谷甄选运营平台此次教学课程为硅谷甄选运营平台项目,包含运营平台项目模板从0到1开发，以及数据大屏幕、权限等业务。 此次教学课程涉及到技术栈包含***:vue3+TypeScript+vue-router+pinia+element-plus+axios+echarts***等技术栈。 一、vue3组件通信方式通信仓库地址:https:&#x2F;&#x2F;gitee.com&#x2F;jch1011&#x2F;vue3_commun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1_硅谷甄选运营平台">
+<meta property="og:url" content="http://elaskon.asia/2023/11/13/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89/1_%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="硅谷甄选运营平台此次教学课程为硅谷甄选运营平台项目,包含运营平台项目模板从0到1开发，以及数据大屏幕、权限等业务。 此次教学课程涉及到技术栈包含***:vue3+TypeScript+vue-router+pinia+element-plus+axios+echarts***等技术栈。 一、vue3组件通信方式通信仓库地址:https:&#x2F;&#x2F;gitee.com&#x2F;jch1011&#x2F;vue3_commun">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-13T06:55:43.000Z">
+<meta property="article:modified_time" content="2023-11-16T16:20:34.537Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>1_硅谷甄选运营平台 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="1_硅谷甄选运营平台"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-13 14:55" pubdate>
+          2023年11月13日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          29k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          243 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">1_硅谷甄选运营平台</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年11月17日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="硅谷甄选运营平台"><a href="#硅谷甄选运营平台" class="headerlink" title="硅谷甄选运营平台"></a>硅谷甄选运营平台</h1><p>此次教学课程为硅谷甄选运营平台项目,包含运营平台项目模板从0到1开发，以及数据大屏幕、权限等业务。</p>
+<p>此次教学课程涉及到技术栈包含***:vue3+TypeScript+vue-router+pinia+element-plus+axios+echarts***等技术栈。</p>
+<h2 id="一、vue3组件通信方式"><a href="#一、vue3组件通信方式" class="headerlink" title="一、vue3组件通信方式"></a>一、vue3组件通信方式</h2><p><strong>通信仓库地址:<a target="_blank" rel="noopener" href="https://gitee.com/jch1011/vue3_communication.git">https://gitee.com/jch1011/vue3_communication.git</a></strong></p>
+<p>不管是vue2还是vue3,组件通信方式很重要,不管是项目还是面试都是经常用到的知识点。</p>
+<p><strong>比如:vue2组件通信方式</strong></p>
+<p>**props:**可以实现父子组件、子父组件、甚至兄弟组件通信</p>
+<p><strong>自定义事件</strong>:可以实现子父组件通信</p>
+<p><strong>全局事件总线$bus</strong>:可以实现任意组件通信</p>
+<p>**pubsub:**发布订阅模式实现任意组件通信</p>
+<p><strong>vuex</strong>:集中式状态管理容器，实现任意组件通信</p>
+<p><strong>ref</strong>:父组件获取子组件实例VC,获取子组件的响应式数据以及方法</p>
+<p>**slot:**插槽(默认插槽、具名插槽、作用域插槽)实现父子组件通信……..</p>
+<h3 id="1-1props"><a href="#1-1props" class="headerlink" title="1.1props"></a>1.1props</h3><p>props可以实现父子组件通信,在vue3中我们可以通过defineProps获取父组件传递的数据。且在组件内部不需要引入defineProps方法可以直接使用！</p>
+<p><strong>父组件给子组件传递数据</strong></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">&lt;<span class="hljs-title class_">Child</span> info=<span class="hljs-string">&quot;我爱祖国&quot;</span> <span class="hljs-symbol">:money=<span class="hljs-string">&quot;money&quot;</span>&gt;&lt;/Child&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>子组件获取父组件传递数据:方式1</strong></p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-keyword">let</span> props <span class="hljs-operator">=</span> defineProps(&#123;<br>  info<span class="hljs-operator">:</span>&#123;<br>   <span class="hljs-keyword">type</span><span class="hljs-operator">:</span>String,<span class="hljs-comment">//接受的数据类型</span><br>   <span class="hljs-keyword">default</span><span class="hljs-operator">:</span>&#x27;默认参数&#x27;,<span class="hljs-comment">//接受默认数据</span><br>  &#125;,<br>  money<span class="hljs-operator">:</span>&#123;<br>   <span class="hljs-keyword">type</span><span class="hljs-operator">:</span>Number,<br>   <span class="hljs-keyword">default</span><span class="hljs-operator">:</span>0<br>&#125;&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><strong>子组件获取父组件传递数据:方式2</strong></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">let props</span> = defineProps([<span class="hljs-string">&quot;info&quot;</span>,<span class="hljs-string">&#x27;money&#x27;</span>]);<br></code></pre></td></tr></table></figure>
+
+<p>子组件获取到props数据就可以在模板中使用了,但是切记props是只读的(只能读取，不能修改)</p>
+<h3 id="1-2自定义事件"><a href="#1-2自定义事件" class="headerlink" title="1.2自定义事件"></a>1.2自定义事件</h3><p>在vue框架中事件分为两种:一种是原生的DOM事件，另外一种自定义事件。</p>
+<p>原生DOM事件可以让用户与网页进行交互，比如click、dbclick、change、mouseenter、mouseleave….</p>
+<p>自定义事件可以实现子组件给父组件传递数据</p>
+<h4 id="1-2-1原生DOM事件"><a href="#1-2-1原生DOM事件" class="headerlink" title="1.2.1原生DOM事件"></a>1.2.1原生DOM事件</h4><p>代码如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">pre</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handler&quot;</span>&gt;</span><br>     我是祖国的老花骨朵<br><span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p>当前代码级给pre标签绑定原生DOM事件点击事件,默认会给事件回调注入event事件对象。当然点击事件想注入多个参数可以按照下图操作。但是切记注入的事件对象务必叫做$event.</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;div @<span class="hljs-attribute">click</span>=<span class="hljs-string">&quot;handler1(1,2,3,<span class="hljs-variable">$event</span>)&quot;</span>&gt;我要传递多个参数&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在vue3框架click、dbclick、change(这类原生DOM事件),不管是在标签、自定义标签上(组件标签)都是原生DOM事件。</p>
+<p><strong><!--vue2中却不是这样的,在vue2中组件标签需要通过native修饰符才能变为原生DOM事件--></strong></p>
+<h4 id="1-2-2自定义事件"><a href="#1-2-2自定义事件" class="headerlink" title="1.2.2自定义事件"></a>1.2.2自定义事件</h4><p>自定义事件可以实现子组件给父组件传递数据.在项目中是比较常用的。</p>
+<p>比如在父组件内部给子组件(Event2)绑定一个自定义事件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Event2</span>  @<span class="hljs-attr">xxx</span>=<span class="hljs-string">&quot;handler3&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Event2</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在Event2子组件内部触发这个自定义事件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>我是子组件2<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handler&quot;</span>&gt;</span>点击我触发xxx自定义事件<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">let</span> $emit = <span class="hljs-title function_">defineEmits</span>([<span class="hljs-string">&quot;xxx&quot;</span>]);</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handler</span> = (<span class="hljs-params"></span>) =&gt; &#123;</span><br><span class="language-javascript">  $emit(<span class="hljs-string">&quot;xxx&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;茅台&quot;</span>);</span><br><span class="language-javascript">&#125;;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>我们会发现在script标签内部,使用了defineEmits方法，此方法是vue3提供的方法,不需要引入直接使用。defineEmits方法执行，传递一个数组，数组元素即为将来组件需要触发的自定义事件类型，此方执行会返回一个$emit方法用于触发自定义事件。</p>
+<p>当点击按钮的时候，事件回调内部调用$emit方法去触发自定义事件,第一个参数为触发事件类型，第二个、三个、N个参数即为传递给父组件的数据。</p>
+<p>需要注意的是:代码如下</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;Event2  @<span class="hljs-attribute">xxx</span>=<span class="hljs-string">&quot;handler3&quot;</span> @<span class="hljs-attribute">click</span>=<span class="hljs-string">&quot;handler&quot;</span>&gt;&lt;/Event2&gt;<br></code></pre></td></tr></table></figure>
+
+<p>正常说组件标签书写@click应该为原生DOM事件,但是如果子组件内部通过defineEmits定义就变为自定义事件了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">let</span> <span class="hljs-variable">$emit</span> = defineEmits([<span class="hljs-string">&quot;xxx&quot;</span>,<span class="hljs-string">&#x27;click&#x27;</span>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3全局事件总线"><a href="#1-3全局事件总线" class="headerlink" title="1.3全局事件总线"></a>1.3全局事件总线</h3><p>全局事件总线可以实现任意组件通信，在vue2中可以根据VM与VC关系推出全局事件总线。</p>
+<p>但是在vue3中没有Vue构造函数，也就没有Vue.prototype.以及组合式API写法没有this，</p>
+<p>那么在Vue3想实现全局事件的总线功能就有点不现实啦，如果想在Vue3中使用全局事件总线功能</p>
+<p>可以使用插件mitt实现。</p>
+<p><strong>mitt:官网地址:<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/mitt">https://www.npmjs.com/package/mitt</a></strong></p>
+<h3 id="1-4v-model"><a href="#1-4v-model" class="headerlink" title="1.4v-model"></a>1.4v-model</h3><p>v-model指令可是收集表单数据(数据双向绑定)，除此之外它也可以实现父子组件数据同步。</p>
+<p>而v-model实指利用props[modelValue]与自定义事件[update:modelValue]实现的。</p>
+<p>下方代码:相当于给组件Child传递一个props(modelValue)与绑定一个自定义事件update:modelValue</p>
+<p>实现父子组件数据同步</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在vue3中一个组件可以通过使用多个v-model,让父子组件多个数据同步,下方代码相当于给组件Child传递两个props分别是pageNo与pageSize，以及绑定两个自定义事件update:pageNo与update:pageSize实现父子数据同步</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">&lt;Child v-<span class="hljs-keyword">mode</span><span class="hljs-variable">l:pageNo</span>=<span class="hljs-string">&quot;msg&quot;</span> v-<span class="hljs-keyword">mode</span><span class="hljs-variable">l:pageSize</span>=<span class="hljs-string">&quot;msg1&quot;</span>&gt;&lt;/Child&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-5useAttrs"><a href="#1-5useAttrs" class="headerlink" title="1.5useAttrs"></a>1.5useAttrs</h3><p>在Vue3中可以利用useAttrs方法获取组件的属性与事件(包含:原生DOM事件或者自定义事件),次函数功能类似于Vue2框架中$attrs属性与$listeners方法。</p>
+<p>比如:在父组件内部使用一个子组件my-button</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;my-button <span class="hljs-attribute">type</span>=<span class="hljs-string">&quot;success&quot;</span> <span class="hljs-attribute">size</span>=<span class="hljs-string">&quot;small&quot;</span> <span class="hljs-attribute">title</span>=<span class="hljs-string">&#x27;标题&#x27;</span> @<span class="hljs-attribute">click</span>=<span class="hljs-string">&quot;handler&quot;</span>&gt;&lt;/my-button&gt;<br></code></pre></td></tr></table></figure>
+
+<p>子组件内部可以通过useAttrs方法获取组件属性与事件.因此你也发现了，它类似于props,可以接受父组件传递过来的属性与属性值。需要注意如果defineProps接受了某一个属性，useAttrs方法返回的对象身上就没有相应属性与属性值。</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> </span></span><span class="hljs-template-variable">&#123;useAttrs&#125;</span><span class="language-xml"><span class="language-javascript"> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;</span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">let</span> $attrs = <span class="hljs-title function_">useAttrs</span>();</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-6ref与-parent"><a href="#1-6ref与-parent" class="headerlink" title="1.6ref与$parent"></a>1.6ref与$parent</h3><p>ref,提及到ref可能会想到它可以获取元素的DOM或者获取子组件实例的VC。既然可以在父组件内部通过ref获取子组件实例VC，那么子组件内部的方法与响应式数据父组件可以使用的。</p>
+<p>比如:在父组件挂载完毕获取组件实例</p>
+<p>父组件内部代码:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ref与$parent<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Son</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;son&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Son</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Son</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Son.vue&quot;</span>;</span><br><span class="language-javascript"><span class="hljs-keyword">import</span> &#123; onMounted, ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> son = <span class="hljs-title function_">ref</span>();</span><br><span class="language-javascript"><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(son.<span class="hljs-property">value</span>);</span><br><span class="language-javascript">&#125;);</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>但是需要注意，如果想让父组件获取子组件的数据或者方法需要通过defineExpose对外暴露,因为vue3中组件内部的数据对外“关闭的”，外部不能访问</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> </span></span><span class="hljs-template-variable">&#123; ref &#125;</span><span class="language-xml"><span class="language-javascript"> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;</span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//数据</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">let</span> money = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1000</span>);</span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//方法</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handler</span> = (<span class="hljs-params"></span>)=&gt;</span></span><span class="hljs-template-variable">&#123;</span><br><span class="hljs-template-variable">&#125;</span><span class="language-xml"></span><br><span class="language-xml">defineExpose(</span><span class="hljs-template-variable">&#123;</span><br><span class="hljs-template-variable">  money,</span><br><span class="hljs-template-variable">   handler</span><br><span class="hljs-template-variable">&#125;</span><span class="language-xml">)</span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>$parent可以获取某一个组件的父组件实例VC,因此可以使用父组件内部的数据与方法。必须子组件内部拥有一个按钮点击时候获取父组件实例，当然父组件的数据与方法需要通过defineExpose方法对外暴露</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;button @<span class="hljs-attribute">click</span>=<span class="hljs-string">&quot;handler(<span class="hljs-variable">$parent</span>)&quot;</span>&gt;点击我获取父组件实例&lt;/button&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-7provide与inject"><a href="#1-7provide与inject" class="headerlink" title="1.7provide与inject"></a>1.7provide与inject</h3><p><strong>provide[提供]</strong></p>
+<p><strong>inject[注入]</strong></p>
+<p>vue3提供两个方法provide与inject,可以实现隔辈组件传递参数</p>
+<p>组件组件提供数据:</p>
+<p>provide方法用于提供数据，此方法执需要传递两个参数,分别提供数据的key与提供数据value</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> </span></span><span class="hljs-template-variable">&#123;provide&#125;</span><span class="language-xml"><span class="language-javascript"> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-title function_">provide</span>(<span class="hljs-string">&#x27;token&#x27;</span>,<span class="hljs-string">&#x27;admin_token&#x27;</span>);</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>后代组件可以通过inject方法获取数据,通过key获取存储的数值</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> </span></span><span class="hljs-template-variable">&#123;inject&#125;</span><span class="language-xml"><span class="language-javascript"> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">let</span> token = <span class="hljs-title function_">inject</span>(<span class="hljs-string">&#x27;token&#x27;</span>);</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h3 id="1-8pinia"><a href="#1-8pinia" class="headerlink" title="1.8pinia"></a>1.8pinia</h3><p><strong>pinia官网:<a target="_blank" rel="noopener" href="https://pinia.web3doc.top/">https://pinia.web3doc.top/</a></strong></p>
+<p>pinia也是集中式管理状态容器,类似于vuex。但是核心概念没有mutation、modules,使用方式参照官网</p>
+<h3 id="1-9slot"><a href="#1-9slot" class="headerlink" title="1.9slot"></a>1.9slot</h3><p>插槽：默认插槽、具名插槽、作用域插槽可以实现父子组件通信.</p>
+<p><strong>默认插槽:</strong></p>
+<p>在子组件内部的模板中书写slot全局组件标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在父组件内部提供结构：Todo即为子组件,在父组件内部使用的时候，在双标签内部书写结构传递给子组件</p>
+<p>注意开发项目的时候默认插槽一般只有一个</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Todo</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>我是默认插槽填充的结构<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Todo</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>具名插槽：</strong></p>
+<p>顾名思义，此插槽带有名字在组件内部留多个指定名字的插槽。</p>
+<p>下面是一个子组件内部,模板中留两个插槽</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>todo<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>父组件内部向指定的具名插槽传递结构。需要注意v-slot：可以替换为#</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>slot<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Todo</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:a</span>&gt;</span>  //可以用#a替换<br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>填入组件A部分的结构<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot:b</span>&gt;</span>//可以用#b替换<br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>填入组件B部分的结构<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Todo</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Todo</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Todo.vue&quot;</span>;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>作用域插槽</strong></p>
+<p>作用域插槽：可以理解为，子组件数据由父组件提供，但是子组件内部决定不了自身结构与外观(样式)</p>
+<p>子组件Todo代码如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>todo<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>     <span class="hljs-comment">&lt;!--组件内部遍历数组--&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(item,index) in todos&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span>&gt;</span><br>         <span class="hljs-comment">&lt;!--作用域插槽将数据回传给父组件--&gt;</span><br>         <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:</span>$<span class="hljs-attr">row</span>=<span class="hljs-string">&quot;item&quot;</span> <span class="hljs-attr">:</span>$<span class="hljs-attr">index</span>=<span class="hljs-string">&quot;index&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;todos&#x27;</span>]);<span class="hljs-comment">//接受父组件传递过来的数据</span></span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>父组件内部代码如下:</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>slot<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Todo</span> <span class="hljs-attr">:todos</span>=<span class="hljs-string">&quot;todos&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-slot</span>=<span class="hljs-string">&quot;&#123;$row,$index&#125;&quot;</span>&gt;</span></span><br><span class="language-xml">         <span class="hljs-comment">&lt;!--父组件决定子组件的结构与外观--&gt;</span></span><br><span class="language-xml">         <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">&quot;&#123;color:$row.done?&#x27;green&#x27;:&#x27;red&#x27;&#125;&quot;</span>&gt;</span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">$row.title</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Todo</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Todo</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Todo.vue&quot;</span>;</span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">import</span> &#123; ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;</span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-comment">//父组件内部数据</span></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">let</span> todos = <span class="hljs-title function_">ref</span>([</span></span><br><span class="language-javascript"><span class="language-xml">  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;吃饭&quot;</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">true</span> &#125;,</span></span><br><span class="language-javascript"><span class="language-xml">  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;睡觉&quot;</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> &#125;,</span></span><br><span class="language-javascript"><span class="language-xml">  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;打豆豆&quot;</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">true</span> &#125;,</span></span><br><span class="language-javascript"><span class="language-xml">]);</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="二、搭建后台管理系统模板"><a href="#二、搭建后台管理系统模板" class="headerlink" title="二、搭建后台管理系统模板"></a>二、搭建后台管理系统模板</h2><h3 id="2-1项目初始化"><a href="#2-1项目初始化" class="headerlink" title="2.1项目初始化"></a>2.1项目初始化</h3><p>今天来带大家从0开始搭建一个vue3版本的后台管理系统。一个项目要有统一的规范，需要使用eslint+stylelint+prettier来对我们的代码质量做检测和修复，需要使用husky来做commit拦截，需要使用commitlint来统一提交规范，需要使用preinstall来统一包管理工具。</p>
+<p>下面我们就用这一套规范来初始化我们的项目，集成一个规范的模版。</p>
+<h4 id="2-1-1环境准备"><a href="#2-1-1环境准备" class="headerlink" title="2.1.1环境准备"></a>2.1.1环境准备</h4><ul>
+<li>node v16.14.2 </li>
+<li>pnpm 8.0.0</li>
+</ul>
+<h4 id="2-1-2初始化项目"><a href="#2-1-2初始化项目" class="headerlink" title="2.1.2初始化项目"></a>2.1.2初始化项目</h4><p>本项目使用vite进行构建，vite官方中文文档参考：<a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">cn.vitejs.dev&#x2F;guide&#x2F;</a></p>
+<p><strong>pnpm:performant npm ，意味“高性能的 npm”。<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=pnpm&spm=1001.2101.3001.7020">pnpm</a>由npm&#x2F;yarn衍生而来，解决了npm&#x2F;yarn内部潜在的bug，极大的优化了性能，扩展了使用场景。被誉为“最先进的包管理工具”</strong></p>
+<p>pnpm安装指令</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> i -g pnpm<br></code></pre></td></tr></table></figure>
+
+<p>项目初始化命令:</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pnpm create vite</span><br></code></pre></td></tr></table></figure>
+
+<p>进入到项目根目录pnpm install安装全部依赖.安装完依赖运行程序:pnpm run dev</p>
+<p>运行完毕项目跑在<a target="_blank" rel="noopener" href="http://127.0.0.1:5173/,%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E4%BD%A0%E5%BE%97%E9%A1%B9%E7%9B%AE%E5%95%A6">http://127.0.0.1:5173/,可以访问你得项目啦</a></p>
+<h3 id="2-2项目配置"><a href="#2-2项目配置" class="headerlink" title="2.2项目配置"></a>2.2项目配置</h3><h4 id="一、eslint配置"><a href="#一、eslint配置" class="headerlink" title="一、eslint配置"></a>一、eslint配置</h4><p><strong>eslint中文官网:<a target="_blank" rel="noopener" href="http://eslint.cn/">http://eslint.cn/</a></strong></p>
+<p>ESLint最初是由<a target="_blank" rel="noopener" href="http://nczonline.net/">Nicholas C. Zakas</a> 于2013年6月创建的开源项目。它的目标是提供一个插件化的<strong>javascript代码检测工具</strong></p>
+<p>首先安装eslint</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">pnpm <span class="hljs-selector-tag">i</span> eslint -D<br></code></pre></td></tr></table></figure>
+
+<p>生成配置文件:.eslint.cjs</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npx eslint <span class="hljs-comment">--init</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>.eslint.cjs配置文件</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs awk">module.exports = &#123;<br>   <span class="hljs-regexp">//</span>运行环境<br>    <span class="hljs-string">&quot;env&quot;</span>: &#123; <br>        <span class="hljs-string">&quot;browser&quot;</span>: true,<span class="hljs-regexp">//</span>浏览器端<br>        <span class="hljs-string">&quot;es2021&quot;</span>: true,<span class="hljs-regexp">//</span>es2021<br>    &#125;,<br>    <span class="hljs-regexp">//</span>规则继承<br>    <span class="hljs-string">&quot;extends&quot;</span>: [ <br>       <span class="hljs-regexp">//</span>全部规则默认是关闭的,这个配置项开启推荐规则,推荐规则参照文档<br>       <span class="hljs-regexp">//</span>比如:函数不能重名、对象不能出现重复key<br>        <span class="hljs-string">&quot;eslint:recommended&quot;</span>,<br>        <span class="hljs-regexp">//</span>vue3语法规则<br>        <span class="hljs-string">&quot;plugin:vue/vue3-essential&quot;</span>,<br>        <span class="hljs-regexp">//</span>ts语法规则<br>        <span class="hljs-string">&quot;plugin:@typescript-eslint/recommended&quot;</span><br>    ],<br>    <span class="hljs-regexp">//</span>要为特定类型的文件指定处理器<br>    <span class="hljs-string">&quot;overrides&quot;</span>: [<br>    ],<br>    <span class="hljs-regexp">//</span>指定解析器:解析器<br>    <span class="hljs-regexp">//</span>Esprima 默认解析器<br>    <span class="hljs-regexp">//</span>Babel-ESLint babel解析器<br>    <span class="hljs-regexp">//</span>@typescript-eslint/parser ts解析器<br>    <span class="hljs-string">&quot;parser&quot;</span>: <span class="hljs-string">&quot;@typescript-eslint/parser&quot;</span>,<br>    <span class="hljs-regexp">//</span>指定解析器选项<br>    <span class="hljs-string">&quot;parserOptions&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;ecmaVersion&quot;</span>: <span class="hljs-string">&quot;latest&quot;</span>,<span class="hljs-regexp">//</span>校验ECMA最新版本<br>        <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;module&quot;</span><span class="hljs-regexp">//</span>设置为<span class="hljs-string">&quot;script&quot;</span>（默认），或者<span class="hljs-string">&quot;module&quot;</span>代码在ECMAScript模块中<br>    &#125;,<br>    <span class="hljs-regexp">//</span>ESLint支持使用第三方插件。在使用插件之前，您必须使用npm安装它<br>    <span class="hljs-regexp">//</span>该eslint-plugin-前缀可以从插件名称被省略<br>    <span class="hljs-string">&quot;plugins&quot;</span>: [<br>        <span class="hljs-string">&quot;vue&quot;</span>,<br>        <span class="hljs-string">&quot;@typescript-eslint&quot;</span><br>    ],<br>    <span class="hljs-regexp">//</span>eslint规则<br>    <span class="hljs-string">&quot;rules&quot;</span>: &#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="1-1vue3环境代码校验插件"><a href="#1-1vue3环境代码校验插件" class="headerlink" title="1.1vue3环境代码校验插件"></a>1.1vue3环境代码校验插件</h5><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs clean"># 让所有与prettier规则存在冲突的Eslint rules失效，并使用prettier进行代码检查<br><span class="hljs-string">&quot;eslint-config-prettier&quot;</span>: <span class="hljs-string">&quot;^8.6.0&quot;</span>,<br><span class="hljs-string">&quot;eslint-plugin-import&quot;</span>: <span class="hljs-string">&quot;^2.27.5&quot;</span>,<br><span class="hljs-string">&quot;eslint-plugin-node&quot;</span>: <span class="hljs-string">&quot;^11.1.0&quot;</span>,<br># 运行更漂亮的Eslint，使prettier规则优先级更高，Eslint优先级低<br><span class="hljs-string">&quot;eslint-plugin-prettier&quot;</span>: <span class="hljs-string">&quot;^4.2.1&quot;</span>,<br># vue.js的Eslint插件（查找vue语法错误，发现错误指令，查找违规风格指南<br><span class="hljs-string">&quot;eslint-plugin-vue&quot;</span>: <span class="hljs-string">&quot;^9.9.0&quot;</span>,<br># 该解析器允许使用Eslint校验所有babel <span class="hljs-keyword">code</span><br><span class="hljs-string">&quot;@babel/eslint-parser&quot;</span>: <span class="hljs-string">&quot;^7.19.1&quot;</span>,<br></code></pre></td></tr></table></figure>
+
+<p>安装指令</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">pnpm install -D eslint-plugin-import eslint-plugin-vue eslint-plugin-<span class="hljs-keyword">node</span> <span class="hljs-title">eslint-plugin-prettier</span> eslint-config-prettier eslint-plugin-<span class="hljs-keyword">node</span> <span class="hljs-title">@babel</span>/eslint-parser<br></code></pre></td></tr></table></figure>
+
+<h5 id="1-2修改-eslintrc-cjs配置文件"><a href="#1-2修改-eslintrc-cjs配置文件" class="headerlink" title="1.2修改.eslintrc.cjs配置文件"></a>1.2修改.eslintrc.cjs配置文件</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> @see https:<span class="hljs-regexp">//</span>eslint.bootcss.com<span class="hljs-regexp">/docs/</span>rules/<br><br>module.exports = &#123;<br>  env: &#123;<br>    browser: true,<br>    es2021: true,<br>    node: true,<br>    jest: true,<br>  &#125;,<br>  <span class="hljs-regexp">/* 指定如何解析语法 */</span><br>  parser: <span class="hljs-string">&#x27;vue-eslint-parser&#x27;</span>,<br>  <span class="hljs-regexp">/** 优先级低于 parse 的语法解析配置 */</span><br>  parserOptions: &#123;<br>    ecmaVersion: <span class="hljs-string">&#x27;latest&#x27;</span>,<br>    sourceType: <span class="hljs-string">&#x27;module&#x27;</span>,<br>    parser: <span class="hljs-string">&#x27;@typescript-eslint/parser&#x27;</span>,<br>    jsxPragma: <span class="hljs-string">&#x27;React&#x27;</span>,<br>    ecmaFeatures: &#123;<br>      jsx: true,<br>    &#125;,<br>  &#125;,<br>  <span class="hljs-regexp">/* 继承已有的规则 */</span><br>  extends: [<br>    <span class="hljs-string">&#x27;eslint:recommended&#x27;</span>,<br>    <span class="hljs-string">&#x27;plugin:vue/vue3-essential&#x27;</span>,<br>    <span class="hljs-string">&#x27;plugin:@typescript-eslint/recommended&#x27;</span>,<br>    <span class="hljs-string">&#x27;plugin:prettier/recommended&#x27;</span>,<br>  ],<br>  plugins: [<span class="hljs-string">&#x27;vue&#x27;</span>, <span class="hljs-string">&#x27;@typescript-eslint&#x27;</span>],<br>  /*<br>   * <span class="hljs-string">&quot;off&quot;</span> 或 <span class="hljs-number">0</span>    ==&gt;  关闭规则<br>   * <span class="hljs-string">&quot;warn&quot;</span> 或 <span class="hljs-number">1</span>   ==&gt;  打开的规则作为警告（不影响代码执行）<br>   * <span class="hljs-string">&quot;error&quot;</span> 或 <span class="hljs-number">2</span>  ==&gt;  规则作为一个错误（代码不能执行，界面报错）<br>   */<br>  rules: &#123;<br>    <span class="hljs-regexp">//</span> eslint（https:<span class="hljs-regexp">//</span>eslint.bootcss.com<span class="hljs-regexp">/docs/</span>rules/）<br>    <span class="hljs-string">&#x27;no-var&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-regexp">//</span> 要求使用 let 或 const 而不是 var<br>    <span class="hljs-string">&#x27;no-multiple-empty-lines&#x27;</span>: [<span class="hljs-string">&#x27;warn&#x27;</span>, &#123; max: <span class="hljs-number">1</span> &#125;], <span class="hljs-regexp">//</span> 不允许多个空行<br>    <span class="hljs-string">&#x27;no-console&#x27;</span>: process.env.NODE_ENV === <span class="hljs-string">&#x27;production&#x27;</span> ? <span class="hljs-string">&#x27;error&#x27;</span> : <span class="hljs-string">&#x27;off&#x27;</span>,<br>    <span class="hljs-string">&#x27;no-debugger&#x27;</span>: process.env.NODE_ENV === <span class="hljs-string">&#x27;production&#x27;</span> ? <span class="hljs-string">&#x27;error&#x27;</span> : <span class="hljs-string">&#x27;off&#x27;</span>,<br>    <span class="hljs-string">&#x27;no-unexpected-multiline&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-regexp">//</span> 禁止空余的多行<br>    <span class="hljs-string">&#x27;no-useless-escape&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 禁止不必要的转义字符<br><br>    <span class="hljs-regexp">//</span> typeScript (https:<span class="hljs-regexp">//</span>typescript-eslint.io/rules)<br>    <span class="hljs-string">&#x27;@typescript-eslint/no-unused-vars&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-regexp">//</span> 禁止定义未使用的变量<br>    <span class="hljs-string">&#x27;@typescript-eslint/prefer-ts-expect-error&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-regexp">//</span> 禁止使用 @ts-ignore<br>    <span class="hljs-string">&#x27;@typescript-eslint/no-explicit-any&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 禁止使用 any 类型<br>    <span class="hljs-string">&#x27;@typescript-eslint/no-non-null-assertion&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>,<br>    <span class="hljs-string">&#x27;@typescript-eslint/no-namespace&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 禁止使用自定义 TypeScript 模块和命名空间。<br>    <span class="hljs-string">&#x27;@typescript-eslint/semi&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>,<br><br>    <span class="hljs-regexp">//</span> eslint-plugin-vue (https:<span class="hljs-regexp">//</span>eslint.vuejs.org<span class="hljs-regexp">/rules/</span>)<br>    <span class="hljs-string">&#x27;vue/multi-word-component-names&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 要求组件名称始终为 “-” 链接的单词<br>    <span class="hljs-string">&#x27;vue/script-setup-uses-vars&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-regexp">//</span> 防止&lt;script setup&gt;使用的变量&lt;template&gt;被标记为未使用<br>    <span class="hljs-string">&#x27;vue/no-mutating-props&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 不允许组件 prop的改变<br>    <span class="hljs-string">&#x27;vue/attribute-hyphenation&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>, <span class="hljs-regexp">//</span> 对模板中的自定义组件强制执行属性命名样式<br>  &#125;,<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="1-3-eslintignore忽略文件"><a href="#1-3-eslintignore忽略文件" class="headerlink" title="1.3.eslintignore忽略文件"></a>1.3.eslintignore忽略文件</h5><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">dist</span><br><span class="hljs-attribute">node_modules</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="1-4运行脚本"><a href="#1-4运行脚本" class="headerlink" title="1.4运行脚本"></a>1.4运行脚本</h5><p>package.json新增两个运行脚本</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;lint&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eslint src&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;fix&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eslint src --fix&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="二、配置prettier"><a href="#二、配置prettier" class="headerlink" title="二、配置prettier"></a>二、配置<strong>prettier</strong></h4><p>有了eslint，为什么还要有prettier？eslint针对的是javascript，他是一个检测工具，包含js语法以及少部分格式问题，在eslint看来，语法对了就能保证代码正常运行，格式问题属于其次；</p>
+<p>而prettier属于格式化工具，它看不惯格式不统一，所以它就把eslint没干好的事接着干，另外，prettier支持</p>
+<p>包含js在内的多种语言。</p>
+<p>总结起来，<strong>eslint和prettier这俩兄弟一个保证js代码质量，一个保证代码美观。</strong></p>
+<h5 id="2-1安装依赖包"><a href="#2-1安装依赖包" class="headerlink" title="2.1安装依赖包"></a>2.1安装依赖包</h5><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">pnpm <span class="hljs-keyword">install </span>-D eslint-plugin-prettier prettier eslint-<span class="hljs-built_in">config</span>-prettier<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-2-prettierrc-json添加规则"><a href="#2-2-prettierrc-json添加规则" class="headerlink" title="2.2.prettierrc.json添加规则"></a>2.2.prettierrc.json添加规则</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;singleQuote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;semi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;bracketSpacing&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;htmlWhitespaceSensitivity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ignore&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;endOfLine&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;auto&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;trailingComma&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;all&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;tabWidth&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="2-3-prettierignore忽略文件"><a href="#2-3-prettierignore忽略文件" class="headerlink" title="2.3.prettierignore忽略文件"></a>2.3.prettierignore忽略文件</h5><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-regexp">/dist/</span>*<br><span class="hljs-regexp">/html/</span>*<br>.local<br><span class="hljs-regexp">/node_modules/</span>**<br>**<span class="hljs-comment">/*.svg</span><br><span class="hljs-comment">**/</span>*.sh<br><span class="hljs-regexp">/public/</span>*<br></code></pre></td></tr></table></figure>
+
+<p><strong>通过pnpm run lint去检测语法，如果出现不规范格式,通过pnpm run fix 修改</strong></p>
+<h4 id="三、配置stylelint"><a href="#三、配置stylelint" class="headerlink" title="三、配置stylelint"></a>三、配置stylelint</h4><p><a target="_blank" rel="noopener" href="https://stylelint.io/">stylelint</a>为css的lint工具。可格式化css代码，检查css语法错误与不合理的写法，指定css书写顺序等。</p>
+<p>我们的项目中使用scss作为预处理器，安装以下依赖：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">pnpm <span class="hljs-keyword">add </span>sass sass-loader stylelint postcss postcss-<span class="hljs-keyword">scss </span>postcss-html stylelint-<span class="hljs-built_in">config</span>-prettier stylelint-<span class="hljs-built_in">config</span>-recess-<span class="hljs-keyword">order </span>stylelint-<span class="hljs-built_in">config</span>-recommended-<span class="hljs-keyword">scss </span>stylelint-<span class="hljs-built_in">config</span>-standard stylelint-<span class="hljs-built_in">config</span>-standard-vue stylelint-<span class="hljs-keyword">scss </span>stylelint-<span class="hljs-keyword">order </span>stylelint-<span class="hljs-built_in">config</span>-standard-<span class="hljs-keyword">scss </span>-D<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-1-stylelintrc-cjs配置文件"><a href="#3-1-stylelintrc-cjs配置文件" class="headerlink" title="3.1.stylelintrc.cjs配置文件"></a>3.1<code>.stylelintrc.cjs</code><strong>配置文件</strong></h5><p><strong>官网:<a target="_blank" rel="noopener" href="https://stylelint.bootcss.com/">https://stylelint.bootcss.com/</a></strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> @see https:<span class="hljs-regexp">//</span>stylelint.bootcss.com/<br><br>module.exports = &#123;<br>  extends: [<br>    <span class="hljs-string">&#x27;stylelint-config-standard&#x27;</span>, <span class="hljs-regexp">//</span> 配置stylelint拓展插件<br>    <span class="hljs-string">&#x27;stylelint-config-html/vue&#x27;</span>, <span class="hljs-regexp">//</span> 配置 vue 中 template 样式格式化<br>    <span class="hljs-string">&#x27;stylelint-config-standard-scss&#x27;</span>, <span class="hljs-regexp">//</span> 配置stylelint scss插件<br>    <span class="hljs-string">&#x27;stylelint-config-recommended-vue/scss&#x27;</span>, <span class="hljs-regexp">//</span> 配置 vue 中 scss 样式格式化<br>    <span class="hljs-string">&#x27;stylelint-config-recess-order&#x27;</span>, <span class="hljs-regexp">//</span> 配置stylelint css属性书写顺序插件,<br>    <span class="hljs-string">&#x27;stylelint-config-prettier&#x27;</span>, <span class="hljs-regexp">//</span> 配置stylelint和prettier兼容<br>  ],<br>  overrides: [<br>    &#123;<br>      files: [<span class="hljs-string">&#x27;**/*.(scss|css|vue|html)&#x27;</span>],<br>      customSyntax: <span class="hljs-string">&#x27;postcss-scss&#x27;</span>,<br>    &#125;,<br>    &#123;<br>      files: [<span class="hljs-string">&#x27;**/*.(html|vue)&#x27;</span>],<br>      customSyntax: <span class="hljs-string">&#x27;postcss-html&#x27;</span>,<br>    &#125;,<br>  ],<br>  ignoreFiles: [<br>    <span class="hljs-string">&#x27;**/*.js&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.jsx&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.tsx&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.ts&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.json&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.md&#x27;</span>,<br>    <span class="hljs-string">&#x27;**/*.yaml&#x27;</span>,<br>  ],<br>  /**<br>   * null  =&gt; 关闭该规则<br>   * always =&gt; 必须<br>   */<br>  rules: &#123;<br>    <span class="hljs-string">&#x27;value-keyword-case&#x27;</span>: null, <span class="hljs-regexp">//</span> 在 css 中使用 v-bind，不报错<br>    <span class="hljs-string">&#x27;no-descending-specificity&#x27;</span>: null, <span class="hljs-regexp">//</span> 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器<br>    <span class="hljs-string">&#x27;function-url-quotes&#x27;</span>: <span class="hljs-string">&#x27;always&#x27;</span>, <span class="hljs-regexp">//</span> 要求或禁止 URL 的引号 <span class="hljs-string">&quot;always(必须加上引号)&quot;</span>|<span class="hljs-string">&quot;never(没有引号)&quot;</span><br>    <span class="hljs-string">&#x27;no-empty-source&#x27;</span>: null, <span class="hljs-regexp">//</span> 关闭禁止空源码<br>    <span class="hljs-string">&#x27;selector-class-pattern&#x27;</span>: null, <span class="hljs-regexp">//</span> 关闭强制选择器类名的格式<br>    <span class="hljs-string">&#x27;property-no-unknown&#x27;</span>: null, <span class="hljs-regexp">//</span> 禁止未知的属性(true 为不允许)<br>    <span class="hljs-string">&#x27;block-opening-brace-space-before&#x27;</span>: <span class="hljs-string">&#x27;always&#x27;</span>, <span class="hljs-regexp">//</span>大括号之前必须有一个空格或不能有空白符<br>    <span class="hljs-string">&#x27;value-no-vendor-prefix&#x27;</span>: null, <span class="hljs-regexp">//</span> 关闭 属性值前缀 --webkit-box<br>    <span class="hljs-string">&#x27;property-no-vendor-prefix&#x27;</span>: null, <span class="hljs-regexp">//</span> 关闭 属性前缀 -webkit-mask<br>    <span class="hljs-string">&#x27;selector-pseudo-class-no-unknown&#x27;</span>: [<br>      <span class="hljs-regexp">//</span> 不允许未知的选择器<br>      true,<br>      &#123;<br>        ignorePseudoClasses: [<span class="hljs-string">&#x27;global&#x27;</span>, <span class="hljs-string">&#x27;v-deep&#x27;</span>, <span class="hljs-string">&#x27;deep&#x27;</span>], <span class="hljs-regexp">//</span> 忽略属性，修改element默认样式的时候能使用到<br>      &#125;,<br>    ],<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-2-stylelintignore忽略文件"><a href="#3-2-stylelintignore忽略文件" class="headerlink" title="3.2.stylelintignore忽略文件"></a>3.2.stylelintignore忽略文件</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/node_modules/</span>*<br><span class="hljs-regexp">/dist/</span>*<br><span class="hljs-regexp">/html/</span>*<br><span class="hljs-regexp">/public/</span>*<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-3运行脚本"><a href="#3-3运行脚本" class="headerlink" title="3.3运行脚本"></a>3.3运行脚本</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">&quot;scripts&quot;: &#123;<br>	&quot;lint:style<span class="hljs-string">&quot;: &quot;</span>stylelint src<span class="hljs-comment">/**/</span>*.&#123;css,scss,vue&#125; <span class="hljs-attr">--cache</span> <span class="hljs-attr">--fix</span>&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后配置统一的prettier来格式化我们的js和css，html代码</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&quot;scripts&quot;: &#123;<br>   &quot;dev&quot;: &quot;vite --open&quot;,<br>   &quot;build&quot;: &quot;vue-tsc &amp;&amp; vite build&quot;,<br>   &quot;preview&quot;: &quot;vite preview&quot;,<br>   &quot;lint&quot;: &quot;eslint src&quot;,<br>   &quot;fix&quot;: &quot;eslint src --fix&quot;,<br>   &quot;format&quot;: &quot;prettier --write \&quot;.<span class="hljs-comment">/**/</span>*.&#123;html,vue,ts,js,<span class="hljs-type">json</span>,md&#125;\&quot;&quot;,<br>   &quot;lint:eslint&quot;: &quot;eslint src/**/*.&#123;ts,vue&#125; --cache --fix&quot;,<br>   &quot;lint:style&quot;: &quot;stylelint src/**/*.&#123;css,scss,vue&#125; --cache --fix&quot;<br> &#125;,<br></code></pre></td></tr></table></figure>
+
+<p><strong>当我们运行<code>pnpm run format</code>的时候，会把代码直接格式化</strong></p>
+<h4 id="四、配置husky"><a href="#四、配置husky" class="headerlink" title="四、配置husky"></a>四、配置husky</h4><p>在上面我们已经集成好了我们代码校验工具，但是需要每次手动的去执行命令才会格式化我们的代码。如果有人没有格式化就提交了远程仓库中，那这个规范就没什么用。所以我们需要强制让开发人员按照代码规范来提交。</p>
+<p>要做到这件事情，就需要利用husky在代码提交之前触发git hook(git在客户端的钩子)，然后执行<code>pnpm run format</code>来自动的格式化我们的代码。</p>
+<p>安装<code>husky</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pnpm <span class="hljs-keyword">install</span> -D husky<br></code></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">npx husky-<span class="hljs-keyword">init</span><br></code></pre></td></tr></table></figure>
+
+<p>会在根目录下生成个一个.husky目录，在这个目录下面会有一个pre-commit文件，这个文件里面的命令在我们执行commit的时候就会执行</p>
+<p>在<code>.husky/pre-commit</code>文件添加如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env sh</span><br>. <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>)</span>/_/husky.sh&quot;</span><br>pnpm run format<br></code></pre></td></tr></table></figure>
+
+<p>当我们对代码进行commit操作的时候，就会执行命令，对代码进行格式化，然后再提交。</p>
+<h4 id="五、配置commitlint"><a href="#五、配置commitlint" class="headerlink" title="五、配置commitlint"></a>五、配置commitlint</h4><p>对于我们的commit信息，也是有统一规范的，不能随便写,要让每个人都按照统一的标准来执行，我们可以利用<strong>commitlint</strong>来实现。</p>
+<p>安装包</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">pnpm <span class="hljs-keyword">add</span><span class="language-bash"> @commitlint/config-conventional @commitlint/cli -D</span><br></code></pre></td></tr></table></figure>
+
+<p>添加配置文件，新建<code>commitlint.config.cjs</code>(注意是cjs)，然后添加下面的代码：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs prolog">module.exports = &#123;<br>  extends: [<span class="hljs-string">&#x27;@commitlint/config-conventional&#x27;</span>],<br>  // 校验规则<br>  rules: &#123;<br>    <span class="hljs-string">&#x27;type-enum&#x27;</span>: [<br>      <span class="hljs-number">2</span>,<br>      <span class="hljs-string">&#x27;always&#x27;</span>,<br>      [<br>        <span class="hljs-string">&#x27;feat&#x27;</span>,<br>        <span class="hljs-string">&#x27;fix&#x27;</span>,<br>        <span class="hljs-string">&#x27;docs&#x27;</span>,<br>        <span class="hljs-string">&#x27;style&#x27;</span>,<br>        <span class="hljs-string">&#x27;refactor&#x27;</span>,<br>        <span class="hljs-string">&#x27;perf&#x27;</span>,<br>        <span class="hljs-string">&#x27;test&#x27;</span>,<br>        <span class="hljs-string">&#x27;chore&#x27;</span>,<br>        <span class="hljs-string">&#x27;revert&#x27;</span>,<br>        <span class="hljs-string">&#x27;build&#x27;</span>,<br>      ],<br>    ],<br>    <span class="hljs-string">&#x27;type-case&#x27;</span>: [<span class="hljs-number">0</span>],<br>    <span class="hljs-string">&#x27;type-empty&#x27;</span>: [<span class="hljs-number">0</span>],<br>    <span class="hljs-string">&#x27;scope-empty&#x27;</span>: [<span class="hljs-number">0</span>],<br>    <span class="hljs-string">&#x27;scope-case&#x27;</span>: [<span class="hljs-number">0</span>],<br>    <span class="hljs-string">&#x27;subject-full-stop&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-string">&#x27;never&#x27;</span>],<br>    <span class="hljs-string">&#x27;subject-case&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-string">&#x27;never&#x27;</span>],<br>    <span class="hljs-string">&#x27;header-max-length&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-string">&#x27;always&#x27;</span>, <span class="hljs-number">72</span>],<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在<code>package.json</code>中配置scripts命令</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 在scrips中添加下面的代码</span><br>&#123;<br><span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;commitlint&quot;</span>: <span class="hljs-string">&quot;commitlint --config commitlint.config.cjs -e -V&quot;</span><br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>配置结束，现在当我们填写<code>commit</code>信息的时候，前面就需要带着下面的<code>subject</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-string">&#x27;feat&#x27;</span>,<span class="hljs-regexp">//</span>新特性、新功能<br><span class="hljs-string">&#x27;fix&#x27;</span>,<span class="hljs-regexp">//</span>修改bug<br><span class="hljs-string">&#x27;docs&#x27;</span>,<span class="hljs-regexp">//</span>文档修改<br><span class="hljs-string">&#x27;style&#x27;</span>,<span class="hljs-regexp">//</span>代码格式修改, 注意不是 css 修改<br><span class="hljs-string">&#x27;refactor&#x27;</span>,<span class="hljs-regexp">//</span>代码重构<br><span class="hljs-string">&#x27;perf&#x27;</span>,<span class="hljs-regexp">//</span>优化相关，比如提升性能、体验<br><span class="hljs-string">&#x27;test&#x27;</span>,<span class="hljs-regexp">//</span>测试用例修改<br><span class="hljs-string">&#x27;chore&#x27;</span>,<span class="hljs-regexp">//</span>其他修改, 比如改变构建流程、或者增加依赖库、工具等<br><span class="hljs-string">&#x27;revert&#x27;</span>,<span class="hljs-regexp">//</span>回滚到上一个版本<br><span class="hljs-string">&#x27;build&#x27;</span>,<span class="hljs-regexp">//</span>编译相关的修改，例如发布版本、对项目构建或者依赖的改动<br></code></pre></td></tr></table></figure>
+
+<p>配置husky</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">npx husky <span class="hljs-keyword">add</span><span class="language-bash"> .husky/commit-msg </span><br></code></pre></td></tr></table></figure>
+
+<p>在生成的commit-msg文件中添加下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env sh</span><br>. <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>)</span>/_/husky.sh&quot;</span><br>pnpm commitlint<br></code></pre></td></tr></table></figure>
+
+<p>当我们 commit 提交信息时，就不能再随意写了，必须是 git commit -m ‘fix: xxx’ 符合类型的才可以，<strong>需要注意的是类型的后面需要用英文的 :，并且冒号后面是需要空一格的，这个是不能省略的</strong></p>
+<h4 id="六、强制使用pnpm包管理器工具"><a href="#六、强制使用pnpm包管理器工具" class="headerlink" title="六、强制使用pnpm包管理器工具"></a>六、强制使用pnpm包管理器工具</h4><p>团队开发项目的时候，需要统一包管理器工具,因为不同包管理器工具下载同一个依赖,可能版本不一样,</p>
+<p>导致项目出现bug问题,因此包管理器工具需要统一管理！！！</p>
+<p>在根目录创建<code>scritps/preinstall.js</code>文件，添加下面的内容</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/pnpm/</span>.test(process.env.npm_execpath || <span class="hljs-string">&#x27;&#x27;</span>)) &#123;<br>  console.warn(<br>    `\u001b[<span class="hljs-number">33</span>mThis repository must using pnpm as the package manager ` +<br>    ` <span class="hljs-keyword">for</span> scripts to work properly.\u001b[<span class="hljs-number">39</span>m\n`,<br>  )<br>  process.<span class="hljs-keyword">exit</span>(<span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>配置命令</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;preinstall&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node ./scripts/preinstall.js&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>当我们使用npm或者yarn来安装包的时候，就会报错了。原理就是在install的时候会触发preinstall（npm提供的生命周期钩子）这个文件里面的代码。</strong></p>
+<h2 id="三、项目集成"><a href="#三、项目集成" class="headerlink" title="三、项目集成"></a>三、项目集成</h2><h3 id="3-1集成element-plus"><a href="#3-1集成element-plus" class="headerlink" title="3.1集成element-plus"></a>3.1集成element-plus</h3><p>硅谷甄选运营平台,UI组件库采用的element-plus，因此需要集成element-plus插件！！！</p>
+<p>官网地址:<a target="_blank" rel="noopener" href="https://element-plus.gitee.io/zh-CN/">https://element-plus.gitee.io/zh-CN/</a></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">pnpm install element-<span class="hljs-keyword">plus</span> @element-<span class="hljs-keyword">plus</span>/icons-vue<br></code></pre></td></tr></table></figure>
+
+<p><strong>入口文件main.ts全局安装element-plus,element-plus默认支持语言英语设置为中文</strong></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> ElementPlus <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;element-plus&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;element-plus/dist/index.css&#x27;</span><br><span class="hljs-comment">//@ts-ignore  忽略当前文件ts类型的检测否则有红色提示(打包会失败)</span><br><span class="hljs-keyword">import</span> zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;element-plus/dist/locale/zh-cn.mjs&#x27;</span><br>app.use(ElementPlus, &#123;<br>    locale: zhCn<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>Element Plus全局组件类型声明</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> tsconfig.json<br>&#123;<br>  <span class="hljs-string">&quot;compilerOptions&quot;</span>: &#123;<br>    <span class="hljs-regexp">//</span> ...<br>    <span class="hljs-string">&quot;types&quot;</span>: [<span class="hljs-string">&quot;element-plus/global&quot;</span>]<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>配置完毕可以测试element-plus组件与图标的使用.</p>
+<h3 id="3-2src别名的配置"><a href="#3-2src别名的配置" class="headerlink" title="3.2src别名的配置"></a>3.2src别名的配置</h3><p>在开发项目的时候文件与文件关系可能很复杂，因此我们需要给src文件夹配置一个别名！！！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// vite.config.ts</span><br><span class="hljs-keyword">import</span> &#123;defineConfig&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite&#x27;</span><br><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-vue&#x27;</span><br><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineConfig</span>(&#123;<br>    <span class="hljs-attr">plugins</span>: [<span class="hljs-title function_">vue</span>()],<br>    <span class="hljs-attr">resolve</span>: &#123;<br>        <span class="hljs-attr">alias</span>: &#123;<br>            <span class="hljs-string">&quot;@&quot;</span>: path.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;./src&quot;</span>) <span class="hljs-comment">// 相对路径别名配置，使用 @ 代替 src</span><br>        &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><strong>TypeScript 编译配置</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> tsconfig.json<br>&#123;<br>  <span class="hljs-string">&quot;compilerOptions&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>, <span class="hljs-regexp">//</span> 解析非相对模块的基地址，默认是当前目录<br>    <span class="hljs-string">&quot;paths&quot;</span>: &#123; <span class="hljs-regexp">//</span>路径映射，相对于baseUrl<br>      <span class="hljs-string">&quot;@/*&quot;</span>: [<span class="hljs-string">&quot;src/*&quot;</span>] <br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3环境变量的配置"><a href="#3-3环境变量的配置" class="headerlink" title="3.3环境变量的配置"></a>3.3环境变量的配置</h3><p><strong>项目开发过程中，至少会经历开发环境、测试环境和生产环境(即正式环境)三个阶段。不同阶段请求的状态(如接口地址等)不尽相同，若手动切换接口地址是相当繁琐且易出错的。于是环境变量配置的需求就应运而生，我们只需做简单的配置，把环境状态切换的工作交给代码。</strong></p>
+<p>开发环境（development）<br>顾名思义，开发使用的环境，每位开发人员在自己的dev分支上干活，开发到一定程度，同事会合并代码，进行联调。</p>
+<p>测试环境（testing）<br>测试同事干活的环境啦，一般会由测试同事自己来部署，然后在此环境进行测试</p>
+<p>生产环境（production）<br>生产环境是指正式提供对外服务的，一般会关掉错误报告，打开错误日志。(正式提供给客户使用的环境。)</p>
+<p>注意:一般情况下，一个环境对应一台服务器,也有的公司开发与测试环境是一台服务器！！！</p>
+<p>项目根目录分别添加 开发、生产和测试环境的文件!</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-class">.env</span><span class="hljs-selector-class">.development</span><br><span class="hljs-selector-class">.env</span><span class="hljs-selector-class">.production</span><br><span class="hljs-selector-class">.env</span>.test<br></code></pre></td></tr></table></figure>
+
+<p>文件内容</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 变量必须以 VITE_ 为前缀才能暴露给外部读取</span><br><span class="hljs-attr">NODE_ENV</span> = <span class="hljs-string">&#x27;development&#x27;</span><br><span class="hljs-attr">VITE_APP_TITLE</span> = <span class="hljs-string">&#x27;硅谷甄选运营平台&#x27;</span><br><span class="hljs-attr">VITE_APP_BASE_API</span> = <span class="hljs-string">&#x27;/dev-api&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">NODE_ENV</span> = <span class="hljs-string">&#x27;production&#x27;</span><br><span class="hljs-attr">VITE_APP_TITLE</span> = <span class="hljs-string">&#x27;硅谷甄选运营平台&#x27;</span><br><span class="hljs-attr">VITE_APP_BASE_API</span> = <span class="hljs-string">&#x27;/prod-api&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 变量必须以 VITE_ 为前缀才能暴露给外部读取</span><br><span class="hljs-attr">NODE_ENV</span> = <span class="hljs-string">&#x27;test&#x27;</span><br><span class="hljs-attr">VITE_APP_TITLE</span> = <span class="hljs-string">&#x27;硅谷甄选运营平台&#x27;</span><br><span class="hljs-attr">VITE_APP_BASE_API</span> = <span class="hljs-string">&#x27;/test-api&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>配置运行命令：package.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>   <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite --open&quot;</span><span class="hljs-punctuation">,</span><br>   <span class="hljs-attr">&quot;build:test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vue-tsc &amp;&amp; vite build --mode test&quot;</span><span class="hljs-punctuation">,</span><br>   <span class="hljs-attr">&quot;build:pro&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vue-tsc &amp;&amp; vite build --mode production&quot;</span><span class="hljs-punctuation">,</span><br>   <span class="hljs-attr">&quot;preview&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite preview&quot;</span><br> <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
+
+<p>通过import.meta.env获取环境变量</p>
+<h3 id="3-4SVG图标配置"><a href="#3-4SVG图标配置" class="headerlink" title="3.4SVG图标配置"></a>3.4SVG图标配置</h3><p>在开发项目的时候经常会用到svg矢量图,而且我们使用SVG以后，页面上加载的不再是图片资源,</p>
+<p>这对页面性能来说是个很大的提升，而且我们SVG文件比img要小的很多，放在项目中几乎不占用资源。</p>
+<p><strong>安装SVG依赖插件</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pnpm <span class="hljs-keyword">install</span> vite-plugin-svg-icons -D<br></code></pre></td></tr></table></figure>
+
+<p><strong>在<code>vite.config.ts</code>中配置插件</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; createSvgIconsPlugin &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite-plugin-svg-icons&#x27;</span><br><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">plugins</span>: [<br>      <span class="hljs-title function_">createSvgIconsPlugin</span>(&#123;<br>        <span class="hljs-comment">// Specify the icon folder to be cached</span><br>        <span class="hljs-attr">iconDirs</span>: [path.<span class="hljs-title function_">resolve</span>(process.<span class="hljs-title function_">cwd</span>(), <span class="hljs-string">&#x27;src/assets/icons&#x27;</span>)],<br>        <span class="hljs-comment">// Specify symbolId format</span><br>        <span class="hljs-attr">symbolId</span>: <span class="hljs-string">&#x27;icon-[dir]-[name]&#x27;</span>,<br>      &#125;),<br>    ],<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>入口文件导入</strong></p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-comment">---main.ts</span><br><span class="hljs-keyword">import</span> &#x27;virtual:svg-icons-register&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>创建文件夹.&#x2F;src&#x2F;assets&#x2F;icons&#x2F;Svgname.svg</p>
+<p>将svg地址拷贝进文件中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--    测试svg图标--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">svg</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">xlink:href</span>=<span class="hljs-string">&quot;#icon-phone&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-4-1svg封装为全局组件"><a href="#3-4-1svg封装为全局组件" class="headerlink" title="3.4.1svg封装为全局组件"></a>3.4.1svg封装为全局组件</h4><p>因为项目很多模块需要使用图标,因此把它封装为全局组件！！！</p>
+<p><strong>在src&#x2F;components目录下创建一个SvgIcon组件:代表如下</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">&quot;&#123; width: width, height: height &#125;&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">:xlink:href</span>=<span class="hljs-string">&quot;prefix + name&quot;</span> <span class="hljs-attr">:fill</span>=<span class="hljs-string">&quot;color&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-title function_">defineProps</span>(&#123;</span><br><span class="language-javascript">  <span class="hljs-comment">//xlink:href属性值的前缀</span></span><br><span class="language-javascript">  <span class="hljs-attr">prefix</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;#icon-&#x27;</span></span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-comment">//svg矢量图的名字</span></span><br><span class="language-javascript">  <span class="hljs-attr">name</span>: <span class="hljs-title class_">String</span>,</span><br><span class="language-javascript">  <span class="hljs-comment">//svg图标的颜色</span></span><br><span class="language-javascript">  <span class="hljs-attr">color</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">default</span>: <span class="hljs-string">&quot;&quot;</span></span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-comment">//svg宽度</span></span><br><span class="language-javascript">  <span class="hljs-attr">width</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;16px&#x27;</span></span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-comment">//svg高度</span></span><br><span class="language-javascript">  <span class="hljs-attr">height</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;16px&#x27;</span></span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在src文件夹目录下创建一个index.ts文件：用于注册components文件夹内部全部全局组件！！！</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">SvgIcon</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./SvgIcon/index.vue&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123; <span class="hljs-title class_">App</span>, <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-attr">components</span>: &#123; [<span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-title class_">Component</span> &#125; = &#123; <span class="hljs-title class_">SvgIcon</span> &#125;;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-title function_">install</span>(<span class="hljs-params">app: App</span>) &#123;<br>        <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(components).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>) =&gt;</span> &#123;<br>            app.<span class="hljs-title function_">component</span>(key, components[key]);<br>        &#125;)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在入口文件引入src&#x2F;index.ts文件,通过app.use方法安装自定义插件</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> gloablComponent <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/index&#x27;</span>;<br>app.use(gloablComponent);<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-5集成sass"><a href="#3-5集成sass" class="headerlink" title="3.5集成sass"></a>3.5集成sass</h3><p>我们目前在组件内部已经可以使用scss样式,因为在配置styleLint工具的时候，项目当中已经安装过sass sass-loader,因此我们再组件内可以使用scss语法！！！需要加上lang&#x3D;”scss”</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>接下来我们为项目添加一些全局的样式</p>
+<p>在src&#x2F;styles目录下创建一个index.scss文件，当然项目中需要用到清除默认样式，因此在index.scss引入reset.scss</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm">@<span class="hljs-keyword">import</span> reset.scss<br></code></pre></td></tr></table></figure>
+
+<p>在入口文件引入</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@/styles&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>但是你会发现在src&#x2F;styles&#x2F;index.scss全局样式文件中没有办法使用$变量.因此需要给项目中引入全局变量$.</p>
+<p>在style&#x2F;variable.scss创建一个variable.scss文件！</p>
+<p>在vite.config.ts文件配置如下:</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig(<span class="hljs-function"><span class="hljs-params">(config)</span> =&gt;</span> &#123;<br>	css: &#123;<br>      preprocessorOptions: &#123;<br>        scss: &#123;<br>          javascriptEnabled: <span class="hljs-literal">true</span>,<br>          additionalData: <span class="hljs-string">&#x27;@import &quot;./src/styles/variable.scss&quot;;&#x27;</span>,<br>        &#125;,<br>      &#125;,<br>    &#125;,<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong><code>@import &quot;./src/styles/variable.less&quot;;</code>后面的<code>;</code>不要忘记，不然会报错</strong>!</p>
+<p>配置完毕你会发现scss提供这些全局变量可以在组件样式中使用了！！！</p>
+<h3 id="3-6mock数据"><a href="#3-6mock数据" class="headerlink" title="3.6mock数据"></a>3.6mock数据</h3><p>安装依赖:<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/vite-plugin-mock">https://www.npmjs.com/package/vite-plugin-mock</a></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pnpm <span class="hljs-keyword">install</span> -D vite-plugin-mock mockjs<br></code></pre></td></tr></table></figure>
+
+<p>在 vite.config.js 配置文件启用插件。</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-keyword">import</span> &#123; UserConfigExport, ConfigEnv &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite&#x27;</span><br><span class="hljs-keyword">import</span> &#123; viteMockServe &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite-plugin-mock&#x27;</span><br><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-vue&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (&#123; command &#125;)=&gt; &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    plugins: [<br>      vue(),<br>      viteMockServe(&#123;<br>        localEnabled: command === <span class="hljs-string">&#x27;serve&#x27;</span>,<br>      &#125;),<br>    ],<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>mock3.0.0可能会报错</p>
+<p>解决方法：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44533794/article/details/130897995">https://blog.csdn.net/weixin_44533794/article/details/130897995</a></p>
+<p>在根目录创建mock文件夹:去创建我们需要mock数据与接口！！！</p>
+<p>在mock文件夹内部创建一个user.ts文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//用户信息数据</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">createUserList</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> [<br>        &#123;<br>            <span class="hljs-attr">userId</span>: <span class="hljs-number">1</span>,<br>            <span class="hljs-attr">avatar</span>:<br>                <span class="hljs-string">&#x27;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&#x27;</span>,<br>            <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;admin&#x27;</span>,<br>            <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;111111&#x27;</span>,<br>            <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;平台管理员&#x27;</span>,<br>            <span class="hljs-attr">roles</span>: [<span class="hljs-string">&#x27;平台管理员&#x27;</span>],<br>            <span class="hljs-attr">buttons</span>: [<span class="hljs-string">&#x27;cuser.detail&#x27;</span>],<br>            <span class="hljs-attr">routes</span>: [<span class="hljs-string">&#x27;home&#x27;</span>],<br>            <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;Admin Token&#x27;</span>,<br>        &#125;,<br>        &#123;<br>            <span class="hljs-attr">userId</span>: <span class="hljs-number">2</span>,<br>            <span class="hljs-attr">avatar</span>:<br>                <span class="hljs-string">&#x27;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&#x27;</span>,<br>            <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;system&#x27;</span>,<br>            <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;111111&#x27;</span>,<br>            <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;系统管理员&#x27;</span>,<br>            <span class="hljs-attr">roles</span>: [<span class="hljs-string">&#x27;系统管理员&#x27;</span>],<br>            <span class="hljs-attr">buttons</span>: [<span class="hljs-string">&#x27;cuser.detail&#x27;</span>, <span class="hljs-string">&#x27;cuser.user&#x27;</span>],<br>            <span class="hljs-attr">routes</span>: [<span class="hljs-string">&#x27;home&#x27;</span>],<br>            <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;System Token&#x27;</span>,<br>        &#125;,<br>    ]<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [<br>    <span class="hljs-comment">// 用户登录接口</span><br>    &#123;<br>        <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/api/user/login&#x27;</span>,<span class="hljs-comment">//请求地址</span><br>        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;post&#x27;</span>,<span class="hljs-comment">//请求方式</span><br>        <span class="hljs-attr">response</span>: <span class="hljs-function">(<span class="hljs-params">&#123; body &#125;</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">//获取请求体携带过来的用户名与密码</span><br>            <span class="hljs-keyword">const</span> &#123; username, password &#125; = body;<br>            <span class="hljs-comment">//调用获取用户信息函数,用于判断是否有此用户</span><br>            <span class="hljs-keyword">const</span> checkUser = <span class="hljs-title function_">createUserList</span>().<span class="hljs-title function_">find</span>(<br>                <span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item.<span class="hljs-property">username</span> === username &amp;&amp; item.<span class="hljs-property">password</span> === password,<br>            )<br>            <span class="hljs-comment">//没有用户返回失败信息</span><br>            <span class="hljs-keyword">if</span> (!checkUser) &#123;<br>                <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">code</span>: <span class="hljs-number">201</span>, <span class="hljs-attr">data</span>: &#123; <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;账号或者密码不正确&#x27;</span> &#125; &#125;<br>            &#125;<br>            <span class="hljs-comment">//如果有返回成功信息</span><br>            <span class="hljs-keyword">const</span> &#123; token &#125; = checkUser<br>            <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">code</span>: <span class="hljs-number">200</span>, <span class="hljs-attr">data</span>: &#123; token &#125; &#125;<br>        &#125;,<br>    &#125;,<br>    <span class="hljs-comment">// 获取用户信息</span><br>    &#123;<br>        <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/api/user/info&#x27;</span>,<br>        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span>,<br>        <span class="hljs-attr">response</span>: <span class="hljs-function">(<span class="hljs-params">request</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">//获取请求头携带token</span><br>            <span class="hljs-keyword">const</span> token = request.<span class="hljs-property">headers</span>.<span class="hljs-property">token</span>;<br>            <span class="hljs-comment">//查看用户信息是否包含有次token用户</span><br>            <span class="hljs-keyword">const</span> checkUser = <span class="hljs-title function_">createUserList</span>().<span class="hljs-title function_">find</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item.<span class="hljs-property">token</span> === token)<br>            <span class="hljs-comment">//没有返回失败的信息</span><br>            <span class="hljs-keyword">if</span> (!checkUser) &#123;<br>                <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">code</span>: <span class="hljs-number">201</span>, <span class="hljs-attr">data</span>: &#123; <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;获取用户信息失败&#x27;</span> &#125; &#125;<br>            &#125;<br>            <span class="hljs-comment">//如果有返回成功信息</span><br>            <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">code</span>: <span class="hljs-number">200</span>, <span class="hljs-attr">data</span>: &#123;checkUser&#125; &#125;<br>        &#125;,<br>    &#125;,<br>]<br></code></pre></td></tr></table></figure>
+
+<p><strong>安装axios</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pnpm <span class="hljs-keyword">install</span> axios<br></code></pre></td></tr></table></figure>
+
+<p>最后通过axios测试接口！！！</p>
+<h3 id="3-7axios二次封装"><a href="#3-7axios二次封装" class="headerlink" title="3.7axios二次封装"></a>3.7axios二次封装</h3><p>在开发项目的时候避免不了与后端进行交互,因此我们需要使用axios插件实现发送网络请求。在开发项目的时候</p>
+<p>我们经常会把axios进行二次封装。</p>
+<p>目的:</p>
+<p>1:使用请求拦截器，可以在请求拦截器中处理一些业务(开始进度条、请求头携带公共参数)</p>
+<p>2:使用响应拦截器，可以在响应拦截器中处理一些业务(进度条结束、简化服务器返回的数据、处理http网络错误)</p>
+<p>在根目录下创建utils&#x2F;request.ts</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">ElMessage</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;element-plus&quot;</span>;<br><span class="hljs-comment">//创建axios实例</span><br><span class="hljs-keyword">let</span> request = axios.<span class="hljs-title function_">create</span>(&#123;<br>    <span class="hljs-attr">baseURL</span>: <span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">env</span>.<span class="hljs-property">VITE_APP_BASE_API</span>,<br>    <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span><br>&#125;)<br><span class="hljs-comment">//请求拦截器</span><br>request.<span class="hljs-property">interceptors</span>.<span class="hljs-property">request</span>.<span class="hljs-title function_">use</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> config;<br>&#125;);<br><span class="hljs-comment">//响应拦截器</span><br>request.<span class="hljs-property">interceptors</span>.<span class="hljs-property">response</span>.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">return</span> response.<span class="hljs-property">data</span>;<br>&#125;, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">//处理网络错误</span><br>    <span class="hljs-keyword">let</span> msg = <span class="hljs-string">&#x27;&#x27;</span>;<br>    <span class="hljs-keyword">let</span> status = error.<span class="hljs-property">response</span>.<span class="hljs-property">status</span>;<br>    <span class="hljs-keyword">switch</span> (status) &#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">401</span>:<br>            msg = <span class="hljs-string">&quot;token过期&quot;</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">403</span>:<br>            msg = <span class="hljs-string">&#x27;无权访问&#x27;</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">404</span>:<br>            msg = <span class="hljs-string">&quot;请求地址错误&quot;</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">500</span>:<br>            msg = <span class="hljs-string">&quot;服务器出现问题&quot;</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-attr">default</span>:<br>            msg = <span class="hljs-string">&quot;无网络&quot;</span>;<br><br>    &#125;<br>    <span class="hljs-title class_">ElMessage</span>(&#123;<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;error&#x27;</span>,<br>        <span class="hljs-attr">message</span>: msg<br>    &#125;)<br>    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(error);<br>&#125;);<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> request;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-8API接口统一管理"><a href="#3-8API接口统一管理" class="headerlink" title="3.8API接口统一管理"></a>3.8API接口统一管理</h3><p>在开发项目的时候,接口可能很多需要统一管理。在src目录下去创建api文件夹去统一管理项目的接口；</p>
+<p>比如:下面方式</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">//统一管理咱们项目用户相关的接口</span><br><br><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/request&#x27;</span><br><br><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> &#123;<br><br> loginFormData,<br><br> loginResponseData,<br><br> userInfoReponseData,<br><br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./type&#x27;</span><br><br><span class="hljs-comment">//项目用户相关的请求地址</span><br><br><span class="hljs-keyword">enum</span> <span class="hljs-variable constant_">API</span> &#123;<br><br> <span class="hljs-variable constant_">LOGIN_URL</span> = <span class="hljs-string">&#x27;/admin/acl/index/login&#x27;</span>,<br><br> <span class="hljs-variable constant_">USERINFO_URL</span> = <span class="hljs-string">&#x27;/admin/acl/index/info&#x27;</span>,<br><br> <span class="hljs-variable constant_">LOGOUT_URL</span> = <span class="hljs-string">&#x27;/admin/acl/index/logout&#x27;</span>,<br><br>&#125;<br><span class="hljs-comment">//登录接口</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">reqLogin</span> = (<span class="hljs-params">data: loginFormData</span>) =&gt;<br> request.<span class="hljs-property">post</span>&lt;<span class="hljs-built_in">any</span>, loginResponseData&gt;(<span class="hljs-variable constant_">API</span>.<span class="hljs-property">LOGIN_URL</span>, data)<br><span class="hljs-comment">//获取用户信息</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">reqUserInfo</span> = (<span class="hljs-params"></span>) =&gt;<br><br> request.<span class="hljs-property">get</span>&lt;<span class="hljs-built_in">any</span>, userInfoReponseData&gt;(<span class="hljs-variable constant_">API</span>.<span class="hljs-property">USERINFO_URL</span>)<br><br><span class="hljs-comment">//退出登录</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">reqLogout</span> = (<span class="hljs-params"></span>) =&gt; request.<span class="hljs-property">post</span>&lt;<span class="hljs-built_in">any</span>, <span class="hljs-built_in">any</span>&gt;(<span class="hljs-variable constant_">API</span>.<span class="hljs-property">LOGOUT_URL</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-9路由搭建"><a href="#3-9路由搭建" class="headerlink" title="3.9路由搭建"></a>3.9路由搭建</h3><p>index.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123;createRouter, createWebHashHistory&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><span class="hljs-keyword">import</span> &#123;constantRoute&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/router/routes.ts&quot;</span>;<br><br><span class="hljs-comment">// 创建路由</span><br><span class="hljs-keyword">let</span> router = <span class="hljs-title function_">createRouter</span>(&#123;<br><span class="hljs-comment">//     路由模式hash</span><br>    <span class="hljs-attr">history</span>: <span class="hljs-title function_">createWebHashHistory</span>(),<br>    <span class="hljs-attr">routes</span>: constantRoute,<br>    <span class="hljs-comment">//滚动行为</span><br>    <span class="hljs-title function_">scrollBehavior</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">left</span>:<span class="hljs-number">0</span>,<br>            <span class="hljs-attr">top</span>:<span class="hljs-number">0</span><br>        &#125;<br>    &#125;<br><br>&#125;);<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router;<br></code></pre></td></tr></table></figure>
+
+<p>routers.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 对外暴露配置常量路由</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> constantRoute = [<br>    &#123;<br>        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/login&#x27;</span>,<br>        <span class="hljs-attr">component</span>:<span class="hljs-function">() =&gt;</span><span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;@/views/login/index.vue&quot;</span>),<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;login&#x27;</span>,<br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>        <span class="hljs-attr">component</span>:<span class="hljs-function">()=&gt;</span><span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;@/views/home/index.vue&quot;</span>),<br>        <span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;layout&#x27;</span>,<br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/404&#x27;</span>,<br>        <span class="hljs-attr">component</span>:<span class="hljs-function">()=&gt;</span><span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;@/views/404/index.vue&quot;</span>),<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;404&#x27;</span><br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/:pathMatch(.*)*&#x27;</span>, <span class="hljs-comment">//未知路径则重定向至404</span><br>        <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;/404&#x27;</span>,<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Any&#x27;</span><br>    &#125;<br>]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、项目的资源地址"><a href="#四、项目的资源地址" class="headerlink" title="四、项目的资源地址"></a>四、项目的资源地址</h2><p>贾成豪老师代码仓库地址:<a target="_blank" rel="noopener" href="https://gitee.com/jch1011/vue3_admin_template-bj1.git">https://gitee.com/jch1011/vue3_admin_template-bj1.git</a></p>
+<p>项目在线文档:</p>
+<p>服务器域名:<a target="_blank" rel="noopener" href="http://sph-api.atguigu.cn/">http://sph-api.atguigu.cn</a></p>
+<p>swagger文档:</p>
+<p><a target="_blank" rel="noopener" href="http://139.198.104.58:8209/swagger-ui.html">http://139.198.104.58:8209/swagger-ui.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://139.198.104.58:8212/swagger-ui.html#/">http://139.198.104.58:8212/swagger-ui.html#/</a></p>
+<p>echarts:国内镜像网站</p>
+<p><a target="_blank" rel="noopener" href="https://www.isqqw.com/echarts-doc/zh/option.html#title">https://www.isqqw.com/echarts-doc/zh/option.html#title</a></p>
+<p><a target="_blank" rel="noopener" href="http://datav.aliyun.com/portal/school/atlas/area_selector">http://datav.aliyun.com/portal/school/atlas/area_selector</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89/" class="category-chain-item">硅谷甄选</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>1_硅谷甄选运营平台</div>
+      <div>http://elaskon.asia/2023/11/13/硅谷甄选/1_硅谷甄选项目笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/17/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89/2_%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2/" title="2_登录页面">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2_登录页面</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/10/Vue3/9_%E5%9B%9E%E9%A1%BE%E5%B7%A9%E5%9B%BA/" title="9_Vue3">
+                        <span class="hidden-mobile">9_Vue3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

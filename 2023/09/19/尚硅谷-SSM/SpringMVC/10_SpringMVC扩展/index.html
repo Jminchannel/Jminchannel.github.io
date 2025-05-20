@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SpringMVC扩展异常处理的两种方式开发过程中是不可避免地会出现各种异常情况的，例如网络连接异常、数据格式异常、空指针异常等等。异常的出现可能导致程序的运行出现问题，甚至直接导致程序崩溃。因此，在开发过程中，合理处理异常、避免异常产生、以及对异常进行有效的调试是非常重要的。   编程式异常处理简单说，try-catch处理 声明式异常处理简单说，将异常处理的逻辑从具体的业务逻辑中分离出来，通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10_SpringMVC扩展">
+<meta property="og:url" content="http://elaskon.asia/2023/09/19/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/SpringMVC/10_SpringMVC%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="SpringMVC扩展异常处理的两种方式开发过程中是不可避免地会出现各种异常情况的，例如网络连接异常、数据格式异常、空指针异常等等。异常的出现可能导致程序的运行出现问题，甚至直接导致程序崩溃。因此，在开发过程中，合理处理异常、避免异常产生、以及对异常进行有效的调试是非常重要的。   编程式异常处理简单说，try-catch处理 声明式异常处理简单说，将异常处理的逻辑从具体的业务逻辑中分离出来，通过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230919232429217.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230919235147955.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920002753742.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920002810565.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920004000735.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920004854090.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920191722591.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920191757434.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920194630723.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920195527218.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920195910862.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920195933553.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920200207882.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920200642235.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920201426769.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920201706552.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920202136879.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920202245064.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920202452383.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230920202536250.png">
+<meta property="article:published_time" content="2023-09-19T14:30:00.000Z">
+<meta property="article:modified_time" content="2023-09-20T17:15:32.569Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20230919232429217.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>10_SpringMVC扩展 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="10_SpringMVC扩展"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-19 22:30" pubdate>
+          2023年9月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">10_SpringMVC扩展</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年9月21日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SpringMVC扩展"><a href="#SpringMVC扩展" class="headerlink" title="SpringMVC扩展"></a>SpringMVC扩展</h1><h2 id="异常处理的两种方式"><a href="#异常处理的两种方式" class="headerlink" title="异常处理的两种方式"></a>异常处理的两种方式</h2><p>开发过程中是不可避免地会出现各种异常情况的，例如网络连接异常、数据格式异常、空指针异常等等。异常的出现可能导致程序的运行出现问题，甚至直接导致程序崩溃。因此，在开发过程中，合理处理异常、避免异常产生、以及对异常进行有效的调试是非常重要的。</p>
+<p><img src="/assets/image-20230919232429217.png" srcset="/img/loading.gif" lazyload alt="image-20230919232429217"></p>
+<p><img src="/assets/image-20230919235147955.png" srcset="/img/loading.gif" lazyload alt="image-20230919235147955"></p>
+<h3 id="编程式异常处理"><a href="#编程式异常处理" class="headerlink" title="编程式异常处理"></a>编程式异常处理</h3><p>简单说，try-catch处理</p>
+<h3 id="声明式异常处理"><a href="#声明式异常处理" class="headerlink" title="声明式异常处理"></a>声明式异常处理</h3><p>简单说，将异常处理的逻辑从具体的业务逻辑中分离出来，通过配置等方式进行统一的管理和处理。开发人员只需要为方法或类标注相应的注解（如 @Throws 或 @ExceptionHandler）</p>
+<h3 id="站在宏观角度来看待声明式事务处理"><a href="#站在宏观角度来看待声明式事务处理" class="headerlink" title="站在宏观角度来看待声明式事务处理"></a>站在宏观角度来看待声明式事务处理</h3><blockquote>
+<p> 整个项目从架构这个层面设计的异常处理的统一机制和规范。</p>
+<p>一个项目中会包含很多个模块，各个模块需要分工完成。如果张三负责的模块按照 A 方案处理异常，李四负责的模块按照 B 方案处理异常……各个模块处理异常的思路、代码、命名细节都不一样，那么就会让整个项目非常混乱。 使用声明式异常处理，可以统一项目处理异常思路，项目更加清晰明了！</p>
+</blockquote>
+<h3 id="基于注解异常声明异常处理"><a href="#基于注解异常声明异常处理" class="headerlink" title="基于注解异常声明异常处理"></a>基于注解异常声明异常处理</h3><ol>
+<li><p>声明异常处理控制器类</p>
+</li>
+<li><p>声明异常处理handler方法</p>
+</li>
+<li><p>配置文件扫描控制器类配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestControllerAdvice</span> <span class="hljs-comment">//直接返回json</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GlobalExceptionHandler</span> &#123;<br>    <span class="hljs-meta">@ExceptionHandler(ArithmeticException.class)</span><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">ArithmeticExceptionHandler</span><span class="hljs-params">(ArithmeticException arithmeticException)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;ArithmeticException&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> arithmeticException.getMessage();<br>        <span class="hljs-keyword">return</span> message; <span class="hljs-comment">//可以转发或重定向到视图页面</span><br>    &#125;<br>    <span class="hljs-meta">@ExceptionHandler(Exception.class)</span><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">ExceptionHandler</span><span class="hljs-params">(Exception e)</span>&#123;<br>        <span class="hljs-keyword">return</span> e.getMessage();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-meta">@ComponentScan(&#123;&quot;com.jmin.controller&quot;,&quot;com.jmin.error&quot;&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MvcConfig</span> &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20230920002753742.png" srcset="/img/loading.gif" lazyload alt="image-20230920002753742"></p>
+<p><img src="/assets/image-20230920002810565.png" srcset="/img/loading.gif" lazyload alt="image-20230920002810565"></p>
+</li>
+</ol>
+<h2 id="拦截器使用"><a href="#拦截器使用" class="headerlink" title="拦截器使用"></a>拦截器使用</h2><h3 id="拦截器概念"><a href="#拦截器概念" class="headerlink" title="拦截器概念"></a>拦截器概念</h3><p><img src="/assets/image-20230920004000735.png" srcset="/img/loading.gif" lazyload alt="image-20230920004000735"></p>
+<p>拦截器 Springmvc VS 过滤器 javaWeb：</p>
+<ul>
+<li>相似点<ul>
+<li>拦截：必须先把请求拦住，才能执行后续操作</li>
+<li>过滤：拦截器或过滤器存在的意义就是对请求进行统一处理</li>
+<li>放行：对请求执行了必要操作后，放请求过去，让它访问原本想要访问的资源</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>工作平台不同<ul>
+<li>过滤器工作在 Servlet 容器中</li>
+<li>拦截器工作在 SpringMVC 的基础上</li>
+</ul>
+</li>
+<li>拦截的范围<ul>
+<li>过滤器：能够拦截到的最大范围是整个 Web 应用</li>
+<li>拦截器：能够拦截到的最大范围是整个 SpringMVC 负责的请求</li>
+</ul>
+</li>
+<li>IOC 容器支持<ul>
+<li>过滤器：想得到 IOC 容器需要调用专门的工具方法，是间接的</li>
+<li>拦截器：它自己就在 IOC 容器中，所以可以直接从 IOC 容器中装配组件，也就是可以直接得到 IOC 容器的支持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>拦截器 Springmvc VS 过滤器 javaWeb：</p>
+<ul>
+<li>相似点<ul>
+<li>拦截：必须先把请求拦住，才能执行后续操作</li>
+<li>过滤：拦截器或过滤器存在的意义就是对请求进行统一处理</li>
+<li>放行：对请求执行了必要操作后，放请求过去，让它访问原本想要访问的资源</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>工作平台不同<ul>
+<li>过滤器工作在 Servlet 容器中</li>
+<li>拦截器工作在 SpringMVC 的基础上</li>
+</ul>
+</li>
+<li>拦截的范围<ul>
+<li>过滤器：能够拦截到的最大范围是整个 Web 应用</li>
+<li>拦截器：能够拦截到的最大范围是整个 SpringMVC 负责的请求</li>
+</ul>
+</li>
+<li>IOC 容器支持<ul>
+<li>过滤器：想得到 IOC 容器需要调用专门的工具方法，是间接的</li>
+<li>拦截器：它自己就在 IOC 容器中，所以可以直接从 IOC 容器中装配组件，也就是可以直接得到 IOC 容器的支持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>拦截器 Springmvc VS 过滤器 javaWeb：</p>
+<ul>
+<li>相似点<ul>
+<li>拦截：必须先把请求拦住，才能执行后续操作</li>
+<li>过滤：拦截器或过滤器存在的意义就是对请求进行统一处理</li>
+<li>放行：对请求执行了必要操作后，放请求过去，让它访问原本想要访问的资源</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>工作平台不同<ul>
+<li>过滤器工作在 Servlet 容器中</li>
+<li>拦截器工作在 SpringMVC 的基础上</li>
+</ul>
+</li>
+<li>拦截的范围<ul>
+<li>过滤器：能够拦截到的最大范围是整个 Web 应用</li>
+<li>拦截器：能够拦截到的最大范围是整个 SpringMVC 负责的请求</li>
+</ul>
+</li>
+<li>IOC 容器支持<ul>
+<li>过滤器：想得到 IOC 容器需要调用专门的工具方法，是间接的</li>
+<li>拦截器：它自己就在 IOC 容器中，所以可以直接从 IOC 容器中装配组件，也就是可以直接得到 IOC 容器的支持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>选择：</p>
+<p>功能需要如果用 SpringMVC 的拦截器能够实现，就不使用过滤器。</p>
+<p><img src="/assets/image-20230920004854090.png" srcset="/img/loading.gif" lazyload alt="image-20230920004854090"></p>
+<h3 id="拦截器实现"><a href="#拦截器实现" class="headerlink" title="拦截器实现"></a>拦截器实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyInterception</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HandlerInterceptor</span> &#123;<br><span class="hljs-comment">//    接口方法是默认实现的，可以重写</span><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 执行handler之前，拦截</span><br><span class="hljs-comment">     * 常用于编码格式设置，登录保护，权限处理</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request 请求对象</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response 响应对象</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> handler 调用方法的对象</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> true 放行 false 拦截</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">preHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        System.out.println(<span class="hljs-string">&quot;request = &quot;</span> + request + <span class="hljs-string">&quot;, response = &quot;</span> + response + <span class="hljs-string">&quot;, handler = &quot;</span> + handler);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * handler执行完毕后，触发的方法 没有拦截机制</span><br><span class="hljs-comment">     * 对结果处理，敏感词汇检查</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> handler</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> modelAndView 返回视图和共享域数据对象</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        System.out.println(<span class="hljs-string">&quot;MyInterception.postHandle&quot;</span>);<br>        HandlerInterceptor.<span class="hljs-built_in">super</span>.postHandle(request, response, handler, modelAndView);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *  整体处理完毕</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> request</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> response</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> handler</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ex handler报错的异常</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterCompletion</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        System.out.println(<span class="hljs-string">&quot;MyInterception.afterCompletion&quot;</span>);<br>        HandlerInterceptor.<span class="hljs-built_in">super</span>.afterCompletion(request, response, handler, ex);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="拦截器配置"><a href="#拦截器配置" class="headerlink" title="拦截器配置"></a>拦截器配置</h3><ol>
+<li><p>方式一 拦截全局</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-meta">@ComponentScan(&#123;&quot;com.jmin.controller&quot;,&quot;com.jmin.error&quot;&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br><span class="hljs-comment">//        配置方法1 拦截全局请求</span><br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>方式二 拦截部分路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br><span class="hljs-comment">//        配置方法2 拦截部分请求,精准拦截</span><br><span class="hljs-comment">//        * 任意一层字符串</span><br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception</span>())<br>                .addPathPatterns(<span class="hljs-string">&quot;/user/*&quot;</span>);<br><span class="hljs-comment">//        ** 任意多层字符串</span><br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception</span>())<br>                .addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>方式三 排除拦截</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-meta">@ComponentScan(&#123;&quot;com.jmin.controller&quot;,&quot;com.jmin.error&quot;&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br><span class="hljs-comment">//        配置方法3 排除拦截 排除地址应该在拦截地址内部</span><br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception</span>())<br>                .addPathPatterns(<span class="hljs-string">&quot;/user/*&quot;</span>)<br>                .excludePathPatterns(<span class="hljs-string">&quot;/user/data1&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="多个拦截器的优先级问题"><a href="#多个拦截器的优先级问题" class="headerlink" title="多个拦截器的优先级问题"></a>多个拦截器的优先级问题</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-meta">@ComponentScan(&#123;&quot;com.jmin.controller&quot;,&quot;com.jmin.error&quot;&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br><span class="hljs-comment">//        多个拦截器执行顺序</span><br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception1</span>());<br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterception2</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p><img src="/assets/image-20230920191722591.png" srcset="/img/loading.gif" lazyload alt="image-20230920191722591"></p>
+<p><img src="/assets/image-20230920191757434.png" srcset="/img/loading.gif" lazyload alt="image-20230920191757434"></p>
+<ol>
+<li>preHandle() 方法：SpringMVC 会把所有拦截器收集到一起，然后按照配置顺序调用各个 preHandle() 方法。</li>
+<li>postHandle() 方法：SpringMVC 会把所有拦截器收集到一起，然后按照配置相反的顺序调用各个 postHandle() 方法。</li>
+<li>afterCompletion() 方法：SpringMVC 会把所有拦截器收集到一起，然后按照配置相反的顺序调用各个 afterCompletion() 方法。</li>
+</ol>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>mvc中所有的请求由DispatcherServlet分发，分发过程中自动调用了拦截器</p>
+<p><img src="/assets/image-20230920194630723.png" srcset="/img/loading.gif" lazyload alt="image-20230920194630723"></p>
+<p>该方法为mvc的整体调用流程</p>
+<p><img src="/assets/image-20230920195527218.png" srcset="/img/loading.gif" lazyload alt="image-20230920195527218"></p>
+<p>mapping（秘书）和adapter（经理）（由秘书寻找）</p>
+<p><img src="/assets/image-20230920195910862.png" srcset="/img/loading.gif" lazyload alt="image-20230920195910862"></p>
+<p><img src="/assets/image-20230920195933553.png" srcset="/img/loading.gif" lazyload alt="image-20230920195933553"></p>
+<p>adapter（经理）调用handler，在调用handler之前经理进行一段拦截动作，寻找是否存在前置拦截器，条件applyPreHandle方法如果返回false，则该if为true，跳出当前方法</p>
+<p><img src="/assets/image-20230920200207882.png" srcset="/img/loading.gif" lazyload alt="image-20230920200207882"></p>
+<p>对于applyPreHandle方法，会顺序遍历所有的拦截器PreHandle方法并调用PreHandle方法，直到调用结束后返回true，而回到上述if语句中条件为false，执行下面的程序。</p>
+<p><img src="/assets/image-20230920200642235.png" srcset="/img/loading.gif" lazyload alt="image-20230920200642235"></p>
+<p>目标方法执行完毕后，经理执行拦截器的applyPostHandler方法</p>
+<p><img src="/assets/image-20230920201426769.png" srcset="/img/loading.gif" lazyload alt="image-20230920201426769"></p>
+<p>applyPostHandler方法，会倒序遍历所有的拦截器并调用PostHandler方法</p>
+<p><img src="/assets/image-20230920201706552.png" srcset="/img/loading.gif" lazyload alt="image-20230920201706552"></p>
+<p>applyPostHandler方法执行完毕后，将请求和响应向上传递</p>
+<p><img src="/assets/image-20230920202136879.png" srcset="/img/loading.gif" lazyload alt="image-20230920202136879"></p>
+<p>而在传递过程中，如果存在异常，会执行processHandlerException异常处理方法。</p>
+<p><img src="/assets/image-20230920202245064.png" srcset="/img/loading.gif" lazyload alt="image-20230920202245064"></p>
+<p>不存在异常，最终会调用triggerAfterCompletion拦截器后置处理方法</p>
+<p><img src="/assets/image-20230920202452383.png" srcset="/img/loading.gif" lazyload alt="image-20230920202452383"></p>
+<p>triggerAfterCompletion方法，会倒序遍历所有的拦截器并调用afterCompletion方法</p>
+<p><img src="/assets/image-20230920202536250.png" srcset="/img/loading.gif" lazyload alt="image-20230920202536250"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SSM/" class="category-chain-item">SSM</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/SSM/SpringMVC/" class="category-chain-item">SpringMVC</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>10_SpringMVC扩展</div>
+      <div>http://elaskon.asia/2023/09/19/尚硅谷-SSM/SpringMVC/10_SpringMVC扩展/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/20/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/SpringMVC/11_%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C/" title="11_参数校验">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">11_参数校验</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/19/%E5%B0%9A%E7%A1%85%E8%B0%B7-SSM/SpringMVC/9_RestFul%E5%AE%9E%E6%88%98/" title="9_RestFul实战">
+                        <span class="hidden-mobile">9_RestFul实战</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

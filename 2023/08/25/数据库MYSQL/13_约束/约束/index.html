@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="约束约束Constraint 概述为什么需要约束数据完整性是指数据的精确性和可靠性。为了保证数据的完整性，SQL规范以约束的方式对表数据进行额外的条件限制。  实体完整性：同一个表中，不能存在两条完全相同无法区别的记录。 域完整性：范围 引用完整性：例如员工所在部门，部门表就必须存在该部门 用户自定义完整性：例如用户名密码不可为空   为什么需要约束？为了保证数据的完整性！   什么叫约束？对表中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13_约束Constraint">
+<meta property="og:url" content="http://elaskon.asia/2023/08/25/%E6%95%B0%E6%8D%AE%E5%BA%93MYSQL/13_%E7%BA%A6%E6%9D%9F/%E7%BA%A6%E6%9D%9F/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="约束约束Constraint 概述为什么需要约束数据完整性是指数据的精确性和可靠性。为了保证数据的完整性，SQL规范以约束的方式对表数据进行额外的条件限制。  实体完整性：同一个表中，不能存在两条完全相同无法区别的记录。 域完整性：范围 引用完整性：例如员工所在部门，部门表就必须存在该部门 用户自定义完整性：例如用户名密码不可为空   为什么需要约束？为了保证数据的完整性！   什么叫约束？对表中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230829165818704.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230829165929992.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230829165943087.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230829171558637.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20230829204520064.png">
+<meta property="article:published_time" content="2023-08-25T14:53:43.000Z">
+<meta property="article:modified_time" content="2023-12-22T13:40:52.711Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20230829165818704.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>13_约束Constraint - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="13_约束Constraint"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-25 22:53" pubdate>
+          2023年8月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">13_约束Constraint</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年12月22日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h1><h2 id="约束Constraint-概述"><a href="#约束Constraint-概述" class="headerlink" title="约束Constraint 概述"></a>约束Constraint 概述</h2><h3 id="为什么需要约束"><a href="#为什么需要约束" class="headerlink" title="为什么需要约束"></a>为什么需要约束</h3><p>数据完整性是指数据的精确性和可靠性。<strong>为了保证数据的完整性</strong>，SQL规范以约束的方式对表数据进行额外的条件限制。</p>
+<ul>
+<li><code>实体完整性</code>：同一个表中，不能存在两条完全相同无法区别的记录。</li>
+<li><code>域完整性</code>：范围</li>
+<li><code>引用完整性</code>：例如员工所在部门，部门表就必须存在该部门</li>
+<li><code>用户自定义完整性</code>：例如用户名密码不可为空</li>
+</ul>
+<blockquote>
+<p>为什么需要约束？为了保证数据的完整性！</p>
+</blockquote>
+<blockquote>
+<p>什么叫约束？对表中字段的限制。</p>
+</blockquote>
+<ul>
+<li>列级约束：将此约束声明在对应字段的后面</li>
+<li>表级约束：在表中所有字段都声明完，在所有字段的后面声明的约束</li>
+</ul>
+<blockquote>
+<p>约束的分类：</p>
+</blockquote>
+<ul>
+<li>NOT NULL非空约束</li>
+<li>UNIQUE唯一性约束</li>
+<li>PRIMARY KEY主键约束</li>
+<li>FOREIGN KEY外键约束</li>
+<li>CHECK检查约束</li>
+<li>DEFAULT默认值约束</li>
+</ul>
+<blockquote>
+<p>如何增加约束？</p>
+</blockquote>
+<blockquote>
+<p>如何查看表中的约束？</p>
+</blockquote>
+<h2 id="NOT-NULL"><a href="#NOT-NULL" class="headerlink" title="NOT NULL"></a>NOT NULL</h2><p>建表时：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">#information_schema数据库名（系统库）<br>#table_constraints表名称（专门存储各个表的约束）<br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> information_schema.table_constraints<br><span class="hljs-keyword">WHERE</span> table_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;表名称&#x27;</span>;<br><br></code></pre></td></tr></table></figure>
+
+<p>建表后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型 <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br></code></pre></td></tr></table></figure>
+
+<p>删除：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型 <span class="hljs-keyword">NULL</span>;#去掉<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>，相当于修改某个非注解字段，该字段允许为空<br>或<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型;#去掉<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>，相当于修改某个非注解字段，该字段允许为空<br></code></pre></td></tr></table></figure>
+
+<h2 id="UNIQUE"><a href="#UNIQUE" class="headerlink" title="UNIQUE"></a>UNIQUE</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">同一个表可以有多个唯一约束。<br>唯一约束可以是某一个列的值唯一，也可以多个列组合的值唯一。<br>唯一性约束允许列值为空。<br>在创建唯一约束的时候，如果不给唯一约束命名，就默认和列名相同。<br>MySQL会给唯一约束的列上默认创建一个唯一索引。<br></code></pre></td></tr></table></figure>
+
+<p>建表时：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> table_name(<br>	字段名 数据类型,<br>	字段名 数据类型 <span class="hljs-keyword">unique</span>,<br>    字段名 数据类型 <span class="hljs-keyword">unique</span> key,<br>    字段名 数据类型<br>);<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型,<br>字段名 数据类型,<br>字段名 数据类型,<br>    ## 表级约束<br>[<span class="hljs-keyword">constraint</span> 约束名] <span class="hljs-keyword">unique</span> key(字段名)<br>);<br></code></pre></td></tr></table></figure>
+
+<p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> student(<br>sid <span class="hljs-type">int</span>,<br>sname <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>),<br>tel <span class="hljs-type">char</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">unique</span>,<br>cardid <span class="hljs-type">char</span>(<span class="hljs-number">18</span>) <span class="hljs-keyword">unique</span> key<br>);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">USER</span>(<br>id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">25</span>),<br>PASSWORD <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">16</span>),<br><span class="hljs-comment">-- 使用表级约束语法</span><br><span class="hljs-keyword">CONSTRAINT</span> uk_name_pwd <span class="hljs-keyword">UNIQUE</span>(NAME,PASSWORD)<br>);<br></code></pre></td></tr></table></figure>
+
+<p>建表后指定唯一键约束:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">#字段列表中如果是一个字段，表示该列的值唯一。如果是两个或更多个字段，那么复合唯一，即多个字段的组合是唯一的<br>#方式<span class="hljs-number">1</span>：<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 <span class="hljs-keyword">add</span> <span class="hljs-keyword">unique</span> key(字段列表);<br></code></pre></td></tr></table></figure>
+
+<h3 id="删除唯一约束"><a href="#删除唯一约束" class="headerlink" title="删除唯一约束"></a>删除唯一约束</h3><ul>
+<li>添加唯一性约束的列上也会自动创建唯一索引。</li>
+<li>删除唯一约束只能通过删除唯一索引的方式删除。</li>
+<li>删除时需要指定唯一索引名，唯一索引名就和唯一约束名一样。</li>
+<li>如果创建唯一约束时未指定名称，如果是单列，就默认和列名相同；如果是组合列，那么默认和()中排在第一个的列名相同。也可以自定义唯一性约束名。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> information_schema.table_constraints <br><span class="hljs-keyword">WHERE</span> table_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;表名&#x27;</span>; #查看都有哪些约束<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">USER</span><br><span class="hljs-keyword">DROP</span> INDEX uk_name_pwd;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 注意：可以通过 show index from 表名称; 查看表的索引</p>
+</blockquote>
+<p><img src="/assets/image-20230829165818704.png" srcset="/img/loading.gif" lazyload alt="image-20230829165818704"></p>
+<p><img src="/assets/image-20230829165929992.png" srcset="/img/loading.gif" lazyload alt="image-20230829165929992"></p>
+<p><img src="/assets/image-20230829165943087.png" srcset="/img/loading.gif" lazyload alt="image-20230829165943087"></p>
+<h2 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h2><p>作用：用来唯一标识表中的一行记录。</p>
+<p>特点：主键约束相当于<strong>唯一约束+非空约束</strong>的组合，主键约束列不允许重复，也不允许出现空值。</p>
+<ul>
+<li>一个表最多只能有一个主键约束，建立主键约束可以在列级别创建，也可以在表级别上创建。</li>
+<li>主键约束对应着表中的一列或者多列（复合主键）</li>
+<li>MySQL的主键名总是PRIMARY，就算自己命名了主键约束名也没用。</li>
+<li>当创建主键约束时，系统默认会在所在的列或列组合上建立对应的主键索引（能够根据主键查询的，就根据主键查询，效率更高）。如果删除主键约束了，主键约束对应的索引就自动删除了。</li>
+<li>需要注意的一点是，不要修改主键字段的值。因为主键是数据记录的唯一标识，如果修改了主键的值，就有可能会破坏数据的完整性。</li>
+</ul>
+<p><img src="/assets/image-20230829171558637.png" srcset="/img/loading.gif" lazyload alt="image-20230829171558637"></p>
+<p>建表时</p>
+<p>建立一个表的主键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型 <span class="hljs-keyword">primary</span> key, #列级模式<br>字段名 数据类型,<br>字段名 数据类型<br>);<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型,<br>字段名 数据类型,<br>字段名 数据类型,<br>[<span class="hljs-keyword">constraint</span> 约束名] <span class="hljs-keyword">primary</span> key(字段名) #表级模式<br>);<br>#列级约束<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> temp(<br>id <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key,<br>name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>)<br>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> temp <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;张三&#x27;</span>);#成功<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> temp <span class="hljs-keyword">values</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;李四&#x27;</span>);#成功<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> temp <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;张三&#x27;</span>);#失败 因为与第一行的id重复<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> temp <span class="hljs-keyword">values</span>(<span class="hljs-keyword">null</span>,<span class="hljs-string">&#x27;李琦&#x27;</span>);#失败 因为id不能为<span class="hljs-keyword">null</span><br><br>#表级约束<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> emp5(<br>id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,<br>NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>),<br>pwd <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>),<br><span class="hljs-keyword">CONSTRAINT</span> emp5_id_pk <span class="hljs-keyword">PRIMARY</span> KEY(id)<br>);<br></code></pre></td></tr></table></figure>
+
+<p>建立两个表主键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">#演示一个表建立两个主键约束<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> temp(<br>id <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key,<br>name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">primary</span> key<br>); #错误 一个表不能含有两个及以上的主键<br></code></pre></td></tr></table></figure>
+
+<p>建表后增加主键约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名称 <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY(字段列表); <br>#字段列表可以是一个字段，也可以是多个字段，如果是多个字段的话，是复合主键<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> student <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY (sid);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> emp5 <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY(NAME,pwd);<br></code></pre></td></tr></table></figure>
+
+<p><strong><code>通常不删除索引操作</code></strong></p>
+<h3 id="关于复合主键"><a href="#关于复合主键" class="headerlink" title="关于复合主键"></a>关于复合主键</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型,<br>字段名 数据类型,<br>字段名 数据类型,<br><span class="hljs-keyword">primary</span> key(字段名<span class="hljs-number">1</span>,字段名<span class="hljs-number">2</span>) #表示字段<span class="hljs-number">1</span>和字段<span class="hljs-number">2</span>的组合是唯一的，也可以有更多个字段<br>);<br>#学生表<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> student(<br>sid <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key, #学号<br>sname <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) #学生姓名<br>);<br>#课程表<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> course(<br>cid <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key, #课程编号<br>cname <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) #课程名称<br>);<br>#选课表<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> student_course(<br>sid <span class="hljs-type">int</span>,<br>cid <span class="hljs-type">int</span>,<br>score <span class="hljs-type">int</span>,<br><span class="hljs-keyword">primary</span> key(sid,cid) #复合主键<br>);<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> emp6(<br>id <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>),<br>pwd <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>),<br><span class="hljs-keyword">CONSTRAINT</span> emp7_pk <span class="hljs-keyword">PRIMARY</span> KEY(NAME,pwd)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="AUTO-INCREMENT自增长列"><a href="#AUTO-INCREMENT自增长列" class="headerlink" title="AUTO_INCREMENT自增长列"></a>AUTO_INCREMENT自增长列</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs 1c">（<span class="hljs-number">1</span>）一个表最多只能有一个自增长列<br>（<span class="hljs-number">2</span>）当需要产生唯一标识符或顺序值时，可设置自 增长<br>（<span class="hljs-number">3</span>）自增长列约束的列必须是键列（主键列，唯一键列）<br>（<span class="hljs-number">4</span>）自增约束的列的数据类型必须是整数类型<br>（<span class="hljs-number">5</span>）如果自增列指定了 <span class="hljs-number">0</span> 和 <span class="hljs-literal">null</span>，会在当前最大值的基础上自增；如果自增列手动指定了具体值，直接<br>赋值为具体值。<br></code></pre></td></tr></table></figure>
+
+<p>错误演示：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> employee(<br>eid <span class="hljs-type">int</span> auto_increment,<br>ename <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>)<br>); #自增长约束的列必须是键列<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> employee(<br>eid <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key,<br>ename <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">unique</span> key auto_increment<br>); #自增约束的列的数据类型必须是整数类型<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型 <span class="hljs-keyword">primary</span> key auto_increment,<br>字段名 数据类型 <span class="hljs-keyword">unique</span> key <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>字段名 数据类型 <span class="hljs-keyword">unique</span> key,<br>字段名 数据类型 <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">default</span> 默认值,<br>);<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名称(<br>字段名 数据类型 <span class="hljs-keyword">default</span> 默认值 ,<br>字段名 数据类型 <span class="hljs-keyword">unique</span> key auto_increment,<br>字段名 数据类型 <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">default</span> 默认值,,<br><span class="hljs-keyword">primary</span> key(字段名)<br>);<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> employee(<br>eid <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key auto_increment,<br>ename <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>)<br>);<br></code></pre></td></tr></table></figure>
+
+<p>建表后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型 auto_increment;<br><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> employee <br>modify eid <span class="hljs-type">int</span> auto_increment;<br></code></pre></td></tr></table></figure>
+
+<p>删除自增约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql">#<span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型 auto_increment;#给这个字段增加自增约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名称 modify 字段名 数据类型;<br>#去掉auto_increment相当于删除<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> employee modify eid <span class="hljs-type">int</span>; #把auto_increment去掉<br></code></pre></td></tr></table></figure>
+
+<h3 id="MySQL-8-0新特性—自增变量的持久化"><a href="#MySQL-8-0新特性—自增变量的持久化" class="headerlink" title="MySQL 8.0新特性—自增变量的持久化"></a>MySQL 8.0新特性—自增变量的持久化</h3><blockquote>
+<p>在mysql5（内存维护）中自增长删除行后会延续删除行的增量，需要重启服务，才会延续最后一行的增量</p>
+<p>而mysql8（重做日志）中删除一行不会延续删除行的增量，重启服务后也会记录之前删除行的增量</p>
+</blockquote>
+<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><ul>
+<li>作用：限定某个表的某个字段的引用</li>
+</ul>
+<h3 id="添加外键"><a href="#添加外键" class="headerlink" title="添加外键"></a>添加外键</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs SQL">#外键约束<br><span class="hljs-comment">-- 先创建主表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> DEPT1(<br>	DEPT_ID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>	DEPT_NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>)<br>);<br><br>#再创建从表<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> EMP1(<br>	EMP_ID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY AUTO_INCREMENT,<br>	EMP_NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>),<br>	DEPAMENT_ID <span class="hljs-type">INT</span>,<br>	<span class="hljs-keyword">CONSTRAINT</span> FK_EMP1_DEPT_ID <span class="hljs-keyword">FOREIGN</span> KEY(DEPAMENT_ID) <span class="hljs-keyword">REFERENCES</span> DEPT1(DEPT_ID)<br>);<br><br>## 效果如下<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> DEPT1 <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;DS&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> EMP1 <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">100</span>,<span class="hljs-string">&#x27;SD&#x27;</span>,<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="约束等级"><a href="#约束等级" class="headerlink" title="约束等级"></a>约束等级</h3><ul>
+<li>Cascade方式：在父表上update&#x2F;delete记录时，同步update&#x2F;delete子表的匹配记录</li>
+<li>Set null方式：在父表上update&#x2F;delete记录时，将子表上匹配记录的列设为null，但是要注意子表的外键列不能为not null</li>
+<li>No action方式（默认）：如果子表中有匹配的记录，则不允许对父表对应候选键进行update&#x2F;delete操作</li>
+<li>Restrict方式（默认）：同no action,都是立即检查外键约束</li>
+<li>Set default方式（在可视化工具中可能显示空白）：父表有变更时，子表将外键列设置成一个默认的值，但Innodb2不能识别</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql">#外键约束<br><span class="hljs-comment">-- 先创建主表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> DEPT1(<br>	DEPT_ID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>	DEPT_NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>)<br>);<br><br>#再创建从表<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> EMP1(<br>	EMP_ID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY AUTO_INCREMENT,<br>	EMP_NAME <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">15</span>),<br>	DEPAMENT_ID <span class="hljs-type">INT</span>,<br>	<span class="hljs-keyword">FOREIGN</span> KEY(DEPAMENT_ID) <span class="hljs-keyword">REFERENCES</span> DEPT1(DEPT_ID) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> CASCADE <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> RESTRICT<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="CHECK约束-MYSQL8"><a href="#CHECK约束-MYSQL8" class="headerlink" title="CHECK约束(MYSQL8+)"></a>CHECK约束(MYSQL8+)</h2><p><img src="/assets/image-20230829204520064.png" srcset="/img/loading.gif" lazyload alt="image-20230829204520064"></p>
+<h2 id="DEFAULT约束"><a href="#DEFAULT约束" class="headerlink" title="DEFAULT约束"></a>DEFAULT约束</h2><p>默认赋值</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">Mysql数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>13_约束Constraint</div>
+      <div>http://elaskon.asia/2023/08/25/数据库MYSQL/13_约束/约束/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/01/%E9%BB%91%E9%A9%AC-Web%E6%A0%B8%E5%BF%83/6_Cookie/" title="Cookie">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Cookie</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/25/%E6%95%B0%E6%8D%AE%E5%BA%93MYSQL/10_%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E8%A1%A8/%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%92%8C%E7%AE%A1%E7%90%86%E8%A1%A8/" title="10_创建和管理表">
+                        <span class="hidden-mobile">10_创建和管理表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

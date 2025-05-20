@@ -1,0 +1,1132 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="项目准备前端环境搭建前端：移动到非中文目录下，双击 nginx.exe 即可启动 nginx 服务，访问端口号为 80  sky目录中存放了管理端的前端资源   导入springboot项目思路：导入模块，创建新模块，替换pom 后端环境搭建后端工程基于 maven 进行项目构建，并且进行分模块开发。  对工程的每个模块作用说明：    序号 名称 说明    1 sky-take-out mav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1_项目准备">
+<meta property="og:url" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="项目准备前端环境搭建前端：移动到非中文目录下，双击 nginx.exe 即可启动 nginx 服务，访问端口号为 80  sky目录中存放了管理端的前端资源   导入springboot项目思路：导入模块，创建新模块，替换pom 后端环境搭建后端工程基于 maven 进行项目构建，并且进行分模块开发。  对工程的每个模块作用说明：    序号 名称 说明    1 sky-take-out mav">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231015163832036.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150153131.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150209919.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150227910.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150248991.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/canqiong_takeaway/%E8%AE%B2%E4%B9%89/day01/assets/image-20221107094852361.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150323413.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150344096.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150353957.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231015170630515.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150410660.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150420050.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150427568.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016150444452.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231015225732267.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015233309162.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015231026583.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231015233855606.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015234352013.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015235546269.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20221107160529803-1697387148262-7.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20221107161918913-1697387148263-8.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20221107160739680-1697387148263-9.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20221107161446710-1697387148263-10.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016005039628.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016094356004.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231016115444678.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114715911.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114652265.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114826475.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114857570.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115058610.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115116162.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115211009.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115318107.png">
+<meta property="og:image" content="http://elaskon.asia/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115350204.png">
+<meta property="article:published_time" content="2023-10-15T06:55:43.000Z">
+<meta property="article:modified_time" content="2023-10-16T07:05:30.593Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20231015163832036.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>1_项目准备 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="1_项目准备"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-15 14:55" pubdate>
+          2023年10月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">1_项目准备</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月16日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h1><h2 id="前端环境搭建"><a href="#前端环境搭建" class="headerlink" title="前端环境搭建"></a>前端环境搭建</h2><p>前端：移动到<strong>非中文目录</strong>下，双击 nginx.exe 即可启动 nginx 服务，访问端口号为 80</p>
+<p><img src="/assets/image-20231015163832036.png" srcset="/img/loading.gif" lazyload alt="image-20231015163832036"></p>
+<p><strong>sky</strong>目录中存放了管理端的前端资源</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150153131.png" srcset="/img/loading.gif" lazyload alt="image-20231016150153131" style="zoom:50%;">
+
+<p>导入springboot项目思路：导入模块，创建新模块，替换pom</p>
+<h2 id="后端环境搭建"><a href="#后端环境搭建" class="headerlink" title="后端环境搭建"></a>后端环境搭建</h2><p>后端工程基于 maven 进行项目构建，并且进行分模块开发。</p>
+<p><img src="/assets/image-20231016150209919.png" srcset="/img/loading.gif" lazyload alt="image-20231016150209919"></p>
+<p>对工程的每个模块作用说明：</p>
+<table>
+<thead>
+<tr>
+<th><strong>序号</strong></th>
+<th><strong>名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>sky-take-out</td>
+<td>maven父工程，统一管理依赖版本，聚合其他子模块</td>
+</tr>
+<tr>
+<td>2</td>
+<td>sky-common</td>
+<td>子模块，存放公共类，例如：工具类、常量类、异常类等</td>
+</tr>
+<tr>
+<td>3</td>
+<td>sky-pojo</td>
+<td>子模块，存放实体类、VO、DTO等</td>
+</tr>
+<tr>
+<td>4</td>
+<td>sky-server</td>
+<td>子模块，后端服务，存放配置文件、Controller、Service、Mapper等</td>
+</tr>
+</tbody></table>
+<p>对项目整体结构了解后，接下来我们详细分析上述的每个子模块：</p>
+<p><strong>sky-common:</strong> 模块中存放的是一些公共类，可以供其他模块使用</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150227910.png" srcset="/img/loading.gif" lazyload alt="image-20231016150227910" style="zoom:50%;">
+
+<ul>
+<li><p>分析sky-common模块的每个包的作用：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>constant</td>
+<td>存放相关常量类</td>
+</tr>
+<tr>
+<td>context</td>
+<td>存放上下文类</td>
+</tr>
+<tr>
+<td>enumeration</td>
+<td>项目的枚举类存储</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>存放自定义异常类</td>
+</tr>
+<tr>
+<td>json</td>
+<td>处理json转换的类</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>存放SpringBoot相关的配置属性类</td>
+</tr>
+<tr>
+<td>result</td>
+<td>返回结果类的封装</td>
+</tr>
+<tr>
+<td>utils</td>
+<td>常用工具类</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>sky-pojo:</strong> 模块中存放的是一些 entity、DTO、VO</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016150248991.png" srcset="/img/loading.gif" lazyload alt="image-20231016150248991" style="zoom:50%;">
+
+<p>分析sky-pojo模块的每个包的作用：</p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Entity</td>
+<td>实体，通常和数据库中的表对应</td>
+</tr>
+<tr>
+<td>DTO</td>
+<td>数据传输对象，通常用于程序中各层之间传递数据</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>视图对象，为前端展示数据提供的对象</td>
+</tr>
+<tr>
+<td>POJO</td>
+<td>普通Java对象，只有属性和对应的getter和setter</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>sky-server:</strong> 模块中存放的是 配置文件、配置类、拦截器、controller、service、mapper、启动类等</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/../canqiong_takeaway/讲义/day01/assets/image-20221107094852361.png" srcset="/img/loading.gif" lazyload alt="image-20221107094852361" style="zoom:50%;">
+
+<p>分析sky-server模块的每个包的作用：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>config</td>
+<td>存放配置类</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>存放controller类</td>
+</tr>
+<tr>
+<td>interceptor</td>
+<td>存放拦截器类</td>
+</tr>
+<tr>
+<td>mapper</td>
+<td>存放mapper接口</td>
+</tr>
+<tr>
+<td>service</td>
+<td>存放service类</td>
+</tr>
+<tr>
+<td>SkyApplication</td>
+<td>启动类</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="Git版本控制"><a href="#Git版本控制" class="headerlink" title="Git版本控制"></a>Git版本控制</h2><p>创建Git本地仓库</p>
+<p><img src="/assets/image-20231016150323413.png" srcset="/img/loading.gif" lazyload alt="image-20231016150323413"></p>
+<p>本地仓库创建成功。</p>
+<p>.gitignore文件是忽略推送相关文件的模板</p>
+<p><img src="/assets/image-20231016150344096.png" srcset="/img/loading.gif" lazyload alt="image-20231016150344096"></p>
+<p>尝试提交代码到git本地仓库</p>
+<p><img src="/assets/image-20231016150353957.png" srcset="/img/loading.gif" lazyload alt="image-20231016150353957"></p>
+<p>gitee创建私有仓库</p>
+<p><img src="/assets/image-20231015170630515.png" srcset="/img/loading.gif" lazyload alt="image-20231015170630515"></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/xin-sanmu-Ming/canqiong_takeout.git%E5%BE%97%E5%88%B0git%E5%9C%B0%E5%9D%80">https://gitee.com/xin-sanmu-Ming/canqiong_takeout.git得到git地址</a></p>
+<p><img src="/assets/image-20231016150410660.png" srcset="/img/loading.gif" lazyload alt="image-20231016150410660"></p>
+<p><img src="/assets/image-20231016150420050.png" srcset="/img/loading.gif" lazyload alt="image-20231016150420050"></p>
+<p><img src="/assets/image-20231016150427568.png" srcset="/img/loading.gif" lazyload alt="image-20231016150427568"></p>
+<p>推送成功！！！</p>
+<h2 id="数据库环境搭建"><a href="#数据库环境搭建" class="headerlink" title="数据库环境搭建"></a>数据库环境搭建</h2><p>数据库建表语句创建数据库表结构</p>
+<p><img src="/assets/image-20231016150444452.png" srcset="/img/loading.gif" lazyload alt="image-20231016150444452"></p>
+<h2 id="前后端联调测试"><a href="#前后端联调测试" class="headerlink" title="前后端联调测试"></a>前后端联调测试</h2><p>后端compile编译 略</p>
+<p>后端初始功能实现了登录功能</p>
+<p>思路：<img src="/assets/image-20231015225732267.png" srcset="/img/loading.gif" lazyload alt="image-20231015225732267"></p>
+<h2 id="nginx反向代理和负载均衡"><a href="#nginx反向代理和负载均衡" class="headerlink" title="nginx反向代理和负载均衡"></a>nginx反向代理和负载均衡</h2><blockquote>
+<p>思考：前端发送的请求是如何请求到后端服务？</p>
+</blockquote>
+<p>前端发出的请求：</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015233309162.png" srcset="/img/loading.gif" lazyload alt="image-20231015233309162" style="zoom:33%;">
+
+<p>而后端接收的请求：</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015231026583.png" srcset="/img/loading.gif" lazyload alt="image-20231015231026583" style="zoom:33%;">
+
+<p>前端请求地址：<a target="_blank" rel="noopener" href="http://localhost/api/employee/login">http://localhost/api/employee/login</a></p>
+<p>后端接口地址：<a target="_blank" rel="noopener" href="http://localhost:8080/admin/employee/login">http://localhost:8080/admin/employee/login</a></p>
+<p>发现两端地址并不匹配，但是前端请求成功。其原因是本项目启用了nginx反向代理，将前端发送的动态请求由nginx转发到后端服务器！！nginx还可以作为反向代理服务器</p>
+<p><img src="/assets/image-20231015233855606.png" srcset="/img/loading.gif" lazyload alt="image-20231015233855606"></p>
+<p><strong>为什么不直接通过浏览器直接请求后台服务端，需要通过nginx反向代理呢？</strong></p>
+<h3 id="nginx反向代理的好处"><a href="#nginx反向代理的好处" class="headerlink" title="nginx反向代理的好处"></a>nginx反向代理的好处</h3><ul>
+<li><p>提高访问速度</p>
+<p>因为nginx本身可以进行缓存，如果访问的同一接口，并且做了数据缓存，nginx就直接可把数据返回，不需要真正地访问服务端，从而提高访问速度。</p>
+</li>
+<li><p>负载均衡</p>
+<p>将大量的请求按照我们指定的方式均衡分配给集群中的每台服务器。</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015234352013.png" srcset="/img/loading.gif" lazyload alt="image-20231015234352013" style="zoom:33%;">
+</li>
+<li><p>保证后端服务安全</p>
+<p>在真实企业项目中很多后端接口并没有暴露于互联网，而是存在于企业内网，前端是无法直接请求到后端，因此前端发送的请求必须经过nginx服务器，让nginx服务器走内网将请求转发给后端，从而保证后端服务的安全。</p>
+</li>
+</ul>
+<h3 id="nginx反向代理配置方式"><a href="#nginx反向代理配置方式" class="headerlink" title="nginx反向代理配置方式"></a>nginx反向代理配置方式</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nginx">server&#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> localhost;<br>    <br>    <span class="hljs-section">location</span> /api/&#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://localhost:8080/admin/; <span class="hljs-comment">#反向代理</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231015235546269.png" srcset="/img/loading.gif" lazyload alt="image-20231015235546269" style="zoom:50%;">
+
+<p><strong>proxy_pass</strong>该指令是用来设置代理服务器的地址，可以是主机名称，IP地址加端口号等形式。</p>
+<p>上面代码含义是：nginx监听80端口号，服务名为localhost的请求， 然后当我们访问 <a target="_blank" rel="noopener" href="http://localhost/..%E8%BF%99%E6%A0%B7%E7%9A%84%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%AE%83%E4%BC%9A%E9%80%9A%E8%BF%87">http://localhost:80/api/../..这样的接口的时候，它会通过</a> location &#x2F;api&#x2F; {} 这样的反向代理到 <a target="_blank" rel="noopener" href="http://localhost:8080/admin/%E4%B8%8A%E6%9D%A5%E3%80%82">http://localhost:8080/admin/上来。</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">nginx 配置：http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">80</span><span class="hljs-regexp">/api/</span>&#123;代理地址&#125;<br>代理地址： http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8080</span><span class="hljs-regexp">/admin/</span><br>当前端发送请求：http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">80</span><span class="hljs-regexp">/api/</span>employee/login<br>nginx 将前端请求地址裁切出<span class="hljs-regexp">/employee/</span>login<br>拼接到代理地址<span class="hljs-regexp">/employee/</span>login 即http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8080</span><span class="hljs-regexp">/admin/</span>employee/login<br></code></pre></td></tr></table></figure>
+
+<p>配置文件在nginx-1.20.2\conf，打开nginx配置</p>
+<h3 id="nginx负载均衡"><a href="#nginx负载均衡" class="headerlink" title="nginx负载均衡"></a>nginx负载均衡</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>	<span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8080</span> weight=<span class="hljs-number">90</span> ;<br>	<span class="hljs-comment">#server 127.0.0.1:8088 weight=10 ;</span><br>&#125;<br>server&#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> localhost;<br>  <br>    <span class="hljs-section">location</span> /api/&#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://webservers/admin;<span class="hljs-comment">#负载均衡</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>upstream：</strong>如果代理服务器是一组服务器的话，我们可以使用upstream指令配置后端服务器组。</p>
+<p>根据webservers名称找到一组服务器，根据设置的负载均衡策略(默认是轮询)转发到具体的服务器。<strong>注：</strong>upstream后面的名称可自定义，但要上下保持一致。</p>
+<p><strong>nginx 负载均衡策略：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>轮询</td>
+<td>默认方式</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>权重方式，默认为1，权重越高，被分配的客户端请求就越多</td>
+</tr>
+<tr>
+<td>ip_hash</td>
+<td>依据ip分配方式，这样每个访客可以固定访问一个后端服务</td>
+</tr>
+<tr>
+<td>least_conn</td>
+<td>依据最少连接方式，把请求优先分配给连接数少的后端服务</td>
+</tr>
+<tr>
+<td>url_hash</td>
+<td>依据url分配方式，这样相同的url会被分配到同一个后端服务</td>
+</tr>
+<tr>
+<td>fair</td>
+<td>依据响应时间方式，响应时间短的服务将会被优先分配</td>
+</tr>
+</tbody></table>
+<p>具体配置方式：</p>
+<p><strong>轮询：</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>weight:</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span> weight=<span class="hljs-number">90</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span> weight=<span class="hljs-number">10</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>ip_hash:</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    ip_hash;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>least_conn:</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    least_conn;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>url_hash:</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    <span class="hljs-attribute">hash</span> &amp;request_uri;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>fair:</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> webservers&#123;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.128:8080</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.100.129:8080</span>;<br>    fair;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="登录功能完善"><a href="#登录功能完善" class="headerlink" title="登录功能完善"></a>登录功能完善</h2><p><strong>问题：</strong>员工表中的密码是明文存储，安全性太低。</p>
+<p><img src="/assets/image-20221107160529803-1697387148262-7.png" srcset="/img/loading.gif" lazyload alt="image-20221107160529803"></p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li><p>将密码加密后存储，提高安全性</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20221107161918913-1697387148263-8.png" srcset="/img/loading.gif" lazyload alt="image-20221107161918913" style="zoom:50%;">
+</li>
+<li><p>使用MD5加密方式对明文密码加密</p>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20221107160739680-1697387148263-9.png" srcset="/img/loading.gif" lazyload alt="image-20221107160739680" style="zoom:50%;"></li>
+</ol>
+<p><strong>实现步骤：</strong></p>
+<ol>
+<li><p>修改数据库中明文密码，改为MD5加密后的密文</p>
+<p>打开employee表，修改密码</p>
+<p><img src="/assets/image-20221107161446710-1697387148263-10.png" srcset="/img/loading.gif" lazyload alt="image-20221107161446710"></p>
+</li>
+<li><p>修改Java代码，前端提交的密码进行MD5加密后再跟数据库中密码比对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">password = DigestUtils.md5DigestAsHex(password.getBytes());<br><span class="hljs-keyword">if</span> (!password.equals(employee.getPassword())) &#123;<br>    <span class="hljs-comment">//密码错误</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PasswordErrorException</span>(MessageConstant.PASSWORD_ERROR);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016005039628.png" srcset="/img/loading.gif" lazyload alt="image-20231016005039628" style="zoom:50%;">
+
+<h2 id="导入接口文档"><a href="#导入接口文档" class="headerlink" title="导入接口文档"></a>导入接口文档</h2><h3 id="前后端分离开发流程"><a href="#前后端分离开发流程" class="headerlink" title="前后端分离开发流程"></a>前后端分离开发流程</h3><img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016094356004.png" srcset="/img/loading.gif" lazyload alt="image-20231016094356004" style="zoom:33%;">
+
+<p>第一步：定义接口，确定接口的路径、请求方式、传入参数、返回参数。</p>
+<p>第二步：前端开发人员和后端开发人员并行开发，同时，也可自测。</p>
+<p>第三步：前后端人员进行连调测试。</p>
+<p>第四步：提交给测试人员进行最终测试。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><p><a target="_blank" rel="noopener" href="https://app.apifox.com/%E5%AF%BC%E5%85%A5json">https://app.apifox.com/导入json</a></p>
+<h2 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务(<a target="_blank" rel="noopener" href="https://swagger.io/">https://swagger.io/</a>)。 它的主要作用是：</p>
+<ol>
+<li><p>使得前后端分离开发更加方便，有利于团队协作</p>
+</li>
+<li><p>接口的文档在线自动生成，降低后端开发人员编写接口文档的负担</p>
+</li>
+<li><p>功能测试 </p>
+<p>Spring已经将Swagger纳入自身的标准，建立了Spring-swagger项目，现在叫Springfox。通过在项目中引入Springfox ，即可非常简单快捷的使用Swagger。</p>
+</li>
+</ol>
+<p>knife4j是为Java MVC框架集成Swagger生成Api文档的增强解决方案,前身是swagger-bootstrap-ui,取名kni4j是希望它能像一把匕首一样小巧,轻量,并且功能强悍!</p>
+<p>目前，一般都使用knife4j框架。</p>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li><p>导入knife4j的maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.xiaoymin<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置类中加入knife4j的相关配置</p>
+<p>WebMvcConfiguration.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 通过knife4j生成接口文档</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">*/</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> Docket <span class="hljs-title function_">docket</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">ApiInfo</span> <span class="hljs-variable">apiInfo</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ApiInfoBuilder</span>()<br>                .title(<span class="hljs-string">&quot;苍穹外卖项目接口文档&quot;</span>)<br>                .version(<span class="hljs-string">&quot;2.0&quot;</span>)<br>                .description(<span class="hljs-string">&quot;苍穹外卖项目接口文档&quot;</span>)<br>                .build();<br>        <span class="hljs-type">Docket</span> <span class="hljs-variable">docket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Docket</span>(DocumentationType.SWAGGER_2)<br>                .apiInfo(apiInfo)<br>                .select()<br>                .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">&quot;com.sky.controller&quot;</span>))<br>                .paths(PathSelectors.any())<br>                .build();<br>        <span class="hljs-keyword">return</span> docket;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231016115444678.png" srcset="/img/loading.gif" lazyload alt="image-20231016115444678"></p>
+</li>
+<li><p>设置静态资源映射，否则接口文档页面无法访问</p>
+<p>WebMvcConfiguration.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置静态资源映射</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> registry</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addResourceHandlers</span><span class="hljs-params">(ResourceHandlerRegistry registry)</span> &#123;<br>        registry.addResourceHandler(<span class="hljs-string">&quot;/doc.html&quot;</span>).addResourceLocations(<span class="hljs-string">&quot;classpath:/META-INF/resources/&quot;</span>);<br>        registry.addResourceHandler(<span class="hljs-string">&quot;/webjars/**&quot;</span>).addResourceLocations(<span class="hljs-string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>访问测试</p>
+<p> <a target="_blank" rel="noopener" href="http://localhost:8080/doc.html">http://localhost:8080/doc.html</a></p>
+</li>
+</ol>
+<p><strong>思考：</strong>通过 Swagger 就可以生成接口文档，那么我们就不需要 Yapi 了？</p>
+<blockquote>
+<p>1.Yapi 是设计阶段使用的工具，管理和维护接口</p>
+<p>2.Swagger 在开发阶段使用的框架，帮助后端开发人员做后端的接口测试</p>
+</blockquote>
+<h3 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h3><p>通过注解可以控制生成的接口文档，使接口文档拥有更好的可读性，常用注解如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Api</td>
+<td>用在类上，例如Controller，表示对类的说明</td>
+</tr>
+<tr>
+<td>@ApiModel</td>
+<td>用在类上，例如entity、DTO、VO</td>
+</tr>
+<tr>
+<td>@ApiModelProperty</td>
+<td>用在属性上，描述属性信息</td>
+</tr>
+<tr>
+<td>@ApiOperation</td>
+<td>用在方法上，例如Controller的方法，说明方法的用途、作用</td>
+</tr>
+</tbody></table>
+<p>使用上述注解，生成可读性更好的接口文档</p>
+<h4 id="Api-tag"><a href="#Api-tag" class="headerlink" title="@Api(tag=&quot;???&quot;)"></a><code>@Api(tag=&quot;???&quot;)</code></h4><img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114715911.png" srcset="/img/loading.gif" lazyload alt="image-20231016114715911" style="zoom:50%;">
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114652265.png" srcset="/img/loading.gif" lazyload alt="image-20231016114652265" style="zoom: 33%;">
+
+<h4 id="ApiOperation-value"><a href="#ApiOperation-value" class="headerlink" title="@ApiOperation(value=&quot;???&quot;)"></a><code>@ApiOperation(value=&quot;???&quot;)</code></h4><img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114826475.png" srcset="/img/loading.gif" lazyload alt="image-20231016114826475" style="zoom:50%;">
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016114857570.png" srcset="/img/loading.gif" lazyload alt="image-20231016114857570" style="zoom: 33%;">
+
+<h4 id="ApiModel-description"><a href="#ApiModel-description" class="headerlink" title="@ApiModel(description=&quot;???&quot;)"></a><code>@ApiModel(description=&quot;???&quot;)</code></h4><img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115058610.png" srcset="/img/loading.gif" lazyload alt="image-20231016115058610" style="zoom:50%;">
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115116162.png" srcset="/img/loading.gif" lazyload alt="image-20231016115116162" style="zoom: 50%;">
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115211009.png" srcset="/img/loading.gif" lazyload alt="image-20231016115211009" style="zoom: 33%;">
+
+<h4 id="ApiModelProperty-value"><a href="#ApiModelProperty-value" class="headerlink" title="@ApiModelProperty(value=&quot;???&quot;)"></a><code>@ApiModelProperty(value=&quot;???&quot;)</code></h4><img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115318107.png" srcset="/img/loading.gif" lazyload alt="image-20231016115318107" style="zoom:50%;">
+
+<img src="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/1_%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87/image-20231016115350204.png" srcset="/img/loading.gif" lazyload alt="image-20231016115350204" style="zoom: 33%;">
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/" class="category-chain-item">项目练习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" class="category-chain-item">苍穹外卖</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>1_项目准备</div>
+      <div>http://elaskon.asia/2023/10/15/黑马-苍穹外卖/1_项目准备/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/15/%E9%BB%91%E9%A9%AC-%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/2_%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" title="2_数据库设计文档">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2_数据库设计文档</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/06/Vue3/8_Vue3%E5%A4%A7%E4%BA%8B%E4%BB%B6_%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2/" title="8_Vue3大事件_文章分类页面">
+                        <span class="hidden-mobile">8_Vue3大事件_文章分类页面</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

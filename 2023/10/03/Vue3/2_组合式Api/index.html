@@ -1,0 +1,924 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="组合式APIsetup选项 在beforeCreate钩子之前执行   setup特点 在setup函数中写的数据和方法需要在末尾以对象的方式return，才能给模版使用  123456789101112131415161718&lt;script&gt;export default &amp;#123;  setup()&amp;#123;    const msg &#x3D; &amp;#x27;vue3&amp;#x27;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2_组合式API">
+<meta property="og:url" content="http://elaskon.asia/2023/10/03/Vue3/2_%E7%BB%84%E5%90%88%E5%BC%8FApi/index.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="组合式APIsetup选项 在beforeCreate钩子之前执行   setup特点 在setup函数中写的数据和方法需要在末尾以对象的方式return，才能给模版使用  123456789101112131415161718&lt;script&gt;export default &amp;#123;  setup()&amp;#123;    const msg &#x3D; &amp;#x27;vue3&amp;#x27;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003150711807.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231011195422012.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003154632472.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003171427385.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003174828652.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003175033235.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231011203719594.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231011205103501.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003220643365.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003220653264.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231011231940909.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003223441116.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003224319680.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003224906937.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20231003234716600.png">
+<meta property="article:published_time" content="2023-10-03T07:21:43.000Z">
+<meta property="article:modified_time" content="2023-10-11T15:53:21.836Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20231003150711807.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>2_组合式API - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2_组合式API"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-03 15:21" pubdate>
+          2023年10月3日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          90 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">2_组合式API</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年10月11日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="组合式API"><a href="#组合式API" class="headerlink" title="组合式API"></a>组合式API</h1><h2 id="setup选项"><a href="#setup选项" class="headerlink" title="setup选项"></a>setup选项</h2><blockquote>
+<p>在beforeCreate钩子之前执行</p>
+</blockquote>
+<p><img src="/assets/image-20231003150711807.png" srcset="/img/loading.gif" lazyload alt="image-20231003150711807"></p>
+<h3 id="setup特点"><a href="#setup特点" class="headerlink" title="setup特点"></a>setup特点</h3><blockquote>
+<p>在setup函数中写的数据和方法需要在末尾以对象的方式return，才能给模版使用</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>export default &#123;<br>  setup()&#123;<br>    const msg = &#x27;vue3&#x27;<br>    const logmsg = () =&gt;&#123;<br>      console.log(msg)<br>    &#125;<br>    return &#123;<br>      msg,<br>      logmsg<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;logmsg&quot;&gt;控制器输出&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="setup语法糖"><a href="#setup语法糖" class="headerlink" title="setup语法糖"></a>setup语法糖</h3><blockquote>
+<p>script标签添加 setup标记，不需要再写导出语句，默认会添加导出语句</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const msg = &#x27;this is message&#x27;<br>const logmsg = () =&gt;&#123;<br>  console.log(msg)<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;logmsg&quot;&gt;控制器输出&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>&lt;script setup&gt;语法糖原理</code></p>
+<p><img src="/assets/image-20231011195422012.png" srcset="/img/loading.gif" lazyload alt="image-20231011195422012"></p>
+<h2 id="reactive和ref函数"><a href="#reactive和ref函数" class="headerlink" title="reactive和ref函数"></a>reactive和ref函数</h2><h3 id="reactive"><a href="#reactive" class="headerlink" title="reactive"></a>reactive</h3><blockquote>
+<p>作用：接受对象类型数据的参数传入并返回一个响应式的对象</p>
+</blockquote>
+<ol>
+<li>从vue包中导入reactive函数</li>
+<li>在<code>&lt;script setup&gt;</code>中执行reactive函数并传入类型为对象的初始值，并使用变量接收返回值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;reactive&#125; from &quot;vue&quot;;<br>const data = &#123;<br>  msg: &#x27;Hello Vue3&#x27;,<br>  count: 100<br>&#125;<br>// 作用：传入对象类型参数，返回响应式对象数据<br>const state = reactive(data)<br>const setCount = () =&gt;&#123;<br>  state.count++<br>  console.log(state.count)<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;state.count&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;setCount&quot;&gt;点击&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><blockquote>
+<p>接收简单类型或者对象类型的数据传入并返回一个响应式的对象</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;ref&#125; from &quot;vue&quot;;<br>const count = ref(0)<br>console.log(count.value)<br>const countAdd = () =&gt;&#123;<br>  count.value++<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;count&#125;&#125;&lt;/div&gt;<br>&lt;!--  不需要.value--&gt;<br>  &lt;button @click=&quot;countAdd&quot;&gt;+1&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="二者对比"><a href="#二者对比" class="headerlink" title="二者对比"></a>二者对比</h3><ol>
+<li><p>都是用来生成响应式数据</p>
+</li>
+<li><p>不同点</p>
+<ol>
+<li>reactive不能处理简单类型的数据</li>
+<li>ref参数类型支持更好，但是必须通过.value做访问修改</li>
+<li>ref函数内部的实现依赖于reactive函数</li>
+</ol>
+</li>
+<li><p>在实际工作中的推荐</p>
+<p>推荐使用ref函数，减少记忆负担</p>
+</li>
+</ol>
+<h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2><blockquote>
+<p>计算属性基本思想和Vue2保持一致，组合式API下的计算属性只是修改了API写法</p>
+</blockquote>
+<p>计算属性小案例</p>
+<p><img src="/assets/image-20231003154632472.png" srcset="/img/loading.gif" lazyload alt="image-20231003154632472"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;computed, ref&#125; from &quot;vue&quot;;<br><br>const list = ref([1,2,3,4,5,6,7,8])<br>// 过滤出list中大于2的数<br>const greaterThan2List = computed(() =&gt; &#123;<br>  return list.value.filter(item =&gt; item &gt; 2)<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;原始数据:&#123;&#123;list&#125;&#125;&lt;/div&gt;<br>  &lt;div&gt;计算后的数据:&#123;&#123;greaterThan2List&#125;&#125;&lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>计算属性中不应该有副作用，例如异步请求或者修改dom操作</li>
+<li>避免直接修改计算属性的值</li>
+<li>全选反选操作可以考虑</li>
+</ul>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><h3 id="单个数据或者多个数据监视"><a href="#单个数据或者多个数据监视" class="headerlink" title="单个数据或者多个数据监视"></a>单个数据或者多个数据监视</h3><blockquote>
+<p>侦听一个或者多个数据的变化，数据变化时执行回调函数，两个额外参数 immediate控制立刻执行，deep开启深度侦听</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;ref, watch&#125; from &quot;vue&quot;;<br>const count = ref(0)<br>const nickname = ref(&quot;zhangsan&quot;)<br>const countAdd = () =&gt;&#123;<br>  count.value++<br>&#125;<br>const changeNickname = () =&gt;&#123;<br>  nickname.value = nickname.value === &quot;zhangsan&quot; ? &quot;lisi&quot; : &quot;zhangsan&quot;<br>&#125;<br>// 监视单个数据的变化<br>watch(count,(newValue,oldValue)=&gt;&#123;<br>  console.log(newValue,oldValue)<br>&#125;)<br>// 监视多个数据的变化<br>watch([count,nickname],(newArr,oldArr)=&gt;&#123;<br>  console.log(newArr,oldArr)<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;count&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;countAdd&quot;&gt;+1&lt;/button&gt;<br>  &lt;div&gt;&#123;&#123;nickname&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;changeNickname&quot;&gt;change nickname&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="immediate"><a href="#immediate" class="headerlink" title="immediate"></a>immediate</h3><blockquote>
+<p>希望在侦听器创建时立即触发回调，响应式数据变化之后继续执行回调</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>    watch([count,nickname],(newArr,oldArr)=&gt;&#123;<br>      console.log(newArr,oldArr)<br>    &#125;,&#123;<br>      immediate:true<br>    &#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="deep"><a href="#deep" class="headerlink" title="deep"></a>deep</h3><p>deep深度监视，默认watch执行的是浅层监视</p>
+<ul>
+<li>const ref1 &#x3D; ref(简单类型) 可以直接监视</li>
+<li>const ref2 &#x3D; ref(复杂类型) 直接监视无法监视到复杂类型内部数据的变化</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;ref, watch&#125; from &quot;vue&quot;;<br>const userInfo = ref(&#123;<br>  username:&quot;zhangsan&quot;,<br>  age: 18<br>&#125;)<br>const updateUser = () =&gt;&#123;<br>  userInfo.value.username = &#x27;lisi&#x27;<br>  userInfo.value.age = 20<br>  // 改变整个value的情况下可以直接监视<br>  // userInfo.value = &#123;<br>  //   username:&#x27;asan&#x27;,<br>  //   password:&#x27;123456&#x27;<br>  // &#125;<br>&#125;<br>watch(userInfo,(newValue,oldValue)=&gt;&#123;<br>  console.log(newValue,oldValue)<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;&#123;&#123;userInfo&#125;&#125;&lt;/div&gt;<br>  &lt;button @click=&quot;updateUser&quot;&gt;updateUser&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231003171427385.png" srcset="/img/loading.gif" lazyload alt="image-20231003171427385"></p>
+<p>点击按钮，无反应！！所以需要开启deep</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">watch</span>(userInfo,<span class="hljs-function">(<span class="hljs-params">newValue,oldValue</span>)=&gt;</span>&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(newValue,oldValue)<br>&#125;,&#123;<br>  <span class="hljs-attr">deep</span>:<span class="hljs-literal">true</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h3 id="精确监听对象的某个属性"><a href="#精确监听对象的某个属性" class="headerlink" title="精确监听对象的某个属性"></a>精确监听对象的某个属性</h3><blockquote>
+<p>如何在不开启deep的前提下，侦听age的变化，只有age变化时才执行回调?</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">watch</span>(<span class="hljs-function">()=&gt;</span>&#123;<br>  userInfo.<span class="hljs-property">value</span>.<span class="hljs-property">age</span><br>&#125;,<span class="hljs-function">(<span class="hljs-params">newValue,oldValue</span>)=&gt;</span>&#123;<br>  newValue,oldValue<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>存在bug：对复杂对象的多个属性同时监视，监视不到旧数据</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">watch</span>([<span class="hljs-function">()=&gt;</span>&#123;<br>  userInfo.<span class="hljs-property">value</span>.<span class="hljs-property">age</span><br>&#125;,<span class="hljs-function">()=&gt;</span>&#123;<br>  userInfo.<span class="hljs-property">value</span>.<span class="hljs-property">username</span><br>&#125;],<span class="hljs-function">(<span class="hljs-params">newValue,oldValue</span>)=&gt;</span>&#123;<br>  newValue,oldValue<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231003174828652.png" srcset="/img/loading.gif" lazyload alt="image-20231003174828652"></p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><img src="/assets/image-20231003175033235.png" srcset="/img/loading.gif" lazyload alt="image-20231003175033235"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>// beforeCreate和created的相关代码 一律在setup中执行<br>import &#123;onMounted&#125; from &quot;vue&quot;;<br><br>const getList = () =&gt;&#123;<br>  console.log(&quot;hello&quot;)<br>&#125;<br>getList()<br>onMounted(()=&gt;&#123;<br>  console.log(&quot;mounted生命周期函数&quot;)<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br><br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="父子通信"><a href="#父子通信" class="headerlink" title="父子通信"></a>父子通信</h2><h3 id="父传子"><a href="#父传子" class="headerlink" title="父传子"></a>父传子</h3><p>基本思想</p>
+<ol>
+<li>父组件中给子组件绑定属性</li>
+<li>子组件内部通过props选项接收数据</li>
+</ol>
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import SonComVue from &quot;@/components/SonComVue.vue&quot;;<br><br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;son-com-vue msg=&quot;hello&quot;&gt;&lt;/son-com-vue&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import SonComVue from &quot;@/components/SonComVue.vue&quot;;<br>import &#123;ref&#125; from &quot;vue&quot;;<br>const ahh = ref(&quot;hello vue3&quot;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;son-com-vue :msg=&quot;ahh&quot;&gt;&lt;/son-com-vue&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;/style&gt;<br><br></code></pre></td></tr></table></figure>
+
+<p>Son.vue</p>
+<p>由于此处采用setup写法，无法直接配置props选项，因此需要借助“编译器宏”函数接收子组件传递的数据<code>defineProps()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const props = defineProps(&#123;<br>  msg: String<br>&#125;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231011203719594.png" srcset="/img/loading.gif" lazyload alt="image-20231011203719594"></p>
+<p><code>defineProps()原理</code></p>
+<p><img src="/assets/image-20231011205103501.png" srcset="/img/loading.gif" lazyload alt="image-20231011205103501"></p>
+<h3 id="父传子的数据，通过子传父更新父数据"><a href="#父传子的数据，通过子传父更新父数据" class="headerlink" title="父传子的数据，通过子传父更新父数据"></a>父传子的数据，通过子传父更新父数据</h3><p>基本思想</p>
+<ol>
+<li>父组件中给子组件标签通过@绑定事件</li>
+<li>子组件内部通过 emit 方法触发事件</li>
+</ol>
+<p>son.vue</p>
+<ol>
+<li><p>子组件中defineEmits([‘事件名称’])定义事件</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">const emit = <span class="hljs-built_in">defineEmits</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;changeMoney&#x27;</span>]</span>)<br>在子组件调用父组件的方法<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>点击事件触发，更新传递到父组件的changeMoney事件，子组件中emit触发监听事件，并传值给父组件</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">const buy = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  emit(<span class="hljs-string">&#x27;changeMoney&#x27;</span>, <span class="hljs-number">6</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>父组件获取子组件的事件，并得到传参值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const money = ref(100)<br>const changeFn = (newValue1,newValue2,newValue3,newValue4,newValue5,newValue6) =&gt; &#123;<br>  money.value -= newValue6<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;son-com-vue car=&quot;宝马&quot;<br>                   :money=&quot;money&quot; @changeMoney=&quot;changeFn&quot;/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const props = defineProps(&#123;<br>  car:String,<br>  money:Number<br>&#125;)<br>const emit = defineEmits([&#x27;changeMoney&#x27;])<br>const buy = () =&gt;&#123;<br>  emit(&#x27;changeMoney&#x27;,6)<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;son-component &#123;&#123;car&#125;&#125; 从父组件拿到 &#123;&#123;money&#125;&#125;RMB&lt;/div&gt;<br>  &lt;button @click=&quot;buy&quot;&gt;儿子花钱&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import sonComponent from &#x27;@/components/sonComponent.vue&#x27;<br>import &#123;ref&#125; from &quot;vue&quot;;<br>const money = ref(100)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;son-component car=&quot;宝马&quot;<br>                   :money=&quot;money&quot; @changeMoney=&quot;args =&gt; money -= args&quot;/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231003220643365.png" srcset="/img/loading.gif" lazyload alt="image-20231003220643365"></p>
+<p><img src="/assets/image-20231003220653264.png" srcset="/img/loading.gif" lazyload alt="image-20231003220653264"></p>
+<h2 id="模板引用"><a href="#模板引用" class="headerlink" title="模板引用"></a>模板引用</h2><blockquote>
+<p>概念：通过 ref标识 获取真实的 dom对象或者组件实例对象</p>
+</blockquote>
+<p>特别注意：在组件挂载完毕之后才能获取模板引用</p>
+<p>回顾vue2获取dom对象</p>
+<p><img src="/assets/image-20231011231940909.png" srcset="/img/loading.gif" lazyload alt="image-20231011231940909"></p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ol>
+<li>调用ref函数生成一个ref对象</li>
+<li>通过ref标识绑定ref对象到标签</li>
+</ol>
+<p><img src="/assets/image-20231003223441116.png" srcset="/img/loading.gif" lazyload alt="image-20231003223441116"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>//1. 调用ref函数生成一个ref对象<br>// 2. 通过ref标识绑定ref对象到标签<br>import testcomponent from &#x27;@/components/testComponent.vue&#x27;<br>import &#123; ref&#125; from &quot;vue&quot;;<br>const inp = ref(null)<br>// onMounted(()=&gt;&#123;<br>//   console.log(inp.value)<br>// //   进入页面立马聚焦<br>//   inp.value.focus()<br>// &#125;)<br>const focusEvent = () =&gt;&#123;<br>  inp.value.focus()<br>&#125;<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;input type=&quot;text&quot; ref=&quot;inp&quot;&gt;<br>    &lt;button @click=&quot;focusEvent&quot;&gt;点击聚焦输入框&lt;/button&gt;<br>    &lt;testcomponent/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="获取组件的属性或方法"><a href="#获取组件的属性或方法" class="headerlink" title="获取组件的属性或方法"></a>获取组件的属性或方法</h3><p>如何获取testcomponent的属性或者方法呢？</p>
+<p>testcomponent.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const count = 999<br>const hello = () =&gt;&#123;<br>  console.log(&quot;hi&quot;)<br>&#125;<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>&lt;div&gt;测试组件&lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import testcomponent from &#x27;@/components/testComponent.vue&#x27;<br>import &#123;onMounted, ref&#125; from &quot;vue&quot;;<br>const tc = ref(null)<br>//1. 调用ref函数生成一个ref对象<br>// 2. 通过ref标识绑定ref对象到标签<br>//关键代码<br>onMounted(()=&gt;&#123;<br>  console.log(tc.value)<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;testcomponent ref=&quot;tc&quot;/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231003224319680.png" srcset="/img/loading.gif" lazyload alt="image-20231003224319680"></p>
+<p>此方法获取不到！！！默认情况下在 <code>&lt;script setup&gt;</code>语法糖下组件内部的属性和方法是不开放给父组件访问的，可以通过defineExpose编译宏指定哪些属性和方法容许访问</p>
+<h3 id="defineExpose"><a href="#defineExpose" class="headerlink" title="defineExpose"></a>defineExpose</h3><p>在子组件中将属性或者方法在defineExpose({‘属性或者方法’})注册，然后向父组件暴露</p>
+<p>在父组件中，对插件添加属性ref&#x3D;”formRef”</p>
+<p>const formRef &#x3D; ref(null)</p>
+<p>formRef.value.hello()或者formRef.value.count</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const count = 999<br>const hello = () =&gt;&#123;<br>  console.log(&quot;hi&quot;)<br>&#125;<br>defineExpose(&#123;<br>  count,<br>  hello<br>&#125;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>&lt;div&gt;测试组件&lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/assets/image-20231003224906937.png" srcset="/img/loading.gif" lazyload alt="image-20231003224906937"></p>
+<h2 id="provide和inject"><a href="#provide和inject" class="headerlink" title="provide和inject"></a>provide和inject</h2><h3 id="作用和场景"><a href="#作用和场景" class="headerlink" title="作用和场景"></a>作用和场景</h3><blockquote>
+<p>顶层组件向任意的底层组件传递数据和方法，实现跨层组件通信</p>
+</blockquote>
+<p><img src="/assets/image-20231003234716600.png" srcset="/img/loading.gif" lazyload alt="image-20231003234716600"></p>
+<h3 id="跨层传递普通数据或响应式数据"><a href="#跨层传递普通数据或响应式数据" class="headerlink" title="跨层传递普通数据或响应式数据"></a>跨层传递普通数据或响应式数据</h3><p>实现步骤</p>
+<ol>
+<li>顶层组件通过 <code>provide</code> 函数提供数据</li>
+<li>底层组件通过 <code>inject</code> 函数提供数据</li>
+</ol>
+<blockquote>
+<p>跨层传递响应式数据</p>
+<p>在调用provide函数时，第二个参数设置为ref对象</p>
+</blockquote>
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import centerComponent from &#x27;@/components/centerComponent.vue&#x27;<br>import &#123;provide&#125; from &quot;vue&quot;;<br>provide(&#x27;theme-color&#x27;,&#x27;pink&#x27;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;顶层组件&lt;/h1&gt;<br>    &lt;center-component/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>bottomComponent.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123;inject&#125; from &quot;vue&quot;;<br><br>const themeColor = inject(&#x27;theme-color&#x27;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>&lt;div&gt;<br>  &lt;h3&gt;底层组件 ---获取顶层组件：&#123;&#123;themeColor&#125;&#125;&lt;/h3&gt;<br>&lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="跨层传递方法"><a href="#跨层传递方法" class="headerlink" title="跨层传递方法"></a>跨层传递方法</h3><blockquote>
+<p>顶层组件可以向底层组件传递方法，底层组件调用方法修改顶层组件的数据</p>
+</blockquote>
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import centerComponent from &#x27;@/components/centerComponent.vue&#x27;<br>import &#123;provide, ref&#125; from &quot;vue&quot;;<br>const count = ref(100)<br>provide(&#x27;count&#x27;,count)<br>    //关键代码<br>provide(&#x27;changeCount&#x27;,(newCount)=&gt;&#123;<br>  count.value = newCount<br>&#125;)<br>&lt;/script&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;顶层组件&lt;/h1&gt;<br>    &lt;center-component/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>Center.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import bottomComponent from &#x27;@/components/bottomComponent.vue&#x27;<br>import &#123;inject&#125; from &quot;vue&quot;;<br>const count = inject(&quot;count&quot;)<br>const newCount = inject(&quot;changeCount&quot;)<br>//关键代码<br>const clickFn = ()=&gt;&#123;<br>  newCount(200)<br>&#125;<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h2&gt;中心组件&lt;/h2&gt;<br>    &#123;&#123;count&#125;&#125;<br>    &lt;button @click=&quot;clickFn&quot;&gt;点击&lt;/button&gt;<br>    &lt;bottom-component/&gt;<br>  &lt;/div&gt;<br><br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Vue3/" class="category-chain-item">Vue3</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2_组合式API</div>
+      <div>http://elaskon.asia/2023/10/03/Vue3/2_组合式Api/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Jmin</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/04/Vue3/3_vue3%E6%96%B0%E7%89%B9%E6%80%A7/" title="3_vue3新特性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">3_vue3新特性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/03/Vue3/1_%E5%88%9D%E8%AF%86vue3/" title="1_初识vue3">
+                        <span class="hidden-mobile">1_初识vue3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

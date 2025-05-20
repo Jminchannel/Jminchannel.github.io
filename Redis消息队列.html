@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Jmin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Redis消息队列消息队列(Message Queue)，字面意思就是存放消息的队列。最简单的消息队列模型包括3个角色  消息队列：存储和管理消息，也被称为消息代理（Message Broker) 生产者：发送消息到消息队列 消费者：从消息队列获取消息并处理消息   Redis提供了三种不同的方式来实现消息队列：  list结构：基于List结构模拟消息队列 PubSub：基本的点对点消息模型 S">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Redis消息队列">
+<meta property="og:url" content="http://elaskon.asia/Redis%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.html">
+<meta property="og:site_name" content="E-zg小破站">
+<meta property="og:description" content="Redis消息队列消息队列(Message Queue)，字面意思就是存放消息的队列。最简单的消息队列模型包括3个角色  消息队列：存储和管理消息，也被称为消息代理（Message Broker) 生产者：发送消息到消息队列 消费者：从消息队列获取消息并处理消息   Redis提供了三种不同的方式来实现消息队列：  list结构：基于List结构模拟消息队列 PubSub：基本的点对点消息模型 S">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328010213614.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328012852155.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328012900585.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328013126731.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328013146907.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328013459121.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014124434.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014352693.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014402198.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014504414.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014644049.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328014655553.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328015722278.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240328015734078.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240402110823576.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240402213713231.png">
+<meta property="og:image" content="http://elaskon.asia/assets/image-20240403193308128.png">
+<meta property="article:published_time" content="2024-03-27T10:15:43.000Z">
+<meta property="article:modified_time" content="2024-04-03T12:20:26.494Z">
+<meta property="article:author" content="Jmin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://elaskon.asia/assets/image-20240328010213614.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis消息队列 - E-zg小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"elaskon.asia","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>E-zg小破站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis消息队列"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h1 id="Redis消息队列"><a href="#Redis消息队列" class="headerlink" title="Redis消息队列"></a>Redis消息队列</h1><p>消息队列(Message Queue)，字面意思就是存放消息的队列。最简单的消息队列模型包括3个角色</p>
+<ul>
+<li>消息队列：存储和管理消息，也被称为消息代理（Message Broker)</li>
+<li>生产者：发送消息到消息队列</li>
+<li>消费者：从消息队列获取消息并处理消息</li>
+</ul>
+<p><img src="/assets/image-20240328010213614.png" srcset="/img/loading.gif" lazyload alt="image-20240328010213614"></p>
+<p>Redis提供了三种不同的方式来实现消息队列：</p>
+<ul>
+<li>list结构：基于List结构模拟消息队列</li>
+<li>PubSub：基本的点对点消息模型</li>
+<li>Stream：比较完善的消息队列模型</li>
+</ul>
+<h2 id="基于List结构模拟消息队列"><a href="#基于List结构模拟消息队列" class="headerlink" title="基于List结构模拟消息队列"></a>基于List结构模拟消息队列</h2><p>消息队列（Message Queue），字面意思就是存放消息的队列。而Redis的list数据结构是一个双向链表，很容易模拟出队列效果。</p>
+<p>队列是入口和出口不在一边，因此我们可以利用：LPUSH结合RPOP、或者RPUSH结合LPOP来实现，不过要注意的是，当队列中没有消息时，RPOP或LPOP操作会返回null，并不像JVM的阻塞队列那样会阻塞并等待消息。因此这里应该使用BRPOP或者BLPOP来实现阻塞效果</p>
+<p><img src="/assets/image-20240328012852155.png" srcset="/img/loading.gif" lazyload alt="image-20240328012852155"></p>
+<p><img src="/assets/image-20240328012900585.png" srcset="/img/loading.gif" lazyload alt="image-20240328012900585"></p>
+<p>监听list1队列，等待时长30秒</p>
+<p><img src="/assets/image-20240328013126731.png" srcset="/img/loading.gif" lazyload alt="image-20240328013126731"></p>
+<p><img src="/assets/image-20240328013146907.png" srcset="/img/loading.gif" lazyload alt="image-20240328013146907"></p>
+<p><img src="/assets/image-20240328013459121.png" srcset="/img/loading.gif" lazyload alt="image-20240328013459121"></p>
+<p>基于List的消息队列有哪些优缺点？<br>优点：</p>
+<ul>
+<li>利用Redis存储，不受限于JVM内存上限</li>
+<li>基于Redis的持久化机制，数据安全性有保证可以满足消息有序性</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>无法避免消息丢失，pop获取后就丢失了，不安全</li>
+<li>只支持单消费者，拿走就移除，其他消费者拿不到</li>
+</ul>
+<h2 id="基于PubSub的消息队列"><a href="#基于PubSub的消息队列" class="headerlink" title="基于PubSub的消息队列"></a>基于PubSub的消息队列</h2><p>PubSub（发布订阅）是Redis2.0版本引入的消息传递模型。顾名思义，消费者可以订阅一个或多个channel，生产者向对channel发送消息后，所有订阅者都能收到相关消息。</p>
+<ul>
+<li>SUBSCRIBE channel[channel]：订阅一个或多个频道</li>
+<li>PUBLISH channel msg：向一个频道发送消息</li>
+<li>PSUBSCRIBE pattern[pattern]：订阅与pattern格式匹配的所有频道</li>
+</ul>
+<p><img src="/assets/image-20240328014124434.png" srcset="/img/loading.gif" lazyload alt="image-20240328014124434"></p>
+<p><img src="/assets/image-20240328014352693.png" srcset="/img/loading.gif" lazyload alt="image-20240328014352693"></p>
+<p><img src="/assets/image-20240328014402198.png" srcset="/img/loading.gif" lazyload alt="image-20240328014402198"></p>
+<p><img src="/assets/image-20240328014504414.png" srcset="/img/loading.gif" lazyload alt="image-20240328014504414"></p>
+<p><img src="/assets/image-20240328014644049.png" srcset="/img/loading.gif" lazyload alt="image-20240328014644049"></p>
+<p><img src="/assets/image-20240328014655553.png" srcset="/img/loading.gif" lazyload alt="image-20240328014655553"></p>
+<p>基于PubSub的消息队列有哪些优缺点？<br>优点：</p>
+<ul>
+<li>采用发布订阅模型，支持多生产、多消费</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不支持数据持久化，如果某个频道没有被订阅，消息直接丢失</li>
+<li>无法避免消息丢失</li>
+<li>消息堆积有上限，超出时数据丢失</li>
+</ul>
+<h2 id="基于Stream的消息队列"><a href="#基于Stream的消息队列" class="headerlink" title="基于Stream的消息队列"></a>基于Stream的消息队列</h2><p>Stream是Redis5.0引入的一种新数据类型，可以实现一个功能非常完善的消息队列。</p>
+<p>发送消息的命令：</p>
+<p><img src="/assets/image-20240328015722278.png" srcset="/img/loading.gif" lazyload alt="image-20240328015722278"></p>
+<p><img src="/assets/image-20240328015734078.png" srcset="/img/loading.gif" lazyload alt="image-20240328015734078"></p>
+<p>查询消息队列的消息数量</p>
+<p><code>XLEN users</code></p>
+<h3 id="XREAD命令读取消息队列"><a href="#XREAD命令读取消息队列" class="headerlink" title="XREAD命令读取消息队列"></a>XREAD命令读取消息队列</h3><p><img src="/assets/image-20240402110823576.png" srcset="/img/loading.gif" lazyload alt="image-20240402110823576"></p>
+<p><code>XREAD COUNT 1 STREAMS s1 0</code></p>
+<p>永久阻塞队列等待获取</p>
+<p><code>XREAD COUNT 1 BLOCK 0 STREAMS s1 $ </code></p>
+<p><strong>Stream类型消息队列的XREAD命令特点</strong></p>
+<ul>
+<li>消息可回溯</li>
+<li>一个消息可以被多个消费者读取</li>
+<li>可以阻塞读取</li>
+<li>有消息漏读的风险</li>
+</ul>
+<h3 id="基于Stream的消息队列-消费者组"><a href="#基于Stream的消息队列-消费者组" class="headerlink" title="基于Stream的消息队列-消费者组"></a>基于Stream的消息队列-消费者组</h3><p>消费者组(Consumer Group)：将多个消费者划分到一个组中，监听同一个队列。</p>
+<p><img src="/assets/image-20240402213713231.png" srcset="/img/loading.gif" lazyload alt="image-20240402213713231"></p>
+<h4 id="创建消费者组"><a href="#创建消费者组" class="headerlink" title="创建消费者组"></a>创建消费者组</h4><p><code>XGROUP CREATE key groupName ID [MKSTREAM]</code></p>
+<ul>
+<li>key:队列名称</li>
+<li>groupName:消费者组名称</li>
+<li>ID：起始ID标示，$代表队列中最后一个消息，0则代表队列中第一个消息</li>
+<li>MKSTREAM:队列不存在时自动创建队列</li>
+</ul>
+<p>其他常见命令</p>
+<ul>
+<li><code>XGROUP DESTORY key groupName</code></li>
+<li><code>XGROUP CREATECONSUMER key groupname consumername</code></li>
+<li><code>XGROUP DELCONSUMER key groupname consumername</code></li>
+</ul>
+<h4 id="从消费者组中读取信息"><a href="#从消费者组中读取信息" class="headerlink" title="从消费者组中读取信息"></a>从消费者组中读取信息</h4><p><code>XREADGROUP GROUP group consumer [COUNT count][BLOCK milliseconds] [NOACK] STREAMS key [key ...] ID [ID ...]</code></p>
+<ul>
+<li>group:消费组名称</li>
+<li>consumer:消费者名称，如果消费者不存在，会自动创建一个消费者</li>
+<li>count:本次查询的最大数量</li>
+<li>BLOCK milliseconds:当没有消息时最长等待时间</li>
+<li>NOACK:无需手动ACK,获取到消息后自动确认</li>
+<li>STREAMS key:指定队列名称</li>
+<li>ID:获取消息的起始ID<ul>
+<li>“&gt;”:从下一个未消费的消息开始</li>
+<li>其它：根据指定id从pending-List中获取已消费但未确认的消息，例如o,是从pending-List中的第一个<br>消息开始</li>
+</ul>
+</li>
+</ul>
+<h4 id="从消费者组中添加信息"><a href="#从消费者组中添加信息" class="headerlink" title="从消费者组中添加信息"></a>从消费者组中添加信息</h4><p><code>XADD key ID field string [field string ...]</code></p>
+<p><img src="/assets/image-20240403193308128.png" srcset="/img/loading.gif" lazyload alt="image-20240403193308128"></p>
+<h2 id="基于Redis的Stream结构作为消息队列，实现异步秒杀下单"><a href="#基于Redis的Stream结构作为消息队列，实现异步秒杀下单" class="headerlink" title="基于Redis的Stream结构作为消息队列，实现异步秒杀下单"></a>基于Redis的Stream结构作为消息队列，实现异步秒杀下单</h2><ul>
+<li>创建一个Stream类型的消息队列，名为stream.orders</li>
+<li>修改之前的秒杀下单Lua脚本，在认定有抢购资格后，直接向stream.orders中添加消息，内容包含voucherld、userld、orderld</li>
+<li>项目启动时，开启一个线程任务，尝试获取stream.orders中的消息，完成下单</li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/Jminchannel" target="_blank" rel="nofollow noopener"><span>Jmin&Github</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/xin-sanmu-Ming/" target="_blank" rel="nofollow noopener"><span>Jmin&Gitee</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
